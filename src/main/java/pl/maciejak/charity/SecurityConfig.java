@@ -60,6 +60,14 @@ public class SecurityConfig {
                         .anyRequest().anonymous()
         );
 
+        http.formLogin(login ->
+                login.loginPage("/login")
+                        .defaultSuccessUrl("/app")
+                        .permitAll()
+        );
+
+        http.logout((logout) -> logout.logoutUrl("/app/logout").permitAll());
+
         http.httpBasic(Customizer.withDefaults());
 
         return http.build();
