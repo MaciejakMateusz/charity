@@ -13,7 +13,7 @@
 <header>
     <nav class="container container--70">
         <ul class="nav--actions">
-            <li><a href="#">Zaloguj</a></li>
+            <li><a href="${pageContext.request.contextPath}/login">Zaloguj</a></li>
             <li class="highlighted"><a href="${pageContext.request.contextPath}/register">Załóż konto</a></li>
         </ul>
 
@@ -57,6 +57,7 @@
 <jsp:include page="footer.jsp"/>
 <%-- END OF FOOTER --%>
 
+<script src="<c:url value="/resources/js/app.js"/>"></script>
 </body>
 </html>
 
