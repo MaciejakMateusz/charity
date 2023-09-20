@@ -16,6 +16,7 @@ import java.util.List;
 @ToString
 public class Donation {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private Integer quantity;
     @OneToMany
