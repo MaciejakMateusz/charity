@@ -18,11 +18,11 @@
         </ul>
 
         <ul>
-            <li><a href="#" class="btn btn--without-border active">Start</a></li>
-            <li><a href="#" class="btn btn--without-border">O co chodzi?</a></li>
-            <li><a href="#" class="btn btn--without-border">O nas</a></li>
-            <li><a href="#" class="btn btn--without-border">Fundacje i organizacje</a></li>
-            <li><a href="#" class="btn btn--without-border">Kontakt</a></li>
+            <li><a href="${pageContext.request.contextPath}/" class="btn btn--without-border active">Start</a></li>
+            <li><a href="#steps" class="btn btn--without-border">O co chodzi?</a></li>
+            <li><a href="#about-us" class="btn btn--without-border">O nas</a></li>
+            <li><a href="#help" class="btn btn--without-border">Fundacje i organizacje</a></li>
+            <li><a href="#contact" class="btn btn--without-border">Kontakt</a></li>
         </ul>
     </nav>
 
@@ -56,7 +56,7 @@
     </div>
 </section>
 
-<section class="steps">
+<section class="steps" id="steps">
     <h2>Wystarczą 4 proste kroki</h2>
 
     <div class="steps--container">
@@ -85,7 +85,7 @@ v
     <a href="${pageContext.request.contextPath}/register" class="btn btn--large">Załóż konto</a>
 </section>
 
-<section class="about-us">
+<section class="about-us" id="about-us">
     <div class="about-us--text">
         <h2>O nas</h2>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas vitae animi rem pariatur incidunt libero
@@ -96,7 +96,7 @@ v
     </div>
 </section>
 
-<section class="help">
+<section class="help" id="help">
     <h2>Komu pomagamy?</h2>
 
     <!-- SLIDE 1 -->
@@ -135,6 +135,7 @@ v
 </section>
 
 <%-- FOOTER --%>
+<span id="contact"></span>
 <jsp:include page="footer.jsp"/>
 <%-- END OF FOOTER --%>
 
