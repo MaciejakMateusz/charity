@@ -85,7 +85,7 @@
         <form action="form-confirmation.html" method="post">
             <!-- STEP 1: class .active is switching steps -->
             <div data-step="1" class="active">
-                <h3>Zaznacz co chcesz oddać:</h3>
+                <h3>Zaznacz, co chcesz oddać:</h3>
 
                 <div class="form-group form-group--checkbox">
                     <label>
