@@ -1,7 +1,7 @@
-<%@ page contentType="text/html;charset=UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="pl">
 
@@ -13,8 +13,10 @@
 <header class="header--main-page">
     <nav class="container container--70">
         <ul class="nav--actions">
-            <li><a href="${pageContext.request.contextPath}/login" class="btn btn--small btn--without-border">Zaloguj</a></li>
-            <li><a href="${pageContext.request.contextPath}/register" class="btn btn--small btn--highlighted">Załóż konto</a></li>
+            <li><a href="${pageContext.request.contextPath}/login"
+                   class="btn btn--small btn--without-border">Zaloguj</a></li>
+            <li><a href="${pageContext.request.contextPath}/register" class="btn btn--small btn--highlighted">Załóż
+                konto</a></li>
         </ul>
 
         <ul>
@@ -81,7 +83,7 @@
             <p>Kurier przyjedzie w dogodnym terminie</p>
         </div>
     </div>
-v
+    v
     <a href="${pageContext.request.contextPath}/register" class="btn btn--large">Załóż konto</a>
 </section>
 
@@ -105,30 +107,18 @@ v
             Możesz sprawdzić, czym się zajmują.</p>
 
         <ul class="help--slides-items">
-            <li>
+            <c:forEach items="${institutions}" var="institution" varStatus="loopStatus">
+                <c:if test="${loopStatus.index % 2 == 0}">
+                    <li>
+                </c:if>
                 <div class="col">
-                    <div class="title">Fundacja "Dbam o Zdrowie"</div>
-                    <div class="subtitle">Cel i misja: Pomoc dzieciom z ubogich rodzin.</div>
+                    <div class="title">Fundacja "${institution.name}"</div>
+                    <div class="subtitle">Cel i misja: ${institution.description}</div>
                 </div>
-
-                <div class="col">
-                    <div class="title">Fundacja "A kogo"</div>
-                    <div class="subtitle">Cel i misja: Pomoc wybudzaniu dzieci ze śpiączki.</div>
-                </div>
-            </li>
-
-            <li>
-                <div class="col">
-                    <div class="title">Fundacja “Dla dzieci"</div>
-                    <div class="subtitle">Cel i misja: Pomoc osobom znajdującym się w trudnej sytuacji życiowej.</div>
-                </div>
-                <div class="col">
-                    <div class="title">Fundacja “Bez domu”</div>
-                    <div class="subtitle">Cel i misja: Pomoc dla osób nie posiadających miejsca zamieszkania</div>
-                </div>
-
-            </li>
-
+                <c:if test="${loopStatus.index % 2 == 1 || loopStatus.last}">
+                    </li>
+                </c:if>
+            </c:forEach>
         </ul>
     </div>
 
