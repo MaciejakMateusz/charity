@@ -35,4 +35,9 @@ public class DonationService implements DonationServiceInterface {
     public void delete(Donation donation) {
         donationRepository.delete(donation);
     }
+
+    @Override
+    public Integer donationsCount() {
+        return donationRepository.countAll();
+    }
 }

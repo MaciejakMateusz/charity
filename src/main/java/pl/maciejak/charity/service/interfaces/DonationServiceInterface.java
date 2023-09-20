@@ -12,4 +12,6 @@ public interface DonationServiceInterface {
     void save(Donation donation);
 
     void delete(Donation donation);
+
+    Integer donationsCount();
 }
