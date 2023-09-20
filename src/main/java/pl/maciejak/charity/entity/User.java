@@ -9,7 +9,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import pl.maciejak.charity.annotation.Email;
 import pl.maciejak.charity.annotation.Password;
-import pl.maciejak.charity.annotation.Username;
 
 import java.time.LocalDateTime;
 import java.util.Set;
@@ -25,9 +24,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false, unique = true, length = 60)
-    @NotBlank
-    @Username
+    @Column(nullable = false, unique = true, length = 150)
     private String username;
 
     @Column(length = 100, nullable = false, unique = true)
@@ -59,6 +56,8 @@ public class User {
         log.info("Password has been successfully encrypted.");
         this.created = LocalDateTime.now();
         log.info("Creation date has been set to : " + this.created);
+        setUsername(this.email);
+        log.info("User's username has been set to: " + this.email);
     }
 
     @PreUpdate
