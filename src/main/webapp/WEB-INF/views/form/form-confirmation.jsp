@@ -44,6 +44,6 @@
 <jsp:include page="../footer.jsp"/>
 <%-- END OF HEADER --%>
 
-<script src="js/app.js"></script>
+<script src="<c:url value="/resources/js/app.js"/>"></script>
 </body>
 </html>
