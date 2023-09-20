@@ -55,7 +55,7 @@ public class SecurityConfig {
 
         http.formLogin(login ->
                 login.loginPage("/login")
-                        .defaultSuccessUrl("/app")
+                        .defaultSuccessUrl("/form")
                         .permitAll()
         );
 
