@@ -38,7 +38,6 @@ public class SecurityConfig {
             CorsConfiguration corsConfiguration = new CorsConfiguration();
             corsConfiguration.setAllowedMethods(List.of("*"));
             corsConfiguration.setAllowedHeaders(List.of("*"));
-            corsConfiguration.addAllowedOrigin("http://localhost:8080");
             corsConfiguration.setAllowCredentials(true);
             return corsConfiguration;
         }));
@@ -47,14 +46,8 @@ public class SecurityConfig {
                 c -> c.dispatcherTypeMatchers(FORWARD, ERROR).permitAll()
                         .requestMatchers(mvcMatcherBuilder.pattern("/resources/**")).permitAll()
                         .requestMatchers(mvcMatcherBuilder.pattern("/")).permitAll()
-                        .requestMatchers(
-                                mvcMatcherBuilder.pattern("/restaurant"),
-                                mvcMatcherBuilder.pattern("/restaurant/orders/**"),
-                                mvcMatcherBuilder.pattern("/restaurant/menu"),
-                                mvcMatcherBuilder.pattern("/restaurant/bookings"),
-                                mvcMatcherBuilder.pattern("/restaurant/finalize-dineIn"),
-                                mvcMatcherBuilder.pattern("/restaurant/finalize-takeAway")).hasAnyRole("USER", "ADMIN")
-                        .requestMatchers(mvcMatcherBuilder.pattern("/restaurant/cms/**")).hasRole("ADMIN")
+                        .requestMatchers(mvcMatcherBuilder.pattern("/form")).hasAnyRole("USER", "ADMIN")
+                        .requestMatchers(mvcMatcherBuilder.pattern("/form/cms/**")).hasRole("ADMIN")
                         .requestMatchers(mvcMatcherBuilder.pattern("/register/**"))
                         .access(new WebExpressionAuthorizationManager("isAnonymous()"))
                         .anyRequest().anonymous()
