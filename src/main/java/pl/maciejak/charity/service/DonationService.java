@@ -40,4 +40,14 @@ public class DonationService implements DonationServiceInterface {
     public Integer donationsCount() {
         return donationRepository.countAll();
     }
+
+    @Override
+    public Integer bagsCount() {
+        List<Donation> allDonations = donationRepository.findAll();
+        int sum = 0;
+        for(Donation donation : allDonations) {
+            sum += donation.getQuantity();
+        }
+        return sum;
+    }
 }

@@ -14,4 +14,6 @@ public interface DonationServiceInterface {
     void delete(Donation donation);
 
     Integer donationsCount();
+
+    Integer bagsCount();
 }

@@ -1,14 +1,11 @@
 package pl.maciejak.charity.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import pl.maciejak.charity.entity.Institution;
 import pl.maciejak.charity.service.DonationService;
 import pl.maciejak.charity.service.InstitutionService;
-
-import java.util.List;
 
 @Controller
 @RequestMapping("/")
@@ -23,18 +20,11 @@ public class HomeController {
     }
 
     @GetMapping
-    public String home() {
+    public String home(Model model) {
+        model.addAttribute("donationsCount", donationService.donationsCount());
+        model.addAttribute("bagsCount", donationService.bagsCount());
+        model.addAttribute("institutions", institutionService.findAll());
         return "home";
-    }
-
-    @ModelAttribute("institutions")
-    private List<Institution> getInstitutions() {
-        return institutionService.findAll();
-    }
-
-    @ModelAttribute("donationsCount")
-    private Integer getDonationsCount() {
-        return donationService.donationsCount();
     }
 
 }
