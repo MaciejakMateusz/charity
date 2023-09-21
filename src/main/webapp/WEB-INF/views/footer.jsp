@@ -2,9 +2,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html>
-<html lang="pl">
-<body>
 <footer>
     <div class="contact">
         <h2>Skontaktuj się z nami</h2>
@@ -43,5 +40,7 @@
         </div>
     </div>
 </footer>
+
+<script src="<c:url value="/resources/js/app.js"/>"></script>
 </body>
 </html>

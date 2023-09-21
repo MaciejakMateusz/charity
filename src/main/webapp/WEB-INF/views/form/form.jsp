@@ -5,7 +5,7 @@
 <html lang="pl">
 
 <%-- HEADER --%>
-<jsp:include page="../header.jsp"/>
+<jsp:include page="../head.jsp"/>
 <%-- END OF HEADER --%>
 
 <body>
@@ -22,13 +22,9 @@
             </li>
         </ul>
 
-        <ul>
-            <li><a href="${pageContext.request.contextPath}/" class="btn btn--without-border active">Start</a></li>
-            <li><a href="${pageContext.request.contextPath}/#steps" class="btn btn--without-border">O co chodzi?</a></li>
-            <li><a href="${pageContext.request.contextPath}/#about-us" class="btn btn--without-border">O nas</a></li>
-            <li><a href="${pageContext.request.contextPath}/#help" class="btn btn--without-border">Fundacje i organizacje</a></li>
-            <li><a href="#contact" class="btn btn--without-border">Kontakt</a></li>
-        </ul>
+        <%-- MENU --%>
+        <jsp:include page="../menu.jsp"/>
+        <%-- END OF MENU --%>
     </nav>
 
     <div class="slogan container container--90">
@@ -305,12 +301,8 @@
     </div>
 </section>
 
-<span id="contact"></span>
 <%-- HEADER --%>
+<span id="contact"></span>
 <jsp:include page="../footer.jsp"/>
 <%-- END OF HEADER --%>
-
-<script src="<c:url value="/resources/js/app.js"/>"></script>
-</body>
-</html>
 
