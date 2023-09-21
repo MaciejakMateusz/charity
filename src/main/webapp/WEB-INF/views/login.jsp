@@ -24,7 +24,7 @@
                method="POST"
                modelAttribute="user">
         <div class="form-group">
-            <form:input path="email" type="email" placeholder="Email"/>
+            <form:input path="username" type="email" placeholder="Email"/>
         </div>
         <div class="form-group">
             <form:password path="password" placeholder="Hasło"/>
