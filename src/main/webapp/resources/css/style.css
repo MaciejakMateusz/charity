@@ -536,7 +536,7 @@ form .form-group textarea {
     border: 1px solid #3c3c3c;
     background: transparent;
     padding: 4px 14px;
-    max-width: 200px;
+    max-width: 350px;
     width: 100%;
     resize: none;
     font-size: 1.8rem;
