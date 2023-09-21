@@ -17,7 +17,7 @@
                 <ul class="dropdown">
                     <li><a href="#">Profil</a></li>
                     <li><a href="#">Moje zbiórki</a></li>
-                    <li><a href="${pageContext.request.contextPath}/login?logout">Wyloguj</a></li>
+                    <li><a href="${pageContext.request.contextPath}/form/logout">Wyloguj</a></li>
                 </ul>
             </li>
         </ul>

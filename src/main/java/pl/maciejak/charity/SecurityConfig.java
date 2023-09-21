@@ -45,12 +45,10 @@ public class SecurityConfig {
         http.authorizeHttpRequests(
                 c -> c.dispatcherTypeMatchers(FORWARD, ERROR).permitAll()
                         .requestMatchers(mvcMatcherBuilder.pattern("/resources/**")).permitAll()
+                        .requestMatchers(mvcMatcherBuilder.pattern("/WEB-INF/**")).permitAll()
                         .requestMatchers(mvcMatcherBuilder.pattern("/")).permitAll()
+                        .requestMatchers(mvcMatcherBuilder.pattern("/register")).permitAll()
                         .requestMatchers(mvcMatcherBuilder.pattern("/form")).hasAnyRole("USER", "ADMIN")
-                        .requestMatchers(mvcMatcherBuilder.pattern("/form/cms/**")).hasRole("ADMIN")
-                        .requestMatchers(mvcMatcherBuilder.pattern("/register/**"))
-                        .access(new WebExpressionAuthorizationManager("isAnonymous()"))
-                        .anyRequest().anonymous()
         );
 
         http.formLogin(login ->
@@ -59,7 +57,7 @@ public class SecurityConfig {
                         .permitAll()
         );
 
-        http.logout((logout) -> logout.logoutUrl("/app/logout").permitAll());
+        http.logout((logout) -> logout.logoutUrl("/form/logout").permitAll());
 
         http.httpBasic(Customizer.withDefaults());
 
