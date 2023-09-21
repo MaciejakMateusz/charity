@@ -17,9 +17,9 @@ import java.util.List;
 public class Donation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private long id;
     private Integer quantity;
-    @OneToMany
+    @ManyToMany
     private List<Category> categories;
     @ManyToOne
     private Institution institution;

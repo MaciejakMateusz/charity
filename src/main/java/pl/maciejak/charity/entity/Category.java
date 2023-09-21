@@ -13,6 +13,6 @@ import lombok.ToString;
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private long id;
     private String name;
 }

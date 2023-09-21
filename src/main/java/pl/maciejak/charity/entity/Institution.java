@@ -13,7 +13,7 @@ import lombok.ToString;
 public class Institution {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private long id;
     private String name;
     private String description;
 }
