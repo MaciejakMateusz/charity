@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
-@Table(name = "dontations")
+@Table(name = "donations")
 @Entity
 @Getter
 @Setter
