@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.maciejak.charity.entity.Category;
 import pl.maciejak.charity.entity.Donation;
+import pl.maciejak.charity.entity.Institution;
 import pl.maciejak.charity.service.CategoryService;
 import pl.maciejak.charity.service.DonationService;
+import pl.maciejak.charity.service.InstitutionService;
 
 import java.util.List;
 
@@ -21,10 +23,12 @@ public class DonationController {
 
     private final CategoryService categoryService;
     private final DonationService donationService;
+    private final InstitutionService institutionService;
 
-    public DonationController(CategoryService categoryService, DonationService donationService) {
+    public DonationController(CategoryService categoryService, DonationService donationService, InstitutionService institutionService) {
         this.categoryService = categoryService;
         this.donationService = donationService;
+        this.institutionService = institutionService;
     }
 
 
@@ -46,5 +50,10 @@ public class DonationController {
     @ModelAttribute("categories")
     private List<Category> getCategories() {
         return categoryService.findAll();
+    }
+
+    @ModelAttribute("institutions")
+    private List<Institution> getInstitutions() {
+        return institutionService.findAll();
     }
 }
