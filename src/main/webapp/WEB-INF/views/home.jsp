@@ -72,7 +72,6 @@
             <p>Kurier przyjedzie w dogodnym terminie</p>
         </div>
     </div>
-    v
     <a href="${pageContext.request.contextPath}/register" class="btn btn--large">Załóż konto</a>
 </section>
 

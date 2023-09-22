@@ -10,30 +10,17 @@
 
 <body>
 <header class="header--form-page">
-    <nav class="container container--70">
-        <ul class="nav--actions">
-            <li class="logged-user">
-                Witaj Agata
-                <ul class="dropdown">
-                    <li><a href="#">Profil</a></li>
-                    <li><a href="#">Moje zbiórki</a></li>
-                    <li><a href="${pageContext.request.contextPath}/form/logout">Wyloguj</a></li>
-                </ul>
-            </li>
-        </ul>
-
-        <%-- MENU --%>
-        <jsp:include page="../menu.jsp"/>
-        <%-- END OF MENU --%>
-    </nav>
-
-    <div class="slogan container container--90">
-        <h2>
-            Dziękujemy za przesłanie formularza.<br>
-            Na maila prześlemy wszelkie informacje o odbiorze.
-        </h2>
-    </div>
+    <%-- MENU --%>
+    <jsp:include page="../menu.jsp"/>
+    <%-- END OF MENU --%>
 </header>
+
+<div class="slogan container container--90">
+    <h2>
+        Dziękujemy za przesłanie formularza.<br>
+        Na maila prześlemy wszelkie informacje o odbiorze.
+    </h2>
+</div>
 
 <%-- HEADER --%>
 <span id="contact"></span>

@@ -1,15 +1,28 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 
 <nav class="container container--70">
-    <ul class="nav--actions">
-        <li><a href="${pageContext.request.contextPath}/login"
-               class="btn btn--small btn--without-border">Zaloguj</a></li>
-        <li><a href="${pageContext.request.contextPath}/register" class="btn btn--small btn--highlighted">Załóż
-            konto</a></li>
-    </ul>
+        <ul class="nav--actions">
+            <sec:authorize access="isAnonymous()">
+            <li><a href="${pageContext.request.contextPath}/login"
+                   class="btn btn--small btn--without-border">Zaloguj</a></li>
+            <li><a href="${pageContext.request.contextPath}/register" class="btn btn--small btn--highlighted">Załóż
+                konto</a></li>
+            </sec:authorize>
+            <sec:authorize access="isAuthenticated()">
+                <li class="logged-user">
+                    Zalogowany jako <sec:authentication property="principal.username"/>
+                    <ul class="dropdown">
+                        <li><a href="#">Profil</a></li>
+                        <li><a href="#">Moje zbiórki</a></li>
+                        <li><a href="${pageContext.request.contextPath}/form/logout">Wyloguj</a></li>
+                    </ul>
+                </li>
+            </sec:authorize>
+        </ul>
 
     <ul>
         <li><a href="${pageContext.request.contextPath}/" class="btn btn--without-border active">Start</a></li>

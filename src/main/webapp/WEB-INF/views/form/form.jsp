@@ -12,22 +12,10 @@
 
 <body>
 <header class="header--form-page">
-    <nav class="container container--70">
-        <ul class="nav--actions">
-            <li class="logged-user">
-                Zalogowany jako <sec:authentication property="principal.username"/>
-                <ul class="dropdown">
-                    <li><a href="#">Profil</a></li>
-                    <li><a href="#">Moje zbiórki</a></li>
-                    <li><a href="${pageContext.request.contextPath}/form/logout">Wyloguj</a></li>
-                </ul>
-            </li>
-        </ul>
 
-        <%-- MENU --%>
-        <jsp:include page="../menu.jsp"/>
-        <%-- END OF MENU --%>
-    </nav>
+    <%-- MENU --%>
+    <jsp:include page="../menu.jsp"/>
+    <%-- END OF MENU --%>
 
     <div class="slogan container container--90">
         <div class="slogan--item">
@@ -80,7 +68,10 @@
     <div class="form--steps-container">
         <div class="form--steps-counter">Krok <span>1</span>/4</div>
 
-        <form:form action="/form" method="POST" modelAttribute="donation">
+        <form:form action="/form"
+                   method="POST"
+                   modelAttribute="donation"
+                   id="donations-form">
             <!-- STEP 1: class .active is switching steps -->
             <div data-step="1" class="active">
                 <h3>Zaznacz, co chcesz oddać:</h3>
@@ -90,8 +81,7 @@
                                      items="${categories}"
                                      itemValue="id"
                                      itemLabel="name"
-                                     cssClass="custom-checkbox"
-                                     id="donations-form"/>
+                                     cssClass="custom-checkbox"/>
                 </div>
 
                 <div class="form-group form-group--buttons">
@@ -106,7 +96,7 @@
                 <div class="form-group form-group--inline">
                     <label>
                         Liczba 60 l worków:
-                        <form:input type="number" path="quantity" step="1" min="1"/>
+                        <form:input type="number" path="quantity" step="1" min="1" name="bags"/>
                     </label>
                 </div>
 
@@ -208,12 +198,13 @@
                         <ul>
                             <li>
                                 <span class="icon icon-bag"></span>
-                                <span class="summary--text" id="bags">4 worki ubrań w dobrym stanie dla dzieci</span>
+                                <span class="summary--text"
+                                      id="bags-summary">4 worki ubrań w dobrym stanie dla dzieci</span>
                             </li>
 
                             <li>
                                 <span class="icon icon-hand"></span>
-                                <span class="summary--text" id="foundation">Dla fundacji "Mam marzenie" w Warszawie</span
+                                <span class="summary--text" id="foundation-summary">Dla fundacji "Mam marzenie" w Warszawie</span
                                 >
                             </li>
                         </ul>
@@ -223,19 +214,19 @@
                         <div class="form-section--column">
                             <h4>Adres odbioru:</h4>
                             <ul>
-                                <li id="street">Prosta 51</li>
-                                <li id="city">Warszawa</li>
-                                <li id="zipcode">99-098</li>
-                                <li id="phone-number">123 456 789</li>
+                                <li id="street-summary">Prosta 51</li>
+                                <li id="city-summary">Warszawa</li>
+                                <li id="zipcode-summary">99-098</li>
+                                <li id="phone-summary">123 456 789</li>
                             </ul>
                         </div>
 
                         <div class="form-section--column">
                             <h4>Termin odbioru:</h4>
                             <ul>
-                                <li id="date">13/12/2018</li>
-                                <li id="time">15:40</li>
-                                <li id="comment">Brak uwag</li>
+                                <li id="date-summary">13/12/2018</li>
+                                <li id="time-summary">15:40</li>
+                                <li id="comment-summary">Brak uwag</li>
                             </ul>
                         </div>
                     </div>
