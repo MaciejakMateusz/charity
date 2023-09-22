@@ -13,14 +13,15 @@
     <%-- MENU --%>
     <jsp:include page="../menu.jsp"/>
     <%-- END OF MENU --%>
+        <div class="slogan container container--90">
+            <h2>
+                Dziękujemy za przesłanie formularza.<br>
+                Na maila prześlemy wszelkie informacje o odbiorze.
+            </h2>
+        </div>
 </header>
 
-<div class="slogan container container--90">
-    <h2>
-        Dziękujemy za przesłanie formularza.<br>
-        Na maila prześlemy wszelkie informacje o odbiorze.
-    </h2>
-</div>
+
 
 <%-- HEADER --%>
 <span id="contact"></span>
