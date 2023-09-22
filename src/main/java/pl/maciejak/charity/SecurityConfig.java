@@ -37,7 +37,7 @@ public class SecurityConfig {
             CorsConfiguration corsConfiguration = new CorsConfiguration();
             corsConfiguration.setAllowedMethods(List.of("*"));
             corsConfiguration.setAllowedHeaders(List.of("*"));
-            corsConfiguration.addAllowedOrigin("http://localhost:8080/**");
+            corsConfiguration.addAllowedOrigin("http://localhost:8080");
             corsConfiguration.setAllowCredentials(true);
             return corsConfiguration;
         }));
@@ -46,6 +46,7 @@ public class SecurityConfig {
                 c -> c.dispatcherTypeMatchers(FORWARD, ERROR).permitAll()
                         .requestMatchers(mvcMatcherBuilder.pattern("/resources/**")).permitAll()
                         .requestMatchers(mvcMatcherBuilder.pattern("/WEB-INF/**")).permitAll()
+                        .requestMatchers(mvcMatcherBuilder.pattern("/api/**")).permitAll()
                         .requestMatchers(mvcMatcherBuilder.pattern("/")).permitAll()
                         .requestMatchers(mvcMatcherBuilder.pattern("/register")).permitAll()
                         .requestMatchers(mvcMatcherBuilder.pattern("/form")).hasAnyRole("USER", "ADMIN")
