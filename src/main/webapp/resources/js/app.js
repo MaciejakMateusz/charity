@@ -195,11 +195,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if(institutionId !== null) {
                 fetchInstitutionById(institutionId).then(data => {
-                    institutionSummary.innerText = `Dla ${data.name}`;
+                    institutionSummary.innerText = `Dla fundacji ${data.name}`;
                 });
             }
 
-            bagsSummary.innerText = `${bagsQuantity} worki ubrań w dobrym stanie dla dzieci`;
+            bagsSummary.innerText = `${bagsQuantity} sztuk(i) worków z kategorii: `;
             streetSummary.innerText = street;
             citySummary.innerText = city;
             zipCodeSummary.innerText = zipCode;
@@ -216,13 +216,32 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
+/**
+ * Api host address
+ */
+const apiHost = 'http://localhost:8080';
+
 function fetchInstitutionById(id) {
-    return fetch(`http://localhost:8080/api/institution/${id}`)
+    return fetch(`${apiHost}/api/institution/${id}`)
         .then(response => {
             if(response.ok) {
                 return response.json();
             } else {
                 throw new Error("Communication error: GET /api/institution/{id}");
+            }
+        }).then(data => {
+            return data;
+        }).catch(error => {
+            console.log(error);
+        });
+}
+function fetchCategoryById(id) {
+    return fetch(`${apiHost}/api/category/${id}`)
+        .then(response => {
+            if(response.ok) {
+                return response.json();
+            } else {
+                throw new Error("Communication error: GET /api/category/{id}");
             }
         }).then(data => {
             return data;
