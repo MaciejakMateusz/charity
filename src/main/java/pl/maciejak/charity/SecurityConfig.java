@@ -57,7 +57,7 @@ public class SecurityConfig {
                         .permitAll()
         );
 
-        http.logout((logout) -> logout.logoutUrl("/form/logout").permitAll());
+        http.logout((logout) -> logout.logoutUrl("/logout").permitAll());
 
         http.httpBasic(Customizer.withDefaults());
 

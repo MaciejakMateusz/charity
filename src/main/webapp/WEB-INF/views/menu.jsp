@@ -16,9 +16,10 @@
                 <li class="logged-user">
                     Zalogowany jako <sec:authentication property="principal.username"/>
                     <ul class="dropdown">
+                        <li><a href="${pageContext.request.contextPath}/form">Profil</a></li>
                         <li><a href="#">Profil</a></li>
                         <li><a href="#">Moje zbiórki</a></li>
-                        <li><a href="${pageContext.request.contextPath}/form/logout">Wyloguj</a></li>
+                        <li><a href="${pageContext.request.contextPath}/logout">Wyloguj</a></li>
                     </ul>
                 </li>
             </sec:authorize>
