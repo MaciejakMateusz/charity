@@ -45,7 +45,7 @@ public class DonationService implements DonationServiceInterface {
     public Integer bagsCount() {
         List<Donation> allDonations = donationRepository.findAll();
         int sum = 0;
-        for(Donation donation : allDonations) {
+        for (Donation donation : allDonations) {
             sum += donation.getQuantity();
         }
         return sum;

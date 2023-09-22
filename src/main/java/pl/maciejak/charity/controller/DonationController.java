@@ -40,7 +40,7 @@ public class DonationController {
 
     @PostMapping
     public String form(@Valid Donation donation, BindingResult br) {
-        if(br.hasErrors()) {
+        if (br.hasErrors()) {
             return "form/form";
         }
         donationService.save(donation);
