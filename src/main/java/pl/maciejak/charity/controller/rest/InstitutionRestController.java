@@ -6,7 +6,6 @@ import pl.maciejak.charity.service.InstitutionService;
 
 @RestController
 @RequestMapping("/api/institution")
-@CrossOrigin(origins = "http://localhost:8080")
 public class InstitutionRestController {
     private final InstitutionService institutionService;
 
@@ -15,8 +14,7 @@ public class InstitutionRestController {
     }
 
     @GetMapping("/{id}")
-    public Institution getDonationById(@PathVariable String id) {
-        Integer institutionId = Integer.parseInt(id);
-        return institutionService.findById(institutionId);
+    public Institution getInstitutionById(@PathVariable Integer id) {
+        return institutionService.findById(id);
     }
 }
