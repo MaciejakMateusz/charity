@@ -622,6 +622,80 @@ form .form-group--checkbox .checkbox {
     cursor: pointer;
 }
 
+.checkbox-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    font-size: 1.8rem;
+    font-weight: lighter;
+    margin-left: 1.5rem;
+}
+
+.checkbox-container span {
+    display: flex;
+    align-items: center;
+}
+
+input[type="checkbox"] {
+    width: 3rem;
+    height: 3rem;
+    margin-right: 3rem;
+    appearance: unset;
+    cursor: pointer;
+    border: 1px solid #3c3c3c;
+    -webkit-transition: background 0.2s ease-in-out;
+    -o-transition: background 0.2s ease-in-out;
+    transition: background 0.2s ease-in-out;
+}
+
+input[type="checkbox"]:checked {
+    background-color: #f9c910;
+    -webkit-transition: background 0.2s ease-in-out;
+    -o-transition: background 0.2s ease-in-out;
+    transition: background 0.2s ease-in-out;
+}
+
+.radio-wrapper {
+    display: flex;
+    font-family: 'Merriweather', serif;
+    font-weight: lighter;
+    align-items: center;
+}
+
+.radio-labels-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.radio-name-label {
+    font-size: 2.1rem;
+}
+
+.radio-description-label {
+    font-size: 1.2rem;
+}
+
+input[type="radio"] {
+    appearance: unset;
+    border: 1px solid #3c3c3c;
+    border-radius: 50%;
+    cursor: pointer;
+    width: 3rem;
+    height: 3rem;
+    margin-right: 3rem;
+    -webkit-transition: background 0.2s ease-in-out;
+    -o-transition: background 0.2s ease-in-out;
+    transition: background 0.2s ease-in-out;
+}
+
+input[type="radio"]:checked {
+    background-color: #f9c910;
+    -webkit-transition: background 0.2s ease-in-out;
+    -o-transition: background 0.2s ease-in-out;
+    transition: background 0.2s ease-in-out;
+}
+
 /* line 78, scss/modules/_forms.scss */
 form .form-group--checkbox .checkbox:not(:empty) {
     padding: 6px 10px;
