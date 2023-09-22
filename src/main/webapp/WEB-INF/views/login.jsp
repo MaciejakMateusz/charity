@@ -24,10 +24,10 @@
                method="POST"
                modelAttribute="user">
         <div class="form-group">
-            <form:input path="username" type="email" placeholder="Email"/>
+            <form:input path="username" type="email" placeholder="Email" cssClass="custom-form-input"/>
         </div>
         <div class="form-group">
-            <form:password path="password" placeholder="Hasło"/>
+            <form:password path="password" placeholder="Hasło" cssClass="custom-form-input"/>
             <a href="#" class="btn btn--small btn--without-border reset-password">Przypomnij hasło</a>
         </div>
         <c:if test="${param.error != null}">

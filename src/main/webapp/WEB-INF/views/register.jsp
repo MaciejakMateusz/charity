@@ -24,7 +24,11 @@
                modelAttribute="user">
         <div class="form-group">
             <label>
-                <form:input type="email" name="email" placeholder="Email" path="email"/>
+                <form:input type="email"
+                            name="email"
+                            placeholder="Email"
+                            path="email"
+                            cssClass="custom-form-input"/>
                 <form:errors path="email" cssClass="validation"/>
                 <c:if test="${emailExists==true}">
                     <p class="validation">Użytkownik o podanym adresie e-mail już istnieje</p>
@@ -33,13 +37,17 @@
         </div>
         <div class="form-group">
             <label>
-                <form:password path="password" placeholder="Hasło"/>
+                <form:password path="password"
+                               placeholder="Hasło"
+                               cssClass="custom-form-input"/>
                 <form:errors path="password" cssClass="validation"/>
             </label>
         </div>
         <div class="form-group">
             <label>
-                <form:password path="repeatedPassword" placeholder="Powtórz hasło"/>
+                <form:password path="repeatedPassword"
+                               placeholder="Powtórz hasło"
+                               cssClass="custom-form-input"/>
                 <c:if test="${passwordsNotMatch==true}">
                     <p class="validation">Hasła nie są identyczne</p>
                 </c:if>
