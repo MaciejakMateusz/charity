@@ -20,7 +20,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const categoryValidation = document.querySelector('#category-validation');
     const quantityValidation = document.querySelector('#quantity-validation');
 
-    let categories = [];
     let bagsQuantity = document.querySelector('#quantityInput').firstElementChild;
     // Select the first institution by default
     document.getElementById('radio-0').checked = true;
@@ -295,6 +294,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // Summary
             if (this.currentStep === 5) {
+
+                let categories = [];
                 checkboxes.forEach(checkbox => {
                     if (checkbox.checked) {
                         const label = checkbox.nextElementSibling.innerText;
