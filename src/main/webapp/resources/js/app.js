@@ -6,7 +6,6 @@ document.addEventListener("DOMContentLoaded", function () {
      * Query selectors used for summary
      */
     const bagsSummary = document.querySelector('#bags-summary');
-    const institutionSummary = document.querySelector('#foundation-summary');
     const streetSummary = document.querySelector('#street-summary');
     const citySummary = document.querySelector('#city-summary');
     const zipCodeSummary = document.querySelector('#zipcode-summary');
@@ -183,8 +182,9 @@ document.addEventListener("DOMContentLoaded", function () {
             const donationsForm = document.querySelector('#donations-form');
             const formData = new FormData(donationsForm);
 
+            let categories = [];
             let bagsQuantity = formData.get("quantity");
-            let institutionId = formData.get("institution");
+            let institution = '';
             let street = formData.get("street");
             let city = formData.get("city");
             let zipCode = formData.get("zipCode");
@@ -193,13 +193,25 @@ document.addEventListener("DOMContentLoaded", function () {
             let time = formData.get("pickUpTime");
             let pickUpComment = formData.get("pickUpComment");
 
-            if(institutionId !== null) {
-                fetchInstitutionById(institutionId).then(data => {
-                    institutionSummary.innerText = `Dla fundacji ${data.name}`;
-                });
-            }
+            const checkboxes = document.querySelectorAll('.checkbox-container input[type="checkbox"]');
+            checkboxes.forEach(checkbox => {
+                if(checkbox.checked) {
+                    const label = checkbox.nextElementSibling.innerText;
+                    categories.push(label);
+                }
+            });
 
-            bagsSummary.innerText = `${bagsQuantity} sztuk(i) worków z kategorii: `;
+            const radioButtons = document.querySelectorAll('.radio-wrapper');
+            radioButtons.forEach(radioButton => {
+                if(radioButton.firstElementChild.checked) {
+                    institution = radioButton.lastElementChild
+                        .firstElementChild
+                        .innerText
+                        .replace('Fundacja ', '');
+                }
+            });
+
+            bagsSummary.innerText = `${bagsQuantity} sztuk(i) worków z kategorii: ${categories.join(', ').toString()}`;
             streetSummary.innerText = street;
             citySummary.innerText = city;
             zipCodeSummary.innerText = zipCode;
@@ -215,37 +227,3 @@ document.addEventListener("DOMContentLoaded", function () {
         new FormSteps(form);
     }
 });
-
-/**
- * Api host address
- */
-const apiHost = 'http://localhost:8080';
-
-function fetchInstitutionById(id) {
-    return fetch(`${apiHost}/api/institution/${id}`)
-        .then(response => {
-            if(response.ok) {
-                return response.json();
-            } else {
-                throw new Error("Communication error: GET /api/institution/{id}");
-            }
-        }).then(data => {
-            return data;
-        }).catch(error => {
-            console.log(error);
-        });
-}
-function fetchCategoryById(id) {
-    return fetch(`${apiHost}/api/category/${id}`)
-        .then(response => {
-            if(response.ok) {
-                return response.json();
-            } else {
-                throw new Error("Communication error: GET /api/category/{id}");
-            }
-        }).then(data => {
-            return data;
-        }).catch(error => {
-            console.log(error);
-        });
-}

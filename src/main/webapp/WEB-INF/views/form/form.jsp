@@ -96,7 +96,7 @@
                 <div class="form-group form-group--inline">
                     <label>
                         Liczba 60 l worków:
-                        <form:input type="number" path="quantity" step="1" min="1" name="bags"/>
+                        <form:input type="number" path="quantity" step="1" min="1"/>
                     </label>
                 </div>
 
@@ -116,7 +116,7 @@
                         <div class="radio-wrapper">
                             <form:radiobutton path="institution" value="${institution.id}"/>
                             <div class="radio-labels-container">
-                                <span class="radio-name-label">${institution.name}</span>
+                                <span class="radio-name-label">Fundacja ${institution.name}</span>
                                 <span class="radio-description-label">Cel i misja: ${institution.description}</span>
                             </div>
                         </div>
