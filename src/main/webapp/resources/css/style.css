@@ -1922,6 +1922,18 @@ footer .bottom-line--icons a img {
     margin-left: 1.5rem;
 }
 
+.step-4-validation {
+    font-size: 1.1rem;
+    color: red;
+    margin-left: 14.8rem;
+    margin-bottom: -1rem;
+    margin-top: 0.1rem;
+}
+
+.date-time-valid {
+    margin-left: 16rem;
+}
+
 .d-none {
     display: none;
 }

@@ -227,30 +227,32 @@ document.addEventListener("DOMContentLoaded", function () {
             this.$step.parentElement.hidden = this.currentStep >= 5;
 
             // Summary
-            checkboxes.forEach(checkbox => {
-                if (checkbox.checked) {
-                    const label = checkbox.nextElementSibling.innerText;
-                    categories.push(label);
-                }
-            });
+            if (this.currentStep === 5) {
+                checkboxes.forEach(checkbox => {
+                    if (checkbox.checked) {
+                        const label = checkbox.nextElementSibling.innerText;
+                        categories.push(label);
+                    }
+                });
 
-            radioButtons.forEach(radioButton => {
-                if (radioButton.firstElementChild.checked) {
-                    institution = radioButton.lastElementChild
-                        .firstElementChild
-                        .innerText
-                        .replace('Fundacja ', '');
-                }
-            });
+                radioButtons.forEach(radioButton => {
+                    if (radioButton.firstElementChild.checked) {
+                        institution = radioButton.lastElementChild
+                            .firstElementChild
+                            .innerText
+                            .replace('Fundacja ', '');
+                    }
+                });
 
-            bagsSummary.innerText = `${bagsQuantity} sztuk(i) worków z kategorii: ${categories.join(', ').toString()}`;
-            streetSummary.innerText = street;
-            citySummary.innerText = city;
-            zipCodeSummary.innerText = zipCode;
-            phoneSummary.innerText = phone;
-            dateSummary.innerText = date;
-            timeSummary.innerText = time;
-            commentSummary.innerText = pickUpComment;
+                bagsSummary.innerText = `${bagsQuantity.value} sztuk(i) worków z kategorii: ${categories.join(', ').toString()}`;
+                streetSummary.innerText = street;
+                citySummary.innerText = city;
+                zipCodeSummary.innerText = zipCode;
+                phoneSummary.innerText = phone;
+                dateSummary.innerText = date;
+                timeSummary.innerText = time;
+                commentSummary.innerText = pickUpComment;
+            }
         }
     }
 

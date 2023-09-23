@@ -140,24 +140,28 @@
                             <label>Ulica
                                 <form:input path="street"/>
                             </label>
+                            <p class="step-4-validation d-none" id="street-validation">Ulica jest wymagana</p>
                         </div>
 
                         <div class="form-group form-group--inline">
                             <label>Miasto
                                 <form:input path="city"/>
                             </label>
+                            <p class="step-4-validation d-none" id="city-validation">Miasto jest wymagane</p>
                         </div>
 
                         <div class="form-group form-group--inline">
                             <label>Kod pocztowy
                                 <form:input path="zipCode"/>
                             </label>
+                            <p class="step-4-validation d-none" id="zipcode-validation">Kod pocztowy jest wymagany</p>
                         </div>
 
                         <div class="form-group form-group--inline">
                             <label>Numer telefonu
                                 <form:input type="phone" path="phoneNumber"/>
                             </label>
+                            <p class="step-4-validation d-none" id="phone-validation">Numer telefonu jest wymagany</p>
                         </div>
                     </div>
 
@@ -167,12 +171,14 @@
                             <label>Data
                                 <form:input type="date" path="pickUpDate"/>
                             </label>
+                            <p class="step-4-validation date-time-valid d-none" id="date-validation">Data odbioru jest wymagana</p>
                         </div>
 
                         <div class="form-group form-group--inline">
                             <label>Godzina
                                 <form:input type="time" path="pickUpTime"/>
                             </label>
+                            <p class="step-4-validation date-time-valid d-none" id="time-validation">Czas odbioru jest wymagany</p>
                         </div>
 
                         <div class="form-group form-group--inline">
