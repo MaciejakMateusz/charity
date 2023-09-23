@@ -1914,6 +1914,18 @@ footer .bottom-line--icons a img {
     display: block;
 }
 
+.form-validation {
+    font-size: 1.4rem;
+    color: red;
+    display: block;
+    margin-top: 1rem;
+    margin-left: 1.5rem;
+}
+
+.d-none {
+    display: none;
+}
+
 .success-message {
     color: green;
     font-size: 1.5rem;

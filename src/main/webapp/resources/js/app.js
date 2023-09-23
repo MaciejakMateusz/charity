@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
     /**
      *
      * @type {Element}
-     * Query selectors used for summary
+     * Query selectors used for summary and validation
      */
     const bagsSummary = document.querySelector('#bags-summary');
     const streetSummary = document.querySelector('#street-summary');
@@ -13,6 +13,27 @@ document.addEventListener("DOMContentLoaded", function () {
     const dateSummary = document.querySelector('#date-summary');
     const timeSummary = document.querySelector('#time-summary');
     const commentSummary = document.querySelector('#comment-summary');
+    const checkboxes = document.querySelectorAll('.checkbox-container input[type="checkbox"]');
+    const radioButtons = document.querySelectorAll('.radio-wrapper');
+
+    const categoryValidation = document.querySelector('#category-validation');
+    const quantityValidation = document.querySelector('#quantity-validation');
+
+    const donationsForm = document.querySelector('#donations-form');
+    const formData = new FormData(donationsForm);
+
+    let categories = [];
+    let bagsQuantity = document.querySelector('#quantityInput').firstElementChild;
+    let institution = '';
+    // Select the first institution by default
+    document.getElementById('radio-0').checked = true;
+    let street = formData.get("street");
+    let city = formData.get("city");
+    let zipCode = formData.get("zipCode");
+    let phone = formData.get("phone");
+    let date = formData.get("pickUpDate");
+    let time = formData.get("pickUpTime");
+    let pickUpComment = formData.get("pickUpComment");
 
     /**
      * Form Select
@@ -140,8 +161,22 @@ document.addEventListener("DOMContentLoaded", function () {
             this.$next.forEach(btn => {
                 btn.addEventListener("click", e => {
                     e.preventDefault();
-                    this.currentStep++;
-                    this.updateForm();
+
+                    let isChecked = false;
+                    checkboxes.forEach(checkbox => {
+                        if (checkbox.checked) {
+                            isChecked = true;
+                        }
+                    });
+
+                    if (isChecked === true) {
+                        this.currentStep++;
+                        this.updateForm();
+                        categoryValidation.classList.add('d-none')
+                    } else {
+                        categoryValidation.classList.remove('d-none')
+                    }
+
                 });
             });
 
@@ -164,8 +199,21 @@ document.addEventListener("DOMContentLoaded", function () {
          */
         updateForm() {
             this.$step.innerText = this.currentStep;
-
             // TODO: Validation
+
+            let validQuantity = false;
+            if (this.currentStep === 3) {
+                if (bagsQuantity.value > 0) {
+                    validQuantity = true;
+                    quantityValidation.classList.add('d-none');
+                } else {
+                    quantityValidation.classList.remove('d-none');
+                }
+                if (validQuantity === false) {
+                    this.currentStep--;
+                    return;
+                }
+            }
 
             this.slides.forEach(slide => {
                 slide.classList.remove("active");
@@ -179,31 +227,15 @@ document.addEventListener("DOMContentLoaded", function () {
             this.$step.parentElement.hidden = this.currentStep >= 5;
 
             // Summary
-            const donationsForm = document.querySelector('#donations-form');
-            const formData = new FormData(donationsForm);
-
-            let categories = [];
-            let bagsQuantity = formData.get("quantity");
-            let institution = '';
-            let street = formData.get("street");
-            let city = formData.get("city");
-            let zipCode = formData.get("zipCode");
-            let phone = formData.get("phone");
-            let date = formData.get("pickUpDate");
-            let time = formData.get("pickUpTime");
-            let pickUpComment = formData.get("pickUpComment");
-
-            const checkboxes = document.querySelectorAll('.checkbox-container input[type="checkbox"]');
             checkboxes.forEach(checkbox => {
-                if(checkbox.checked) {
+                if (checkbox.checked) {
                     const label = checkbox.nextElementSibling.innerText;
                     categories.push(label);
                 }
             });
 
-            const radioButtons = document.querySelectorAll('.radio-wrapper');
             radioButtons.forEach(radioButton => {
-                if(radioButton.firstElementChild.checked) {
+                if (radioButton.firstElementChild.checked) {
                     institution = radioButton.lastElementChild
                         .firstElementChild
                         .innerText

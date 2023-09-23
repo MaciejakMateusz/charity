@@ -81,6 +81,7 @@
                                      itemLabel="name"
                                      cssClass="custom-checkbox"/>
                 </div>
+                <span class="form-validation d-none" id="category-validation">Przynajmniej jedna kategoria jest wymagana</span>
 
                 <div class="form-group form-group--buttons">
                     <button type="button" class="btn next-step">Dalej</button>
@@ -92,11 +93,12 @@
                 <h3>Podaj liczbę 60 l worków, w które spakowałeś/aś rzeczy:</h3>
 
                 <div class="form-group form-group--inline">
-                    <label>
+                    <label id="quantityInput">
                         Liczba 60 l worków:
                         <form:input type="number" path="quantity" step="1" min="1"/>
                     </label>
                 </div>
+                <span class="form-validation d-none" id="quantity-validation">Przynajmniej jeden worek jest wymagany</span>
 
                 <div class="form-group form-group--buttons">
                     <button type="button" class="btn prev-step">Wstecz</button>
@@ -110,9 +112,9 @@
                 <h3>Wybierz organizację, której chcesz pomóc:</h3>
 
                 <div class="checkbox-container">
-                    <c:forEach items="${institutions}" var="institution">
+                    <c:forEach items="${institutions}" var="institution" varStatus="loop">
                         <div class="radio-wrapper">
-                            <form:radiobutton path="institution" value="${institution.id}"/>
+                            <form:radiobutton path="institution" value="${institution.id}" id="radio-${loop.index}"/>
                             <div class="radio-labels-container">
                                 <span class="radio-name-label">Fundacja ${institution.name}</span>
                                 <span class="radio-description-label">Cel i misja: ${institution.description}</span>
