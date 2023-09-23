@@ -50,6 +50,7 @@ public class SecurityConfig {
                         .requestMatchers(mvcMatcherBuilder.pattern("/")).permitAll()
                         .requestMatchers(mvcMatcherBuilder.pattern("/register")).permitAll()
                         .requestMatchers(mvcMatcherBuilder.pattern("/form")).hasAnyRole("USER", "ADMIN")
+                        .requestMatchers(mvcMatcherBuilder.pattern("/profile")).hasAnyRole("USER", "ADMIN")
         );
 
         http.formLogin(login ->
