@@ -173,8 +173,8 @@
                             <label id="date-input">Data
                                 <form:input type="date" path="pickUpDate"/>
                             </label>
-                            <p class="step-4-validation date-time-valid d-none" id="date-validation">Data odbioru jest
-                                wymagana</p>
+                            <p class="step-4-validation date-time-valid d-none" id="date-validation">Data odbioru jest wymagana</p>
+                            <p class="step-4-validation date-time-valid d-none" id="future-date-validation">Data odbioru musi być w przyszłości</p>
                         </div>
 
                         <div class="form-group form-group--inline">

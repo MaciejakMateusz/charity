@@ -261,6 +261,17 @@ document.addEventListener("DOMContentLoaded", function () {
                     return;
                 }
 
+                const futureDateValidation = document.querySelector('#future-date-validation');
+                const userDate = new Date(date.value);
+                const currentDate = new Date();
+                if (userDate > currentDate) {
+                    futureDateValidation.classList.add('d-none');
+                } else {
+                    futureDateValidation.classList.remove('d-none');
+                    this.currentStep--;
+                    return;
+                }
+
                 const timeValidation = document.querySelector('#time-validation');
                 if (time.value !== '') {
                     timeValidation.classList.add('d-none');
