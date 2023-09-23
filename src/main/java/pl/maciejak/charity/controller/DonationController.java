@@ -39,8 +39,9 @@ public class DonationController {
     }
 
     @PostMapping
-    public String form(@Valid Donation donation, BindingResult br) {
+    public String form(@Valid Donation donation, BindingResult br, Model model) {
         if (br.hasErrors()) {
+            model.addAttribute("validFormInputs", false);
             return "form/form";
         }
         donationService.save(donation);

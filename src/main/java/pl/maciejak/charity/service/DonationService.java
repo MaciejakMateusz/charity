@@ -40,6 +40,7 @@ public class DonationService implements DonationServiceInterface {
     public long donationsCount() {
         return donationRepository.count();
     }
+
     @Override
     public long bagsCount() {
         return donationRepository.sumBags();

@@ -81,8 +81,8 @@
                                      itemLabel="name"
                                      cssClass="custom-checkbox"/>
                 </div>
-                <span class="form-validation d-none"
-                      id="category-validation">Przynajmniej jedna kategoria jest wymagana</span>
+                <span class="form-validation d-none" id="category-validation">Przynajmniej jedna kategoria jest wymagana</span>
+                <form:errors path="categories" cssClass="step-4-validation date-time-valid"/>
 
                 <div class="form-group form-group--buttons">
                     <button type="button" class="btn next-step">Dalej</button>
@@ -99,8 +99,8 @@
                         <form:input type="number" path="quantity" step="1" min="1"/>
                     </label>
                 </div>
-                <span class="form-validation d-none"
-                      id="quantity-validation">Przynajmniej jeden worek jest wymagany</span>
+                <span class="form-validation d-none" id="quantity-validation">Przynajmniej jeden worek jest wymagany</span>
+                <form:errors path="quantity" cssClass="step-4-validation date-time-valid"/>
 
                 <div class="form-group form-group--buttons">
                     <button type="button" class="btn prev-step">Wstecz</button>
@@ -143,6 +143,7 @@
                                 <form:input path="street"/>
                             </label>
                             <p class="step-4-validation d-none" id="street-validation">Ulica jest wymagana</p>
+                            <form:errors path="street" cssClass="step-4-validation date-time-valid"/>
                         </div>
 
                         <div class="form-group form-group--inline">
@@ -150,6 +151,7 @@
                                 <form:input path="city"/>
                             </label>
                             <p class="step-4-validation d-none" id="city-validation">Miasto jest wymagane</p>
+                            <form:errors path="city" cssClass="step-4-validation date-time-valid"/>
                         </div>
 
                         <div class="form-group form-group--inline">
@@ -157,6 +159,7 @@
                                 <form:input path="zipCode"/>
                             </label>
                             <p class="step-4-validation d-none" id="zipcode-validation">Kod pocztowy jest wymagany</p>
+                            <form:errors path="zipCode" cssClass="step-4-validation date-time-valid"/>
                         </div>
 
                         <div class="form-group form-group--inline">
@@ -164,6 +167,7 @@
                                 <form:input type="phone" path="phoneNumber"/>
                             </label>
                             <p class="step-4-validation d-none" id="phone-validation">Numer telefonu jest wymagany</p>
+                            <form:errors path="phoneNumber" cssClass="step-4-validation date-time-valid"/>
                         </div>
                     </div>
 
@@ -175,20 +179,22 @@
                             </label>
                             <p class="step-4-validation date-time-valid d-none" id="date-validation">Data odbioru jest wymagana</p>
                             <p class="step-4-validation date-time-valid d-none" id="future-date-validation">Data odbioru musi być w przyszłości</p>
+                            <form:errors path="pickUpDate" cssClass="step-4-validation date-time-valid"/>
                         </div>
 
                         <div class="form-group form-group--inline">
                             <label id="time-input">Godzina
                                 <form:input type="time" path="pickUpTime"/>
                             </label>
-                            <p class="step-4-validation date-time-valid d-none" id="time-validation">Czas odbioru jest
-                                wymagany</p>
+                            <p class="step-4-validation date-time-valid d-none" id="time-validation">Czas odbioru jest wymagany</p>
+                            <form:errors path="pickUpTime" cssClass="step-4-validation date-time-valid"/>
                         </div>
 
                         <div class="form-group form-group--inline">
                             <label id="comment-input">Uwagi dla kuriera
                                 <form:textarea path="pickUpComment" rows="5"/>
                             </label>
+                            <form:errors path="pickUpComment" cssClass="step-4-validation date-time-valid"/>
                         </div>
                     </div>
                 </div>
@@ -240,6 +246,12 @@
                         </div>
                     </div>
                 </div>
+
+                <c:if test="${validFormInputs==false}">
+                    <div>
+                        <p class="validation">Popraw wymagane pola</p>
+                    </div>
+                </c:if>
 
                 <div class="form-group form-group--buttons">
                     <button type="button" class="btn prev-step">Wstecz</button>
