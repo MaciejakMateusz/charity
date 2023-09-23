@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.Query;
 import pl.maciejak.charity.entity.Donation;
 
 public interface DonationRepository extends JpaRepository<Donation, Integer> {
-    @Query(value = "SELECT COUNT(*) FROM charity_donation.donations", nativeQuery = true)
-    Integer countAll();
+    @Query("SELECT SUM(d.quantity) FROM Donation d")
+    long sumBags();
 }

@@ -37,17 +37,11 @@ public class DonationService implements DonationServiceInterface {
     }
 
     @Override
-    public Integer donationsCount() {
-        return donationRepository.countAll();
+    public long donationsCount() {
+        return donationRepository.count();
     }
-
     @Override
-    public Integer bagsCount() {
-        List<Donation> allDonations = donationRepository.findAll();
-        int sum = 0;
-        for (Donation donation : allDonations) {
-            sum += donation.getQuantity();
-        }
-        return sum;
+    public long bagsCount() {
+        return donationRepository.sumBags();
     }
 }
