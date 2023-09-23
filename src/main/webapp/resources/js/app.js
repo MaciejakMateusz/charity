@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
      * Query selectors used for summary and validation
      */
     const bagsSummary = document.querySelector('#bags-summary');
+    const foundationSummary = document.querySelector('#foundation-summary');
     const streetSummary = document.querySelector('#street-summary');
     const citySummary = document.querySelector('#city-summary');
     const zipCodeSummary = document.querySelector('#zipcode-summary');
@@ -19,21 +20,18 @@ document.addEventListener("DOMContentLoaded", function () {
     const categoryValidation = document.querySelector('#category-validation');
     const quantityValidation = document.querySelector('#quantity-validation');
 
-    const donationsForm = document.querySelector('#donations-form');
-    const formData = new FormData(donationsForm);
-
     let categories = [];
     let bagsQuantity = document.querySelector('#quantityInput').firstElementChild;
-    let institution = '';
     // Select the first institution by default
     document.getElementById('radio-0').checked = true;
-    let street = formData.get("street");
-    let city = formData.get("city");
-    let zipCode = formData.get("zipCode");
-    let phone = formData.get("phone");
-    let date = formData.get("pickUpDate");
-    let time = formData.get("pickUpTime");
-    let pickUpComment = formData.get("pickUpComment");
+    let institution = '';
+    let street = document.querySelector('#street-input').firstElementChild;
+    let city = document.querySelector('#city-input').firstElementChild;
+    let zipCode = document.querySelector('#zipcode-input').firstElementChild;
+    let phone = document.querySelector('#phone-input').firstElementChild;
+    let date = document.querySelector('#date-input').firstElementChild;
+    let time = document.querySelector('#time-input').firstElementChild;
+    let pickUpComment = document.querySelector('#comment-input').firstElementChild;
 
     /**
      * Form Select
@@ -215,6 +213,64 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             }
 
+            console.log(this.currentStep);
+            if (this.currentStep === 5) {
+
+                const streetValidation = document.querySelector('#street-validation');
+                if (street.value !== '') {
+                    streetValidation.classList.add('d-none');
+                } else {
+                    streetValidation.classList.remove('d-none');
+                    this.currentStep--;
+                    return;
+                }
+
+                const cityValidation = document.querySelector('#city-validation');
+                if (city.value !== '') {
+                    cityValidation.classList.add('d-none');
+                } else {
+                    cityValidation.classList.remove('d-none');
+                    this.currentStep--;
+                    return;
+                }
+
+                const zipcodeValidation = document.querySelector('#zipcode-validation');
+                if (zipCode.value !== '') {
+                    zipcodeValidation.classList.add('d-none');
+                } else {
+                    zipcodeValidation.classList.remove('d-none');
+                    this.currentStep--;
+                    return;
+                }
+
+                const phoneValidation = document.querySelector('#phone-validation');
+                if (phone.value !== '') {
+                    phoneValidation.classList.add('d-none');
+                } else {
+                    phoneValidation.classList.remove('d-none');
+                    this.currentStep--;
+                    return;
+                }
+
+                const dateValidation = document.querySelector('#date-validation');
+                if (date.value !== '') {
+                    dateValidation.classList.add('d-none');
+                } else {
+                    dateValidation.classList.remove('d-none');
+                    this.currentStep--;
+                    return;
+                }
+
+                const timeValidation = document.querySelector('#time-validation');
+                if (time.value !== '') {
+                    timeValidation.classList.add('d-none');
+                } else {
+                    timeValidation.classList.remove('d-none');
+                    this.currentStep--;
+                    return;
+                }
+            }
+
             this.slides.forEach(slide => {
                 slide.classList.remove("active");
 
@@ -244,14 +300,17 @@ document.addEventListener("DOMContentLoaded", function () {
                     }
                 });
 
+                foundationSummary.innerText = `Dla fundacji ${institution}`;
                 bagsSummary.innerText = `${bagsQuantity.value} sztuk(i) worków z kategorii: ${categories.join(', ').toString()}`;
-                streetSummary.innerText = street;
-                citySummary.innerText = city;
-                zipCodeSummary.innerText = zipCode;
-                phoneSummary.innerText = phone;
-                dateSummary.innerText = date;
-                timeSummary.innerText = time;
-                commentSummary.innerText = pickUpComment;
+                streetSummary.innerText = street.value;
+                citySummary.innerText = city.value;
+                zipCodeSummary.innerText = zipCode.value;
+                phoneSummary.innerText = phone.value;
+                dateSummary.innerText = date.value;
+                timeSummary.innerText = time.value;
+                if (pickUpComment.value !== '') {
+                    commentSummary.innerText = pickUpComment.value;
+                }
             }
         }
     }

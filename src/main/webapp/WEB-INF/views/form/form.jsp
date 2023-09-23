@@ -81,7 +81,8 @@
                                      itemLabel="name"
                                      cssClass="custom-checkbox"/>
                 </div>
-                <span class="form-validation d-none" id="category-validation">Przynajmniej jedna kategoria jest wymagana</span>
+                <span class="form-validation d-none"
+                      id="category-validation">Przynajmniej jedna kategoria jest wymagana</span>
 
                 <div class="form-group form-group--buttons">
                     <button type="button" class="btn next-step">Dalej</button>
@@ -98,7 +99,8 @@
                         <form:input type="number" path="quantity" step="1" min="1"/>
                     </label>
                 </div>
-                <span class="form-validation d-none" id="quantity-validation">Przynajmniej jeden worek jest wymagany</span>
+                <span class="form-validation d-none"
+                      id="quantity-validation">Przynajmniej jeden worek jest wymagany</span>
 
                 <div class="form-group form-group--buttons">
                     <button type="button" class="btn prev-step">Wstecz</button>
@@ -113,7 +115,7 @@
 
                 <div class="checkbox-container">
                     <c:forEach items="${institutions}" var="institution" varStatus="loop">
-                        <div class="radio-wrapper">
+                        <div class="radio-wrapper" id="institution-input">
                             <form:radiobutton path="institution" value="${institution.id}" id="radio-${loop.index}"/>
                             <div class="radio-labels-container">
                                 <span class="radio-name-label">Fundacja ${institution.name}</span>
@@ -137,28 +139,28 @@
                     <div class="form-section--column">
                         <h4>Adres odbioru</h4>
                         <div class="form-group form-group--inline">
-                            <label>Ulica
+                            <label id="street-input">Ulica
                                 <form:input path="street"/>
                             </label>
                             <p class="step-4-validation d-none" id="street-validation">Ulica jest wymagana</p>
                         </div>
 
                         <div class="form-group form-group--inline">
-                            <label>Miasto
+                            <label id="city-input">Miasto
                                 <form:input path="city"/>
                             </label>
                             <p class="step-4-validation d-none" id="city-validation">Miasto jest wymagane</p>
                         </div>
 
                         <div class="form-group form-group--inline">
-                            <label>Kod pocztowy
+                            <label id="zipcode-input">Kod pocztowy
                                 <form:input path="zipCode"/>
                             </label>
                             <p class="step-4-validation d-none" id="zipcode-validation">Kod pocztowy jest wymagany</p>
                         </div>
 
                         <div class="form-group form-group--inline">
-                            <label>Numer telefonu
+                            <label id="phone-input">Numer telefonu
                                 <form:input type="phone" path="phoneNumber"/>
                             </label>
                             <p class="step-4-validation d-none" id="phone-validation">Numer telefonu jest wymagany</p>
@@ -168,21 +170,23 @@
                     <div class="form-section--column">
                         <h4>Termin odbioru</h4>
                         <div class="form-group form-group--inline">
-                            <label>Data
+                            <label id="date-input">Data
                                 <form:input type="date" path="pickUpDate"/>
                             </label>
-                            <p class="step-4-validation date-time-valid d-none" id="date-validation">Data odbioru jest wymagana</p>
+                            <p class="step-4-validation date-time-valid d-none" id="date-validation">Data odbioru jest
+                                wymagana</p>
                         </div>
 
                         <div class="form-group form-group--inline">
-                            <label>Godzina
+                            <label id="time-input">Godzina
                                 <form:input type="time" path="pickUpTime"/>
                             </label>
-                            <p class="step-4-validation date-time-valid d-none" id="time-validation">Czas odbioru jest wymagany</p>
+                            <p class="step-4-validation date-time-valid d-none" id="time-validation">Czas odbioru jest
+                                wymagany</p>
                         </div>
 
                         <div class="form-group form-group--inline">
-                            <label>Uwagi dla kuriera
+                            <label id="comment-input">Uwagi dla kuriera
                                 <form:textarea path="pickUpComment" rows="5"/>
                             </label>
                         </div>
@@ -210,8 +214,7 @@
 
                             <li>
                                 <span class="icon icon-hand"></span>
-                                <span class="summary--text" id="foundation-summary">Dla fundacji "Mam marzenie" w Warszawie</span
-                                >
+                                <span class="summary--text" id="foundation-summary">Dla fundacji "Mam marzenie" w Warszawie</span>
                             </li>
                         </ul>
                     </div>
@@ -232,7 +235,7 @@
                             <ul>
                                 <li id="date-summary">13/12/2018</li>
                                 <li id="time-summary">15:40</li>
-                                <li id="comment-summary">Brak uwag</li>
+                                <li id="comment-summary">Brak uwag dla kuriera</li>
                             </ul>
                         </div>
                     </div>
