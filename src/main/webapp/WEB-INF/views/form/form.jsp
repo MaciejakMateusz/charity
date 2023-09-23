@@ -81,7 +81,8 @@
                                      itemLabel="name"
                                      cssClass="custom-checkbox"/>
                 </div>
-                <span class="form-validation d-none" id="category-validation">Przynajmniej jedna kategoria jest wymagana</span>
+                <span class="form-validation d-none"
+                      id="category-validation">Przynajmniej jedna kategoria jest wymagana</span>
                 <form:errors path="categories" cssClass="step-4-validation date-time-valid"/>
 
                 <div class="form-group form-group--buttons">
@@ -99,7 +100,8 @@
                         <form:input type="number" path="quantity" step="1" min="1"/>
                     </label>
                 </div>
-                <span class="form-validation d-none" id="quantity-validation">Przynajmniej jeden worek jest wymagany</span>
+                <span class="form-validation d-none"
+                      id="quantity-validation">Przynajmniej jeden worek jest wymagany</span>
                 <form:errors path="quantity" cssClass="step-4-validation date-time-valid"/>
 
                 <div class="form-group form-group--buttons">
@@ -177,8 +179,10 @@
                             <label id="date-input">Data
                                 <form:input type="date" path="pickUpDate"/>
                             </label>
-                            <p class="step-4-validation date-time-valid d-none" id="date-validation">Data odbioru jest wymagana</p>
-                            <p class="step-4-validation date-time-valid d-none" id="future-date-validation">Data odbioru musi być w przyszłości</p>
+                            <p class="step-4-validation date-time-valid d-none" id="date-validation">Data odbioru jest
+                                wymagana</p>
+                            <p class="step-4-validation date-time-valid d-none" id="future-date-validation">Data odbioru
+                                musi być w przyszłości</p>
                             <form:errors path="pickUpDate" cssClass="step-4-validation date-time-valid"/>
                         </div>
 
@@ -186,7 +190,8 @@
                             <label id="time-input">Godzina
                                 <form:input type="time" path="pickUpTime"/>
                             </label>
-                            <p class="step-4-validation date-time-valid d-none" id="time-validation">Czas odbioru jest wymagany</p>
+                            <p class="step-4-validation date-time-valid d-none" id="time-validation">Czas odbioru jest
+                                wymagany</p>
                             <form:errors path="pickUpTime" cssClass="step-4-validation date-time-valid"/>
                         </div>
 
