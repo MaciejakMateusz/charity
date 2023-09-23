@@ -30,6 +30,6 @@
         <li><a href="${pageContext.request.contextPath}/#about-us" class="btn btn--without-border">O nas</a></li>
         <li><a href="${pageContext.request.contextPath}/#help" class="btn btn--without-border">Fundacje i
             organizacje</a></li>
-        <li><a href="${pageContext.request.contextPath}/#contact" class="btn btn--without-border">Kontakt</a></li>
+        <li><a href="#contact" class="btn btn--without-border">Kontakt</a></li>
     </ul>
 </nav>
