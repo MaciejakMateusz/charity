@@ -16,7 +16,7 @@
                     Zalogowany jako <sec:authentication property="principal.username"/>
                     <ul class="dropdown">
                         <li><a href="${pageContext.request.contextPath}/form">Przekaż dary</a></li>
-                        <li><a href="#">Profil</a></li>
+                        <li><a href="${pageContext.request.contextPath}/profile">Twój profil</a></li>
                         <li><a href="#">Moje zbiórki</a></li>
                         <li><a href="${pageContext.request.contextPath}/logout">Wyloguj</a></li>
                     </ul>
