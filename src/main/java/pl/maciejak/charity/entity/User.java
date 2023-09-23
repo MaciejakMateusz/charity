@@ -37,6 +37,14 @@ public class User {
     @Password
     private String password;
 
+    private String
+            name,
+            surname,
+            street,
+            city,
+            zipCode,
+            phoneNumber;
+
     @Transient
     private String repeatedPassword;
 
