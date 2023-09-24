@@ -1937,6 +1937,15 @@ footer .bottom-line--icons a img {
     margin-top: 0.1rem;
 }
 
+.profile-validation {
+    font-size: 1.1rem;
+    color: red;
+    margin-bottom: -1rem;
+    margin-top: 0.1rem;
+    display: flex;
+    justify-content: flex-end;
+}
+
 .date-time-valid {
     margin-left: 16rem;
 }
@@ -1956,7 +1965,7 @@ footer .bottom-line--icons a img {
 
 .profile-form-buttons {
     margin-top: 3rem;
-    justify-content: space-around;
+    justify-content: space-around !important;
 }
 
 .profile-form-page {

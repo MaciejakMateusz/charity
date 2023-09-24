@@ -46,24 +46,9 @@
                             <label>E-mail
                                 <form:input path="email"/>
                             </label>
+                            <form:errors path="email" cssClass="profile-validation"/>
                         </div>
                     </div>
-
-                    <div class="form-section--column">
-                        <h4>Zmień hasło</h4>
-                        <div class="form-group form-group--inline">
-                            <label>Nowe hasło
-                                <form:password path="password"/>
-                            </label>
-                        </div>
-
-                        <div class="form-group form-group--inline">
-                            <label>Powtórz nowe hasło
-                                <form:password path="repeatedPassword"/>
-                            </label>
-                        </div>
-                    </div>
-
 
                     <div class="form-section--column address-div">
                         <h4>Zmień dane adresowe</h4>
@@ -96,6 +81,9 @@
                 <div class="form-group form-group--buttons profile-form-buttons">
                     <a href="${pageContext.request.contextPath}/">
                         <button type="button" class="btn">Wstecz</button>
+                    </a>
+                    <a href="${pageContext.request.contextPath}/profile/password">
+                        <button type="button" class="btn">Zmień hasło</button>
                     </a>
                     <c:choose>
                         <c:when test="${formSubmitted==true}">
