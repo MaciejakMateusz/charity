@@ -20,6 +20,7 @@ import java.util.Set;
 @Table(name = "users")
 @Slf4j
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -46,6 +47,7 @@ public class User {
             phoneNumber;
 
     @Transient
+    @Password
     private String repeatedPassword;
 
     private LocalDateTime created;

@@ -31,7 +31,6 @@ public class DonationController {
         this.institutionService = institutionService;
     }
 
-
     @GetMapping
     public String form(Model model) {
         model.addAttribute("donation", new Donation());
