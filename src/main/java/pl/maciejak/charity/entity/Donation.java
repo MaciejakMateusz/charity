@@ -58,4 +58,5 @@ public class Donation {
 
     @NotBlank
     private String phoneNumber;
+
 }
