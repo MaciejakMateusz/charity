@@ -59,6 +59,9 @@ public class Donation {
     @NotBlank
     private String phoneNumber;
 
+    @ManyToOne
+    private User user;
+
     private boolean isPickedUp;
 
 }
