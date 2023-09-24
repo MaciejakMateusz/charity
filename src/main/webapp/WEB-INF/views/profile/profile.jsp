@@ -23,7 +23,7 @@
         </div>
 
         <div class="profile-form-container">
-            <form:form action="/form"
+            <form:form action="/profile"
                        method="POST"
                        modelAttribute="user">
                 <div class="form-section form-section--columns">
@@ -37,13 +37,13 @@
                         </div>
 
                         <div class="form-group form-group--inline">
-                            <label>Miasto
+                            <label>Nazwisko
                                 <form:input path="surname"/>
                             </label>
                         </div>
 
                         <div class="form-group form-group--inline">
-                            <label>Kod pocztowy
+                            <label>E-mail
                                 <form:input path="email"/>
                             </label>
                         </div>
@@ -93,10 +93,18 @@
                     </div>
                 </div>
 
-
                 <div class="form-group form-group--buttons profile-form-buttons">
-                    <button type="button" class="btn prev-step">Wstecz</button>
-                    <button type="submit" class="btn">Zapisz</button>
+                    <a href="${pageContext.request.contextPath}/">
+                        <button type="button" class="btn">Wstecz</button>
+                    </a>
+                    <c:choose>
+                        <c:when test="${formSubmitted==true}">
+                            <p class="success-message">Dane zmienione pomyślnie</p>
+                        </c:when>
+                        <c:when test="${formSubmitted!=true}">
+                            <button type="submit" class="btn">Zapisz</button>
+                        </c:when>
+                    </c:choose>
                 </div>
             </form:form>
         </div>
