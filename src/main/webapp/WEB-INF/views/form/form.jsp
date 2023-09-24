@@ -142,7 +142,7 @@
                         <h4>Adres odbioru</h4>
                         <div class="form-group form-group--inline">
                             <label id="street-input">Ulica
-                                <form:input path="street"/>
+                                <form:input path="street" value="${user.street}"/>
                             </label>
                             <p class="step-4-validation d-none" id="street-validation">Ulica jest wymagana</p>
                             <form:errors path="street" cssClass="step-4-validation date-time-valid"/>
@@ -150,7 +150,7 @@
 
                         <div class="form-group form-group--inline">
                             <label id="city-input">Miasto
-                                <form:input path="city"/>
+                                <form:input path="city" value="${user.city}"/>
                             </label>
                             <p class="step-4-validation d-none" id="city-validation">Miasto jest wymagane</p>
                             <form:errors path="city" cssClass="step-4-validation date-time-valid"/>
@@ -158,7 +158,7 @@
 
                         <div class="form-group form-group--inline">
                             <label id="zipcode-input">Kod pocztowy
-                                <form:input path="zipCode"/>
+                                <form:input path="zipCode" value="${user.zipCode}"/>
                             </label>
                             <p class="step-4-validation d-none" id="zipcode-validation">Kod pocztowy jest wymagany</p>
                             <form:errors path="zipCode" cssClass="step-4-validation date-time-valid"/>
@@ -166,7 +166,7 @@
 
                         <div class="form-group form-group--inline">
                             <label id="phone-input">Numer telefonu
-                                <form:input type="phone" path="phoneNumber"/>
+                                <form:input type="phone" path="phoneNumber" value="${user.phoneNumber}"/>
                             </label>
                             <p class="step-4-validation d-none" id="phone-validation">Numer telefonu jest wymagany</p>
                             <form:errors path="phoneNumber" cssClass="step-4-validation date-time-valid"/>
