@@ -32,6 +32,11 @@ public class DonationService implements DonationServiceInterface {
     }
 
     @Override
+    public List<Donation> findAllByUser(User user) {
+        return donationRepository.findDonationsByUser(user);
+    }
+
+    @Override
     public void save(Donation donation) {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

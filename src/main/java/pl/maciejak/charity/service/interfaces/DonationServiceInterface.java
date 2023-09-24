@@ -1,6 +1,7 @@
 package pl.maciejak.charity.service.interfaces;
 
 import pl.maciejak.charity.entity.Donation;
+import pl.maciejak.charity.entity.User;
 
 import java.util.List;
 
@@ -16,4 +17,6 @@ public interface DonationServiceInterface {
     long donationsCount();
 
     long bagsCount();
+
+    List<Donation> findAllByUser(User user);
 }
