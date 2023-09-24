@@ -2,6 +2,8 @@ package pl.maciejak.charity.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,19 +20,20 @@ import java.util.List;
 @Setter
 @ToString
 public class Donation {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @NotBlank
     @Positive
+    @NotNull
     private Integer quantity;
 
-    @NotBlank
+    @NotEmpty
     @ManyToMany
     private List<Category> categories;
 
-    @NotBlank
+    @NotNull
     @ManyToOne
     private Institution institution;
 
@@ -43,17 +46,14 @@ public class Donation {
     @NotBlank
     private String zipCode;
 
-    @NotBlank
+    @NotNull
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-
-    @NotBlank
     private LocalDate pickUpDate;
 
-    @NotBlank
+    @NotNull
     @DateTimeFormat(pattern = "HH:mm")
     private LocalTime pickUpTime;
 
-    @NotBlank
     private String pickUpComment;
 
     @NotBlank
