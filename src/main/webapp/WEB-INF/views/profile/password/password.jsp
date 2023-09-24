@@ -26,6 +26,10 @@
             <form:form action="/profile/password"
                        method="POST"
                        modelAttribute="user">
+                <form:hidden path="id"/>
+                <form:hidden path="username"/>
+                <form:hidden path="email"/>
+                <form:hidden path="created"/>
                 <div class="form-section form-section--columns">
 
                     <div class="form-section--column">
@@ -40,11 +44,10 @@
                         <div class="form-group form-group--inline">
                             <label>Powtórz nowe hasło
                                 <form:password path="repeatedPassword"/>
-                                <c:if test="${passwordsNotMatch==true}">
-                                    <p class="profile-validation">Hasła nie są identyczne</p>
-                                </c:if>
                             </label>
-
+                            <c:if test="${passwordsNotMatch==true}">
+                                <p class="profile-validation">Hasła nie są identyczne</p>
+                            </c:if>
                         </div>
                     </div>
                 </div>
