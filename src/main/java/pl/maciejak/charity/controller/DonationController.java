@@ -1,6 +1,8 @@
 package pl.maciejak.charity.controller;
 
 import jakarta.validation.Valid;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import pl.maciejak.charity.entity.Category;
 import pl.maciejak.charity.entity.Donation;
 import pl.maciejak.charity.entity.Institution;
+import pl.maciejak.charity.entity.User;
 import pl.maciejak.charity.service.CategoryService;
 import pl.maciejak.charity.service.DonationService;
 import pl.maciejak.charity.service.InstitutionService;
+import pl.maciejak.charity.service.UserService;
 
 import java.util.List;
 
@@ -24,15 +28,22 @@ public class DonationController {
     private final CategoryService categoryService;
     private final DonationService donationService;
     private final InstitutionService institutionService;
+    private final UserService userService;
 
-    public DonationController(CategoryService categoryService, DonationService donationService, InstitutionService institutionService) {
+    public DonationController(CategoryService categoryService, DonationService donationService, InstitutionService institutionService, UserService userService) {
         this.categoryService = categoryService;
         this.donationService = donationService;
         this.institutionService = institutionService;
+        this.userService = userService;
     }
 
     @GetMapping
     public String form(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        User user = userService.findByUsername(username);
+
+        model.addAttribute("user", user);
         model.addAttribute("donation", new Donation());
         return "form/form";
     }
