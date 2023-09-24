@@ -5,7 +5,9 @@ import pl.maciejak.charity.entity.User;
 public interface UserServiceInterface {
     User findByUsername(String email);
 
-    void saveUser(User user);
+    void save(User user);
+
+    void updatePassword(User user);
 
     boolean existsByUsername(String username);
 

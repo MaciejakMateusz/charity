@@ -40,7 +40,7 @@ public class RegisterController {
             model.addAttribute("passwordsNotMatch", true);
             return "register";
         }
-        userService.saveUser(user);
+        userService.save(user);
         return "success-registration";
     }
 }

@@ -1,5 +1,6 @@
 package pl.maciejak.charity.service;
 
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import pl.maciejak.charity.entity.User;
 import pl.maciejak.charity.repository.RoleRepository;
@@ -26,10 +27,16 @@ public class UserService implements UserServiceInterface {
     }
 
     @Override
-    public void saveUser(User user) {
+    public void save(User user) {
         user.setEnabled(1);
         user.setRoles(new HashSet<>(Collections.singletonList(roleRepository.findByName("ROLE_USER"))));
         userRepository.save(user);
+    }
+
+    @Override
+    public void updatePassword(User user) {
+        user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
+        save(user);
     }
 
     @Override
