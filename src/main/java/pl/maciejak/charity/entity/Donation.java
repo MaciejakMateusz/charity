@@ -59,4 +59,6 @@ public class Donation {
     @NotBlank
     private String phoneNumber;
 
+    private boolean isPickedUp;
+
 }
