@@ -33,11 +33,10 @@ public class UserProfileController {
 
     @PostMapping
     public String profile(User user, Model model) {
-        userService.saveUser(user);
+        userService.save(user);
         model.addAttribute("formSubmitted", true);
         return "profile/profile";
     }
-
 
     @GetMapping("/password")
     public String password(Model model) {
@@ -54,7 +53,7 @@ public class UserProfileController {
             model.addAttribute("passwordsNotMatch", true);
             return "profile/password/password";
         }
-        userService.saveUser(user);
+        userService.updatePassword(user);
         model.addAttribute("formSubmitted", true);
         return "profile/password/password";
     }

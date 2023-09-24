@@ -47,7 +47,6 @@ public class User {
             phoneNumber;
 
     @Transient
-    @Password
     private String repeatedPassword;
 
     private LocalDateTime created;
