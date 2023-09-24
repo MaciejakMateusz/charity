@@ -26,6 +26,10 @@
             <form:form action="/profile"
                        method="POST"
                        modelAttribute="user">
+                <form:hidden path="id"/>
+                <form:hidden path="password"/>
+                <form:hidden path="username"/>
+                <form:hidden path="created"/>
                 <div class="form-section form-section--columns">
 
                     <div class="form-section--column">
