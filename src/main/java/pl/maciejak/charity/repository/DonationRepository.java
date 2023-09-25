@@ -11,5 +11,6 @@ public interface DonationRepository extends JpaRepository<Donation, Long> {
     @Query("SELECT SUM(d.quantity) FROM Donation d")
     long sumBags();
 
-    List<Donation> findDonationsByUser(User user);
+    @Query("SELECT d FROM Donation d WHERE d.user = :user AND d.isArchived = :isArchived")
+    List<Donation> findDonationsByUserAndArchived(User user, boolean isArchived);
 }

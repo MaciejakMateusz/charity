@@ -8,6 +8,8 @@ import jakarta.validation.constraints.Positive;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
@@ -30,7 +32,9 @@ public class Donation {
     private Integer quantity;
 
     @NotEmpty
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Category> categories;
 
     @NotNull
@@ -65,5 +69,7 @@ public class Donation {
     private boolean isPickedUp;
     private LocalDate pickedUpDate;
     private LocalTime pickedUpTime;
+
+    private boolean isArchived;
 
 }
