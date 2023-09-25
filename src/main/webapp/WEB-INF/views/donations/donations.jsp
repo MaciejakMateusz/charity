@@ -50,7 +50,7 @@
                     </c:when>
                 </c:choose>
                 <td>
-                    <form action="${pageContext.request.contextPath}/details"
+                    <form action="${pageContext.request.contextPath}/donations/details"
                           method="POST">
                         <input type="hidden" name="id" value="${donation.id}">
                         <button type="submit">Szczegóły</button>

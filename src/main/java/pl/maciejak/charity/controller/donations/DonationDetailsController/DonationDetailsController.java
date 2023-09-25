@@ -27,7 +27,7 @@ public class DonationDetailsController {
         return "donations/details/details";
     }
 
-    @PostMapping
+    @PostMapping("/update-status")
     public String updateStatus(Donation donation) {
         donationService.updateStatus(donation);
         return "donations/details/details";
