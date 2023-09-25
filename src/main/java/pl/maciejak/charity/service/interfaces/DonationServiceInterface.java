@@ -12,6 +12,8 @@ public interface DonationServiceInterface {
 
     void save(Donation donation);
 
+    void updateStatus(long id);
+
     void delete(Donation donation);
 
     long donationsCount();

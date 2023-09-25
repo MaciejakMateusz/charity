@@ -43,11 +43,16 @@ public class DonationService implements DonationServiceInterface {
         String username = authentication.getName();
         User user = userService.findByUsername(username);
 
-        List<Donation> donations = user.getDonations();
-        donations.add(donation);
-        user.setDonations(donations);
+        donation.setUser(user);
 
         donationRepository.save(donation);
+    }
+
+    @Override
+    public void updateStatus(long id) {
+        Donation donation = findById((int) id);
+        donation.setPickedUp(true);
+        save(donation);
     }
 
     @Override
