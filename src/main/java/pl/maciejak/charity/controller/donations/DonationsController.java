@@ -5,7 +5,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
 import pl.maciejak.charity.entity.Donation;
 import pl.maciejak.charity.entity.User;
 import pl.maciejak.charity.service.DonationService;
@@ -34,7 +36,7 @@ public class DonationsController {
 
     @ModelAttribute("donations")
     private List<Donation> getDonations() {
-        return donationService.findAllByUser(getSessionUser());
+        return donationService.findAllByUserAndArchived(getSessionUser(), false);
     }
 
     private User getSessionUser() {
