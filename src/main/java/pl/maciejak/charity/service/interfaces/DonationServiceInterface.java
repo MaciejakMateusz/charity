@@ -18,7 +18,7 @@ public interface DonationServiceInterface {
 
     void archive(Donation donation);
 
-    long donationsCount();
+    Long donationsCount();
 
-    long bagsCount();
+    Long bagsCount();
 }

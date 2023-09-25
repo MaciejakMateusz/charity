@@ -29,7 +29,7 @@ public class Donation {
 
     @Positive
     @NotNull
-    private Integer quantity;
+    private Long quantity;
 
     @NotEmpty
     @ManyToMany(cascade = CascadeType.REMOVE)
