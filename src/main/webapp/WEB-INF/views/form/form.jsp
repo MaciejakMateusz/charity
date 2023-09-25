@@ -220,12 +220,12 @@
                             <li>
                                 <span class="icon icon-bag"></span>
                                 <span class="summary--text"
-                                      id="bags-summary">4 worki ubrań w dobrym stanie dla dzieci</span>
+                                      id="bags-summary"></span>
                             </li>
 
                             <li>
                                 <span class="icon icon-hand"></span>
-                                <span class="summary--text" id="foundation-summary">Dla fundacji "Mam marzenie" w Warszawie</span>
+                                <span class="summary--text" id="foundation-summary"></span>
                             </li>
                         </ul>
                     </div>
@@ -234,19 +234,19 @@
                         <div class="form-section--column">
                             <h4>Adres odbioru:</h4>
                             <ul>
-                                <li id="street-summary">Prosta 51</li>
-                                <li id="city-summary">Warszawa</li>
-                                <li id="zipcode-summary">99-098</li>
-                                <li id="phone-summary">123 456 789</li>
+                                <li id="street-summary"></li>
+                                <li id="city-summary"></li>
+                                <li id="zipcode-summary"></li>
+                                <li id="phone-summary"></li>
                             </ul>
                         </div>
 
                         <div class="form-section--column">
                             <h4>Termin odbioru:</h4>
                             <ul>
-                                <li id="date-summary">13/12/2018</li>
-                                <li id="time-summary">15:40</li>
-                                <li id="comment-summary">Brak uwag dla kuriera</li>
+                                <li id="date-summary"></li>
+                                <li id="time-summary"></li>
+                                <li id="comment-summary"></li>
                             </ul>
                         </div>
                     </div>
