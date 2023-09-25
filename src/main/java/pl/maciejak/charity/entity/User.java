@@ -11,7 +11,6 @@ import pl.maciejak.charity.annotation.Email;
 import pl.maciejak.charity.annotation.Password;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -54,9 +53,6 @@ public class User {
     private LocalDateTime updated;
 
     private int enabled;
-
-    @OneToMany
-    private List<Donation> donations;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"),
