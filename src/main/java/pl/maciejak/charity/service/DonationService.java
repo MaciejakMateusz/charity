@@ -8,6 +8,8 @@ import pl.maciejak.charity.entity.User;
 import pl.maciejak.charity.repository.DonationRepository;
 import pl.maciejak.charity.service.interfaces.DonationServiceInterface;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 @Service
@@ -52,6 +54,8 @@ public class DonationService implements DonationServiceInterface {
     public void updateStatus(long id) {
         Donation donation = findById((int) id);
         donation.setPickedUp(true);
+        donation.setPickedUpDate(LocalDate.now());
+        donation.setPickUpTime(LocalTime.now());
         save(donation);
     }
 
