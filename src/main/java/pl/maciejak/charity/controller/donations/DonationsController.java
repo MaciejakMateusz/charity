@@ -32,12 +32,6 @@ public class DonationsController {
         return "donations/donations";
     }
 
-    @PostMapping
-    public String updateStatus(@RequestParam long id) {
-        donationService.updateStatus(id);
-        return "donations/donations";
-    }
-
     @ModelAttribute("donations")
     private List<Donation> getDonations() {
         return donationService.findAllByUser(getSessionUser());
