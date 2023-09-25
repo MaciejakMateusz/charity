@@ -12,7 +12,7 @@ public interface DonationServiceInterface {
 
     void save(Donation donation);
 
-    void updateStatus(long id);
+    void updateStatus(Donation donation);
 
     void delete(Donation donation);
 

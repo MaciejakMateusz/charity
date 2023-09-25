@@ -51,8 +51,7 @@ public class DonationService implements DonationServiceInterface {
     }
 
     @Override
-    public void updateStatus(long id) {
-        Donation donation = findById((int) id);
+    public void updateStatus(Donation donation) {
         donation.setPickedUp(true);
         donation.setPickedUpDate(LocalDate.now());
         donation.setPickUpTime(LocalTime.now());
