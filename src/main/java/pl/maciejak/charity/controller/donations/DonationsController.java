@@ -5,10 +5,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import pl.maciejak.charity.entity.Donation;
 import pl.maciejak.charity.entity.User;
 import pl.maciejak.charity.service.DonationService;
@@ -36,9 +33,8 @@ public class DonationsController {
     }
 
     @PostMapping
-    public String donations(User user, Model model) {
-        userService.save(user);
-        model.addAttribute("formSubmitted", true);
+    public String updateStatus(@RequestParam long id) {
+        donationService.updateStatus(id);
         return "donations/donations";
     }
 
