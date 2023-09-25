@@ -58,13 +58,13 @@
                             </c:choose>
                         </div>
                     </li>
-                    <form:form action="/donations"
-                               method="POST"
-                               modelAttribute="user">
-                        <form:hidden path="id"/>
-                        <form:hidden path="donations"/>
-                        <p>Potwierdź odebranie daru</p>
-                    </form:form>
+                    <c:if test="${donation.pickedUp==false}">
+                        <form action="${pageContext.request.contextPath}/donations"
+                                   method="POST">
+                            <input type="hidden" name="id" value="${donation.id}"/>
+                            <button type="submit" class="btn">Potwierdź odebranie daru</button>
+                        </form>
+                    </c:if>
                 </c:forEach>
             </ul>
         </div>
