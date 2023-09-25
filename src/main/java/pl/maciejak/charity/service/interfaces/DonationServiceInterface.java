@@ -10,6 +10,8 @@ public interface DonationServiceInterface {
 
     List<Donation> findAll();
 
+    List<Donation> findAllByUserAndArchived(User user, boolean isArchived);
+
     void save(Donation donation);
 
     void updateStatus(Donation donation);
@@ -19,6 +21,4 @@ public interface DonationServiceInterface {
     long donationsCount();
 
     long bagsCount();
-
-    List<Donation> findAllByUser(User user);
 }
