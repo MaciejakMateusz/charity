@@ -63,5 +63,7 @@ public class Donation {
     private User user;
 
     private boolean isPickedUp;
+    private LocalDate pickedUpDate;
+    private LocalTime pickedUpTime;
 
 }
