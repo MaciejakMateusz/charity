@@ -4,7 +4,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import pl.maciejak.charity.entity.Donation;
+import pl.maciejak.charity.entity.DonationArchive;
 import pl.maciejak.charity.entity.User;
+import pl.maciejak.charity.repository.DonationArchiveRepository;
 import pl.maciejak.charity.repository.DonationRepository;
 import pl.maciejak.charity.service.interfaces.DonationServiceInterface;
 
@@ -16,10 +18,12 @@ import java.util.List;
 public class DonationService implements DonationServiceInterface {
 
     private final DonationRepository donationRepository;
+    private final DonationArchiveRepository donationArchiveRepository;
     private final UserService userService;
 
-    public DonationService(DonationRepository donationRepository, UserService userService) {
+    public DonationService(DonationRepository donationRepository, DonationArchiveRepository donationArchiveRepository, UserService userService) {
         this.donationRepository = donationRepository;
+        this.donationArchiveRepository = donationArchiveRepository;
         this.userService = userService;
     }
 
@@ -61,6 +65,28 @@ public class DonationService implements DonationServiceInterface {
     @Override
     public void archive(Donation donation) {
 
+        DonationArchive donationArchive = new DonationArchive();
+
+        donationArchive.setUser(donation.getUser());
+
+        donationArchive.setCategories(donation.getCategories());
+        donationArchive.setQuantity(donation.getQuantity());
+        donationArchive.setInstitution(donation.getInstitution());
+
+        donationArchive.setStreet(donation.getStreet());
+        donationArchive.setCity(donation.getCity());
+        donationArchive.setZipCode(donation.getZipCode());
+        donationArchive.setPhoneNumber(donation.getPhoneNumber());
+
+        donationArchive.setPickUpDate(donation.getPickUpDate());
+        donationArchive.setPickUpTime(donation.getPickUpTime());
+        donationArchive.setPickUpComment(donation.getPickUpComment());
+
+        donationArchive.setPickedUp(donation.isPickedUp());
+        donationArchive.setPickedUpDate(donation.getPickedUpDate());
+        donationArchive.setPickedUpTime(donation.getPickedUpTime());
+
+        donationArchiveRepository.save(donationArchive);
         donationRepository.delete(donation);
     }
 
