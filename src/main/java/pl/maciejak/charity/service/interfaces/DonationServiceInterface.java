@@ -6,7 +6,7 @@ import pl.maciejak.charity.entity.User;
 import java.util.List;
 
 public interface DonationServiceInterface {
-    Donation findById(Integer id);
+    Donation findById(Long id);
 
     List<Donation> findAll();
 
@@ -14,7 +14,7 @@ public interface DonationServiceInterface {
 
     void updateStatus(Donation donation);
 
-    void delete(Donation donation);
+    void archive(Donation donation);
 
     long donationsCount();
 

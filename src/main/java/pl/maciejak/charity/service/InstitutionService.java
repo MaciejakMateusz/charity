@@ -18,7 +18,7 @@ public class InstitutionService implements InstitutionServiceInterface {
     }
 
     @Override
-    public Institution findById(Integer id) {
+    public Institution findById(Long id) {
         return institutionRepository.findById(id).orElseThrow();
     }
 

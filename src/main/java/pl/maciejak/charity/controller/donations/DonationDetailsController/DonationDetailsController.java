@@ -22,7 +22,7 @@ public class DonationDetailsController {
 
     @PostMapping
     public String donationDetails(@RequestParam long id, Model model) {
-        Donation donation = donationService.findById((int) id);
+        Donation donation = donationService.findById(id);
         model.addAttribute("donation", donation);
         return "donations/details/details";
     }

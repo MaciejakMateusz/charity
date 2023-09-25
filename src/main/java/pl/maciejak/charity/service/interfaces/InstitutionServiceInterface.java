@@ -5,7 +5,7 @@ import pl.maciejak.charity.entity.Institution;
 import java.util.List;
 
 public interface InstitutionServiceInterface {
-    Institution findById(Integer id);
+    Institution findById(Long id);
 
     List<Institution> findAll();
 

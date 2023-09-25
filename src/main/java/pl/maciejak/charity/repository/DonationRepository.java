@@ -7,7 +7,7 @@ import pl.maciejak.charity.entity.User;
 
 import java.util.List;
 
-public interface DonationRepository extends JpaRepository<Donation, Integer> {
+public interface DonationRepository extends JpaRepository<Donation, Long> {
     @Query("SELECT SUM(d.quantity) FROM Donation d")
     long sumBags();
 

@@ -24,7 +24,7 @@ public class DonationService implements DonationServiceInterface {
     }
 
     @Override
-    public Donation findById(Integer id) {
+    public Donation findById(Long id) {
         return donationRepository.findById(id).orElseThrow();
     }
 
@@ -59,7 +59,8 @@ public class DonationService implements DonationServiceInterface {
     }
 
     @Override
-    public void delete(Donation donation) {
+    public void archive(Donation donation) {
+
         donationRepository.delete(donation);
     }
 

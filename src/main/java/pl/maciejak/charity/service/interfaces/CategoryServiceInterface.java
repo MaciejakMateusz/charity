@@ -5,7 +5,7 @@ import pl.maciejak.charity.entity.Category;
 import java.util.List;
 
 public interface CategoryServiceInterface {
-    Category findById(Integer id);
+    Category findById(Long id);
 
     List<Category> findAll();
 

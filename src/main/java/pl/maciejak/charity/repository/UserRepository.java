@@ -4,7 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import pl.maciejak.charity.entity.User;
 
 
-public interface UserRepository extends JpaRepository<User, Integer> {
+public interface UserRepository extends JpaRepository<User, Long> {
     User findUserByUsername(String username);
 
     boolean existsByEmail(String email);

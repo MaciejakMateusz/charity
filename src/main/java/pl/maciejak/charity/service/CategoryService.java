@@ -17,7 +17,7 @@ public class CategoryService implements CategoryServiceInterface {
     }
 
     @Override
-    public Category findById(Integer id) {
+    public Category findById(Long id) {
         return categoryRepository.findById(id).orElseThrow();
     }
 
