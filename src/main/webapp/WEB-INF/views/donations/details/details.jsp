@@ -22,28 +22,39 @@
             </h1>
         </div>
 
-        <div class="profile-form-container">
-            <p>Donacja dla fundacji ${donation.institution.name}</p>
-            <p>Zawiera ${donation.quantity} sztuk(i) worków z kategorii:</p>
-            <ul>
-                <c:forEach items="${donation.categories}" var="category">
-                    <li>
-                        <p>${category.name}</p>
-                    </li>
-                </c:forEach>
-            </ul>
-            <div>
-                <p>Odbiór z adresu:</p>
-                <p>${donation.street}</p>
-                <p>${donation.city}</p>
-                <p>${donation.zipCode}</p>
-                <p>${donation.phoneNumber}</p>
+        <div class="donation-details-grid">
+
+            <div class="institution-area">
+                <p>Donacja dla fundacji<br> ${donation.institution.name}</p>
             </div>
-            <div>
+
+            <div class="contents-area">
+                <p>Zawiera ${donation.quantity} sztuk(i) worków z kategorii:</p>
+                <ul>
+                    <c:forEach items="${donation.categories}" var="category">
+                        <li>
+                            <p>${category.name}</p>
+                        </li>
+                    </c:forEach>
+                </ul>
+            </div>
+
+            <div class="address-area">
+                <div>
+                    <p>Odbiór z adresu:</p>
+                    <p>${donation.street}</p>
+                    <p>${donation.city}</p>
+                    <p>${donation.zipCode}</p>
+                    <p>${donation.phoneNumber}</p>
+                </div>
+            </div>
+
+            <div class="date-time-area">
                 <p>Czasu odbioru:</p>
                 <p>${donation.pickUpDate} o godzinie ${donation.pickUpTime}</p>
             </div>
-            <div>
+
+            <div class="status-area">
                 <p>Status donacji:</p>
                 <c:choose>
                     <c:when test="${donation.pickedUp==true}">
@@ -54,13 +65,26 @@
                     </c:when>
                 </c:choose>
             </div>
-            <c:if test="${donation.pickedUp==false}">
-                <form action="${pageContext.request.contextPath}/donations/details/update-status"
-                      method="POST">
-                    <input type="hidden" name="id" value="${donation.id}"/>
-                    <button type="submit" class="btn">Potwierdź odebranie daru</button>
-                </form>
-            </c:if>
+            <div class="buttons-area">
+                <c:choose>
+                    <c:when test="${donation.pickedUp==false}">
+                        <form:form action="/donations/details/update-status"
+                                   method="POST"
+                                   modelAttribute="donation">
+                            <form:hidden path="id"/>
+                            <button type="submit" class="btn">Potwierdź odebranie</button>
+                        </form:form>
+                    </c:when>
+                    <c:when test="${donation.pickedUp==true}">
+                        <form:form action="/donations/details/archive"
+                                   method="POST"
+                                   modelAttribute="donation">
+                            <form:hidden path="id"/>
+                            <button type="submit" class="btn">Archiwizuj</button>
+                        </form:form>
+                    </c:when>
+                </c:choose>
+            </div>
         </div>
     </div>
 </header>

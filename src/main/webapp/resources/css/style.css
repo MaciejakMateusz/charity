@@ -1781,6 +1781,41 @@ footer .bottom-line--icons a img {
     margin: 0 auto;
 }
 
+.donation-details-grid {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+            "institution-area contents-area"
+            "address-area date-time-area"
+            "status-area buttons-area";
+    font-size: 1.5rem;
+}
+
+.institution-area {
+    grid-area: institution-area;
+}
+
+.contents-area {
+    grid-area: contents-area;
+}
+
+.address-area {
+    grid-area: address-area;
+}
+
+.date-time-area {
+    grid-area: date-time-area;
+}
+
+.status-area {
+    grid-area: status-area;
+}
+
+.buttons-area {
+    grid-area: buttons-area;
+}
+
 /* line 77, scss/style.scss */
 .form--steps-counter {
     font-family: 'Open Sans', sans-serif;
