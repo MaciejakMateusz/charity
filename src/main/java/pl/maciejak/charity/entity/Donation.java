@@ -1,15 +1,13 @@
 package pl.maciejak.charity.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
@@ -51,6 +49,7 @@ public class Donation {
     private String zipCode;
 
     @NotNull
+    @Future
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate pickUpDate;
 
@@ -58,6 +57,7 @@ public class Donation {
     @DateTimeFormat(pattern = "HH:mm")
     private LocalTime pickUpTime;
 
+    @Length(max = 255)
     private String pickUpComment;
 
     @NotBlank
