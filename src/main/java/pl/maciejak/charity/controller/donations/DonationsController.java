@@ -6,14 +6,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import pl.maciejak.charity.entity.Donation;
 import pl.maciejak.charity.entity.User;
 import pl.maciejak.charity.service.DonationService;
 import pl.maciejak.charity.service.UserService;
-
-import java.util.List;
 
 @Controller
 @RequestMapping("/donations")
@@ -30,13 +26,16 @@ public class DonationsController {
 
     @GetMapping
     public String donations(Model model) {
-        model.addAttribute("user", getSessionUser());
+        model.addAttribute("donations",
+                donationService.findAllByUserAndArchived(getSessionUser(), false));
         return "donations/donations";
     }
 
-    @ModelAttribute("donations")
-    private List<Donation> getDonations() {
-        return donationService.findAllByUserAndArchived(getSessionUser(), false);
+    @GetMapping("/archived")
+    public String archived(Model model) {
+        model.addAttribute("archivedDonations",
+                donationService.findAllByUserAndArchived(getSessionUser(), true));
+        return "donations/archived/archived-donations";
     }
 
     private User getSessionUser() {
