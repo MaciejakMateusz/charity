@@ -30,12 +30,12 @@ public class DonationDetailsController {
     @PostMapping("/update-status")
     public String updateStatus(Donation donation) {
         donationService.updateStatus(donation);
-        return "donations/details/details";
+        return "donations/details/success-update";
     }
 
     @PostMapping("/archive")
     public String archive(Donation donation) {
         donationService.archive(donation);
-        return "donations/donations";
+        return "donations/details/success-archive";
     }
 }

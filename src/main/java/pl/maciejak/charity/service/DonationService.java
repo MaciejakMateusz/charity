@@ -56,7 +56,7 @@ public class DonationService implements DonationServiceInterface {
 
         existingDonation.setPickedUp(true);
         existingDonation.setPickedUpDate(LocalDate.now());
-        existingDonation.setPickUpTime(LocalTime.now());
+        existingDonation.setPickedUpTime(LocalTime.now());
         save(existingDonation);
     }
 
