@@ -74,6 +74,4 @@ public class Donation {
 
     @DateTimeFormat(pattern = "HH:mm")
     private LocalTime pickedUpTime;
-
-
 }

@@ -3,6 +3,7 @@ package pl.maciejak.charity.controller.donations.DonationDetailsController;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,10 +21,12 @@ public class DonationDetailsController {
         this.donationService = donationService;
     }
 
+    private static Donation currentDonation;
+
     @PostMapping
     public String donationDetails(@RequestParam long id, Model model) {
-        Donation donation = donationService.findById(id);
-        model.addAttribute("donation", donation);
+        currentDonation = donationService.findById(id);
+        model.addAttribute("donation", currentDonation);
         return "donations/details/details";
     }
 
@@ -37,5 +40,11 @@ public class DonationDetailsController {
     public String archive(Donation donation) {
         donationService.archive(donation);
         return "donations/details/success-archive";
+    }
+
+    @GetMapping
+    public String donation(Model model) {
+        model.addAttribute("donation", currentDonation);
+        return "donations/details/details";
     }
 }
