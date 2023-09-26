@@ -15,6 +15,9 @@
                 <li class="logged-user">
                     Zalogowany jako <sec:authentication property="principal.username"/>
                     <ul class="dropdown">
+                        <sec:authorize access="hasRole('ADMIN')">
+                            <li><a href="${pageContext.request.contextPath}/admin/dashboard">Administracja</a></li>
+                        </sec:authorize>
                         <li><a href="${pageContext.request.contextPath}/form">Przekaż dary</a></li>
                         <li><a href="${pageContext.request.contextPath}/profile">Twój profil</a></li>
                         <li><a href="${pageContext.request.contextPath}/donations">Moje zbiórki</a></li>
