@@ -11,6 +11,7 @@ import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -74,4 +75,12 @@ public class Donation {
 
     @DateTimeFormat(pattern = "HH:mm")
     private LocalTime pickedUpTime;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+    private LocalDateTime created;
+
+    @PrePersist
+    private void prePersist() {
+        this.created = LocalDateTime.now();
+    }
 }
