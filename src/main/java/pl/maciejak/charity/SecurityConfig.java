@@ -10,6 +10,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
+import pl.maciejak.charity.service.LoginSuccessHandler;
 
 import java.util.List;
 
@@ -58,6 +59,7 @@ public class SecurityConfig {
         http.formLogin(login ->
                 login.loginPage("/login")
                         .defaultSuccessUrl("/form")
+                        .successHandler(new LoginSuccessHandler())
                         .permitAll()
         );
 
