@@ -52,6 +52,7 @@ public class SecurityConfig {
                         .requestMatchers(mvcMatcherBuilder.pattern("/form")).hasAnyRole("USER", "ADMIN")
                         .requestMatchers(mvcMatcherBuilder.pattern("/profile/**")).hasAnyRole("USER", "ADMIN")
                         .requestMatchers(mvcMatcherBuilder.pattern("/donations/**")).hasAnyRole("USER", "ADMIN")
+                        .requestMatchers(mvcMatcherBuilder.pattern("/admin/**")).hasRole("ADMIN")
         );
 
         http.formLogin(login ->
