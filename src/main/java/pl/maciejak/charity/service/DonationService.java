@@ -1,13 +1,12 @@
 package pl.maciejak.charity.service;
 
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import pl.maciejak.charity.entity.Donation;
 import pl.maciejak.charity.entity.User;
 import pl.maciejak.charity.repository.DonationRepository;
 import pl.maciejak.charity.service.interfaces.DonationServiceInterface;
 
+import java.security.Principal;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -29,24 +28,14 @@ public class DonationService implements DonationServiceInterface {
     }
 
     @Override
-    public List<Donation> findAll() {
-        return donationRepository.findAll();
-    }
-
-    @Override
     public List<Donation> findAllByUserAndArchived(User user, boolean isArchived) {
         return donationRepository.findDonationsByUserAndArchived(user, isArchived);
     }
 
     @Override
-    public void save(Donation donation) {
-
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String username = authentication.getName();
-        User user = userService.findByUsername(username);
-
+    public void save(Donation donation, Principal principal) {
+        User user = userService.findByUsername(principal.getName());
         donation.setUser(user);
-
         donationRepository.save(donation);
     }
 
@@ -57,14 +46,14 @@ public class DonationService implements DonationServiceInterface {
         existingDonation.setPickedUp(true);
         existingDonation.setPickedUpDate(LocalDate.now());
         existingDonation.setPickedUpTime(LocalTime.now());
-        save(existingDonation);
+        donationRepository.save(existingDonation);
     }
 
     @Override
     public void archive(Donation donation) {
         Donation existingDonation = findById(donation.getId());
         existingDonation.setArchived(true);
-        save(existingDonation);
+        donationRepository.save(existingDonation);
     }
 
     @Override

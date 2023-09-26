@@ -51,7 +51,7 @@ public class UserProfileController {
 
     @PostMapping("/password")
     public String password(@Valid User user, BindingResult br, Model model) {
-        if(br.hasErrors()) {
+        if (br.hasErrors()) {
             return "profile/password/password";
         }
         if (!user.getPassword().equals(user.getRepeatedPassword())) {

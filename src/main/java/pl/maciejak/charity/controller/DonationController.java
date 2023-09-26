@@ -1,8 +1,6 @@
 package pl.maciejak.charity.controller;
 
 import jakarta.validation.Valid;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,6 +17,7 @@ import pl.maciejak.charity.service.DonationService;
 import pl.maciejak.charity.service.InstitutionService;
 import pl.maciejak.charity.service.UserService;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -38,23 +37,20 @@ public class DonationController {
     }
 
     @GetMapping
-    public String form(Model model) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String username = authentication.getName();
-        User user = userService.findByUsername(username);
-
+    public String form(Model model, Principal principal) {
+        User user = userService.findByUsername(principal.getName());
         model.addAttribute("user", user);
         model.addAttribute("donation", new Donation());
         return "form/form";
     }
 
     @PostMapping
-    public String form(@Valid Donation donation, BindingResult br, Model model) {
+    public String form(@Valid Donation donation, BindingResult br, Model model, Principal principal) {
         if (br.hasErrors()) {
             model.addAttribute("validFormInputs", false);
             return "form/form";
         }
-        donationService.save(donation);
+        donationService.save(donation, principal);
         return "form/form-confirmation";
     }
 
