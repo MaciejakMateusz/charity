@@ -85,6 +85,9 @@
                     </c:when>
                 </c:choose>
             </div>
+            <a href="${pageContext.request.contextPath}/donations">
+                <button class="btn">Wróć</button>
+            </a>
         </div>
     </div>
 </header>
