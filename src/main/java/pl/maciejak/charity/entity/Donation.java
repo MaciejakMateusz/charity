@@ -67,9 +67,13 @@ public class Donation {
     private User user;
 
     private boolean isPickedUp;
+    private boolean isArchived;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate pickedUpDate;
+
+    @DateTimeFormat(pattern = "HH:mm")
     private LocalTime pickedUpTime;
 
-    private boolean isArchived;
 
 }
