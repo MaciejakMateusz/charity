@@ -25,6 +25,14 @@
 </header>
 
 <div class="profile-form-container">
+    <div class="donation-types-buttons">
+        <a href="${pageContext.request.contextPath}/donations">
+            <button class="btn">Aktywne donacje</button>
+        </a>
+        <a href="${pageContext.request.contextPath}/donations/archived">
+            <button class="btn">Zakończone donacje</button>
+        </a>
+    </div>
     <table>
         <thead>
         <tr>

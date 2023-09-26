@@ -66,28 +66,40 @@
                 </c:choose>
             </div>
             <div class="buttons-area">
-                <c:choose>
-                    <c:when test="${donation.pickedUp==false}">
-                        <form:form action="/donations/details/update-status"
-                                   method="POST"
-                                   modelAttribute="donation">
-                            <form:hidden path="id"/>
-                            <button type="submit" class="btn">Potwierdź odebranie</button>
-                        </form:form>
-                    </c:when>
-                    <c:when test="${donation.pickedUp==true}">
-                        <form:form action="/donations/details/archive"
-                                   method="POST"
-                                   modelAttribute="donation">
-                            <form:hidden path="id"/>
-                            <button type="submit" class="btn">Archiwizuj</button>
-                        </form:form>
-                    </c:when>
-                </c:choose>
+                <c:if test="${donation.archived!=true}">
+                    <c:choose>
+                        <c:when test="${donation.pickedUp==false}">
+                            <form:form action="/donations/details/update-status"
+                                       method="POST"
+                                       modelAttribute="donation">
+                                <form:hidden path="id"/>
+                                <button type="submit" class="btn">Potwierdź odebranie</button>
+                            </form:form>
+                        </c:when>
+                        <c:when test="${donation.pickedUp==true}">
+                            <form:form action="/donations/details/archive"
+                                       method="POST"
+                                       modelAttribute="donation">
+                                <form:hidden path="id"/>
+                                <button type="submit" class="btn">Archiwizuj</button>
+                            </form:form>
+                        </c:when>
+                    </c:choose>
+                </c:if>
             </div>
-            <a href="${pageContext.request.contextPath}/donations">
-                <button class="btn">Wróć</button>
-            </a>
+            <c:choose>
+                <c:when test="${donation.archived==false}">
+                    <a href="${pageContext.request.contextPath}/donations">
+                        <button class="btn">Wróć</button>
+                    </a>
+                </c:when>
+                <c:when test="${donation.archived==true}">
+                    <a href="${pageContext.request.contextPath}/donations/archived">
+                        <button class="btn">Wróć</button>
+                    </a>
+                </c:when>
+            </c:choose>
+
         </div>
     </div>
 </header>
