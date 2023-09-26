@@ -11,7 +11,6 @@ import pl.maciejak.charity.service.interfaces.DonationServiceInterface;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
-import java.util.Objects;
 
 @Service
 public class DonationService implements DonationServiceInterface {
@@ -75,10 +74,6 @@ public class DonationService implements DonationServiceInterface {
 
     @Override
     public Long bagsCount() {
-        Long sum = donationRepository.sumBags();
-        if(Objects.isNull(sum)) {
-            return 0L;
-        }
-        return sum;
+        return donationRepository.sumBags().orElse(0L);
     }
 }
