@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import pl.maciejak.charity.annotation.Email;
@@ -26,12 +27,14 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false, unique = true, length = 150)
+    @Column(nullable = false, unique = true, length = 100)
+    @Length(max = 100)
     private String username;
 
     @Column(length = 100, nullable = false, unique = true)
     @NotBlank
     @Email
+    @Length(max = 100)
     private String email;
 
     @Column(nullable = false)
