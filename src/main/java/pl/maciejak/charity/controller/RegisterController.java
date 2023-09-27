@@ -30,9 +30,6 @@ public class RegisterController {
     public String register(@Valid User user, BindingResult br, Model model) {
         if (br.hasErrors()) {
             return "register";
-        } else if (userService.existsByUsername(user.getUsername())) {
-            model.addAttribute("usernameExists", true);
-            return "register";
         } else if (userService.existsByEmail(user.getEmail())) {
             model.addAttribute("emailExists", true);
             return "register";
