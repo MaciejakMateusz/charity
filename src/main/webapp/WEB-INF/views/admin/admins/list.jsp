@@ -116,7 +116,7 @@
                                                         </form>
                                                         <form style="all: unset;"
                                                               method="POST"
-                                                              action="${pageContext.request.contextPath}/app/edit">
+                                                              action="${pageContext.request.contextPath}/admin/user/edit">
                                                             <button
                                                                     type="submit"
                                                                     style="outline: none;"
@@ -128,7 +128,7 @@
                                                         </form>
                                                         <form style="all: unset;"
                                                               method="POST"
-                                                              action="${pageContext.request.contextPath}/app/delete">
+                                                              action="${pageContext.request.contextPath}/admin/user/delete">
                                                             <button
                                                                     type="submit"
                                                                     style="outline: none; background: tomato;"
