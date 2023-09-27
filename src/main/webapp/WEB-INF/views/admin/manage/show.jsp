@@ -6,7 +6,7 @@
 <html lang="pl">
 
 <!-- Header -->
-<%@ include file="header.jsp" %>
+<%@ include file="../header.jsp" %>
 <!-- End of Header -->
 
 <body id="page-top">
@@ -145,7 +145,7 @@
         </div>
 
         <!-- Footer -->
-        <%@ include file="footer.jsp" %>
+        <%@ include file="../footer.jsp" %>
         <!-- End of Footer -->
 
         <!-- End of Content -->
