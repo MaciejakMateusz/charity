@@ -45,6 +45,11 @@ public class UserService implements UserServiceInterface {
     }
 
     @Override
+    public void delete(User user) {
+        userRepository.delete(user);
+    }
+
+    @Override
     public void updatePassword(User user) {
         user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
         save(user);
