@@ -25,13 +25,12 @@ public class UserManagementController {
     public String show(@RequestParam Long id, Model model) {
         this.user = userService.findById(id);
         model.addAttribute("user", this.user);
-        return "admin/show";
+        return "admin/manage/show";
     }
 
     @GetMapping
     public String show(Model model) {
         model.addAttribute("user", this.user);
-        return "admin/show";
+        return "admin/manage/show";
     }
-
 }

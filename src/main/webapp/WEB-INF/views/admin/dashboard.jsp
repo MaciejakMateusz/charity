@@ -28,7 +28,7 @@
                 <p style=" font-size: 1.2rem">Lista użytkowników</p>
             </a>
             <hr class="sidebar-divider">
-            <a type="s" class="nav-link" href="${pageContext.request.contextPath}/admin/admins-list">
+            <a type="s" class="nav-link" href="${pageContext.request.contextPath}/admin/admins">
                 <p style="font-size: 1.2rem">Lista adminów</p>
             </a>
             <hr class="sidebar-divider">

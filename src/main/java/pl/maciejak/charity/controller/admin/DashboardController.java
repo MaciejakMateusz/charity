@@ -17,8 +17,14 @@ public class DashboardController {
     }
 
     @GetMapping("/dashboard")
-    public String form(Model model) {
+    public String users(Model model) {
         model.addAttribute("users", userService.findByRoles("ROLE_USER"));
         return "admin/dashboard";
+    }
+
+    @GetMapping("/admins")
+    public String admins(Model model) {
+        model.addAttribute("admins", userService.findByRoles("ROLE_ADMIN"));
+        return "admin/admins/list";
     }
 }
