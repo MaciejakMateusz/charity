@@ -66,6 +66,12 @@
                             <form:errors path="email"/>
                         </div>
                         <div class="form-group">
+                            <label for="email">Numer telefonu <br>
+                                    <form:input  path="phoneNumber"
+                                                 class="form-control"/>
+                                    <form:errors path="phoneNumber"/>
+                        </div>
+                        <div class="form-group">
                             <label for="name">Ulica <br>
                                 <form:input path="street"
                                             class="form-control"/>
