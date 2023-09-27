@@ -78,6 +78,10 @@
                                             <td><c:out value='${empty user.email ? "-" : user.email}'/></td>
                                         </tr>
                                         <tr>
+                                            <td><strong>Numer telefonu</strong></td>
+                                            <td><c:out value='${empty user.phoneNumber ? "-" : user.phoneNumber}'/></td>
+                                        </tr>
+                                        <tr>
                                             <td><strong>Data utworzenia</strong></td>
                                             <td><c:out value='${empty user.created ? "-" : user.created}'/></td>
                                         </tr>
