@@ -21,11 +21,11 @@ public class DonationDetailsController {
         this.donationService = donationService;
     }
 
-    private static Donation currentDonation;
+    private Donation currentDonation;
 
     @PostMapping
     public String donationDetails(@RequestParam long id, Model model) {
-        currentDonation = donationService.findById(id);
+        this.currentDonation = donationService.findById(id);
         model.addAttribute("donation", currentDonation);
         return "donations/details/details";
     }
@@ -44,7 +44,7 @@ public class DonationDetailsController {
 
     @GetMapping
     public String donation(Model model) {
-        model.addAttribute("donation", currentDonation);
+        model.addAttribute("donation", this.currentDonation);
         return "donations/details/details";
     }
 }
