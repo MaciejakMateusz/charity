@@ -2,8 +2,14 @@ package pl.maciejak.charity.service.interfaces;
 
 import pl.maciejak.charity.entity.User;
 
+import java.util.List;
+
 public interface UserServiceInterface {
+    List<User> findByRoles(String roleName);
+
     User findByUsername(String email);
+
+    User findById(Long id);
 
     void save(User user);
 

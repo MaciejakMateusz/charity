@@ -9,6 +9,7 @@ import pl.maciejak.charity.service.interfaces.UserServiceInterface;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 
 @Service
 public class UserService implements UserServiceInterface {
@@ -22,8 +23,18 @@ public class UserService implements UserServiceInterface {
     }
 
     @Override
+    public List<User> findByRoles(String roleName) {
+        return userRepository.findByRoleName(roleName);
+    }
+
+    @Override
     public User findByUsername(String username) {
         return userRepository.findUserByUsername(username);
+    }
+
+    @Override
+    public User findById(Long id) {
+        return userRepository.findById(id).orElse(new User());
     }
 
     @Override
