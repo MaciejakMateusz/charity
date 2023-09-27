@@ -1,8 +1,4 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
-<!DOCTYPE html>
-<html lang="pl">
-
-<body>
 
 <footer class="bg-white">
     <div class="container">
@@ -11,5 +7,4 @@
         </div>
     </div>
 </footer>
-</body>
-</html>
+

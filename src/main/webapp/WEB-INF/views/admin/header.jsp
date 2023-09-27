@@ -17,7 +17,37 @@
     <!-- Custom styles for this template-->
     <link href="<c:url value="/resources/admin/css/sb-admin-2.css"/>" rel="stylesheet">
 </head>
-<body>
-
-</body>
-</html>
+<body id="page-top">
+<div id="wrapper">
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <!-- Sidebar - Brand -->
+        <a class="sidebar-brand d-flex align-items-center justify-content-center"
+           href="${pageContext.request.contextPath}/admin/dashboard">
+            <div class="sidebar-brand-text mx-3">Zalogowany jako <sec:authentication
+                    property="principal.username"/></div>
+        </a>
+        <!-- Divider -->
+        <!-- Nav Item - Dashboard -->
+        <li class="nav-item active">
+            <hr class="sidebar-divider my-0">
+            <hr class="sidebar-divider">
+            <a type="s" class="nav-link" href="${pageContext.request.contextPath}/admin/dashboard">
+                <p style=" font-size: 1.2rem">Lista użytkowników</p>
+            </a>
+            <hr class="sidebar-divider">
+            <a type="s" class="nav-link" href="${pageContext.request.contextPath}/admin/admins">
+                <p style="font-size: 1.2rem">Lista adminów</p>
+            </a>
+            <hr class="sidebar-divider">
+            <a type="s" class="nav-link" href="${pageContext.request.contextPath}/">
+                <p style="font-size: 1.2rem">Wyjdź z panelu</p>
+            </a>
+            <hr class="sidebar-divider">
+            <a type="s" class="nav-link" href="${pageContext.request.contextPath}/logout">
+                <p style="font-size: 1.2rem">Wyloguj się</p>
+            </a>
+        </li>
+        <!-- Divider -->
+    </ul>
+    <!-- End of Sidebar -->

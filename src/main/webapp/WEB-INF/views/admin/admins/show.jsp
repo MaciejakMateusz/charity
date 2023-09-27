@@ -2,47 +2,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
-<!DOCTYPE html>
-<html lang="pl">
-
 <!-- Header -->
 <%@ include file="../header.jsp" %>
 <!-- End of Header -->
 
-<body id="page-top">
-<div id="wrapper">
-    <!-- Sidebar -->
-    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-        <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center"
-           href="${pageContext.request.contextPath}/admin/dashboard">
-            <div class="sidebar-brand-text mx-3">Zalogowany jako <sec:authentication
-                    property="principal.username"/></div>
-        </a>
-        <!-- Divider -->
-        <!-- Nav Item - Dashboard -->
-        <li class="nav-item active">
-            <hr class="sidebar-divider my-0">
-            <hr class="sidebar-divider">
-            <a type="s" class="nav-link" href="${pageContext.request.contextPath}/admin/dashboard">
-                <p style=" font-size: 1.2rem">Lista użytkowników</p>
-            </a>
-            <hr class="sidebar-divider">
-            <a type="s" class="nav-link" href="${pageContext.request.contextPath}/admin/admins-list">
-                <p style="font-size: 1.2rem">Lista adminów</p>
-            </a>
-            <hr class="sidebar-divider">
-            <a type="s" class="nav-link" href="${pageContext.request.contextPath}/">
-                <p style="font-size: 1.2rem">Wyjdź z panelu</p>
-            </a>
-            <hr class="sidebar-divider">
-            <a type="s" class="nav-link" href="${pageContext.request.contextPath}/logout">
-                <p style="font-size: 1.2rem">Wyloguj się</p>
-            </a>
-        </li>
-        <!-- Divider -->
-    </ul>
-    <!-- End of Sidebar -->
     <div id="content-wrapper" class="d-flex flex-column">
         <!-- Main Content -->
         <div id="content">

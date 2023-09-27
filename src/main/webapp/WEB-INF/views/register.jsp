@@ -23,7 +23,6 @@
         <div class="form-group">
             <label>
                 <form:input type="email"
-                            name="email"
                             placeholder="Email"
                             path="email"
                             cssClass="custom-form-input"/>
