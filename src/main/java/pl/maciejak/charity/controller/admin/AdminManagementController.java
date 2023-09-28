@@ -24,13 +24,13 @@ public class AdminManagementController {
     @PostMapping("/show")
     public String show(@RequestParam Long id, Model model) {
         this.admin = userService.findById(id);
-        model.addAttribute("user", this.admin);
+        model.addAttribute("admin", this.admin);
         return "admin/admins/show";
     }
 
     @GetMapping("/show")
     public String show(Model model) {
-        model.addAttribute("user", this.admin);
+        model.addAttribute("admin", this.admin);
         return "admin/admins/show";
     }
 }
