@@ -22,7 +22,7 @@
             <div class="container-fluid">
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <a href="${pageContext.request.contextPath}/admin/dashboard/add-user"
+                    <a href="${pageContext.request.contextPath}/admin/user/add"
                        class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
                        style="font-size: 1.1rem;"><i
                             class="fas fa-download fa-sm text-white-50"></i> Dodaj użytkownika
@@ -43,7 +43,7 @@
                                            style="width: 80px;"
                                            min="1"
                                            name="findId"
-                                           value="${findId}" ;
+                                           value="${findId}"
                                            placeholder="Id"
                                            form="findId">
                                 </label>
@@ -122,7 +122,7 @@
                                                                     style="outline: none;"
                                                                     class="button-list"
                                                                     name="id"
-                                                                    value="<c:out value='${user.id}'/>">
+                                                                    value="${user.id}">
                                                                 Edytuj
                                                             </button>
                                                         </form>
@@ -134,7 +134,7 @@
                                                                     style="outline: none; background: tomato;"
                                                                     class="button-list"
                                                                     name="id"
-                                                                    value="<c:out value='${user.id}'/>">
+                                                                    value="${user.id}">
                                                                 Usuń
                                                             </button>
                                                         </form>
