@@ -23,13 +23,13 @@
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
                 <form style="all: unset;"
                       method="POST"
-                      action="${pageContext.request.contextPath}/app/edit">
+                      action="${pageContext.request.contextPath}/admin/user/edit">
                     <button
                             type="submit"
                             style="outline: none; font-size: 1.1rem;"
                             class="button-list"
                             name="id"
-                            value="<c:out value='${user.id}'/>">
+                            value="${user.id}">
                         <i class="fas fa-download fa-sm text-white-50"></i>
                         Edytuj użytkownika
                     </button>
