@@ -27,21 +27,19 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http, HandlerMappingIntrospector handlerMappingIntrospector) throws Exception {
 
-        MvcRequestMatcher.Builder mvcMatcherBuilder =
-                new MvcRequestMatcher
-                        .Builder(handlerMappingIntrospector);
-
-
         http.csrf(AbstractHttpConfigurer::disable);
 
         http.cors(c -> c.configurationSource(req -> {
             CorsConfiguration corsConfiguration = new CorsConfiguration();
             corsConfiguration.setAllowedMethods(List.of("*"));
             corsConfiguration.setAllowedHeaders(List.of("*"));
-            corsConfiguration.addAllowedOrigin("http://localhost:8080");
             corsConfiguration.setAllowCredentials(true);
             return corsConfiguration;
         }));
+
+        MvcRequestMatcher.Builder mvcMatcherBuilder =
+                new MvcRequestMatcher
+                        .Builder(handlerMappingIntrospector);
 
         http.authorizeHttpRequests(
                 c -> c.dispatcherTypeMatchers(FORWARD, ERROR).permitAll()
