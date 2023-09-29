@@ -21,7 +21,7 @@
         <div class="container-fluid">
             <!-- Page Heading -->
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <a href="${pageContext.request.contextPath}/admin/dashboard">
+                <a href="${pageContext.request.contextPath}/admin/admins">
                     <button type="submit"
                             style="outline: none; font-size: 1.1rem;"
                             class="button-list">

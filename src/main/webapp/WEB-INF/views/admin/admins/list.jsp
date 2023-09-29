@@ -31,11 +31,11 @@
                 <!-- /.container-fluid -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Lista użytkowników</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Lista administratorów</h6>
                     </div>
                     <div class="card-body">
                         <div>
-                            <p>Wyszukaj użytkownika po:</p>
+                            <p>Wyszukaj administratora po:</p>
                             <form style="display: inline-block;" method="post" id="findId"
                                   action="${pageContext.request.contextPath}/app/list">
                                 <label>
@@ -82,7 +82,7 @@
                                                 <th tabindex="0" aria-controls="dataTable" rowspan="1"
                                                     colspan="1"
                                                     aria-label="Position: activate to sort column ascending"
-                                                    style="width: auto">Nazwa użytkownika
+                                                    style="width: auto">Nazwa administratora
                                                 </th>
                                                 <th tabindex="0" aria-controls="dataTable" rowspan="1"
                                                     colspan="1"
@@ -106,7 +106,7 @@
                                                     <td>
                                                         <form style="all: unset;"
                                                                    method="POST"
-                                                                   action="${pageContext.request.contextPath}/admin/user">
+                                                                   action="${pageContext.request.contextPath}/admin/admins/show">
                                                             <input type="hidden" value="${admin.id}" name="id">
                                                             <button type="submit"
                                                                     style="outline: none;"
@@ -116,7 +116,7 @@
                                                         </form>
                                                         <form style="all: unset;"
                                                               method="POST"
-                                                              action="${pageContext.request.contextPath}/admin/user/edit">
+                                                              action="${pageContext.request.contextPath}/admin/admins/edit">
                                                             <button
                                                                     type="submit"
                                                                     style="outline: none;"
@@ -128,7 +128,7 @@
                                                         </form>
                                                         <form style="all: unset;"
                                                               method="POST"
-                                                              action="${pageContext.request.contextPath}/admin/user/delete">
+                                                              action="${pageContext.request.contextPath}/admin/admins/delete">
                                                             <button
                                                                     type="submit"
                                                                     style="outline: none; background: tomato;"

@@ -23,22 +23,22 @@
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                     <form style="all: unset;"
                           method="POST"
-                          action="${pageContext.request.contextPath}/app/edit">
+                          action="${pageContext.request.contextPath}/admin/admins/edit">
                         <button
                                 type="submit"
                                 style="outline: none; font-size: 1.1rem;"
                                 class="button-list"
                                 name="id"
-                                value="<c:out value='${admin.id}'/>">
+                                value="${admin.id}">
                             <i class="fas fa-download fa-sm text-white-50"></i>
-                            Edytuj użytkownika
+                            Edytuj administratora
                         </button>
                     </form>
                 </div>
                 <!-- /.container-fluid -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Szczegóły użytkownika</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Szczegóły administratora</h6>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -95,7 +95,7 @@
                                             </tr>
                                             </tbody>
                                         </table>
-                                        <a href="${pageContext.request.contextPath}/admin/dashboard">
+                                        <a href="${pageContext.request.contextPath}/admin/admins">
                                             <button style="outline: none; font-size: 1.1rem;"
                                                     class="button-list">
                                                 Powrót
