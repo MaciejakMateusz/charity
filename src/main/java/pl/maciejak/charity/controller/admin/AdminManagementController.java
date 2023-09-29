@@ -1,7 +1,9 @@
 package pl.maciejak.charity.controller.admin;
 
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,4 +35,28 @@ public class AdminManagementController {
         model.addAttribute("admin", this.admin);
         return "admin/admins/show";
     }
+
+    @GetMapping("/add")
+    public String add(Model model) {
+        model.addAttribute("admin", new User());
+        return "admin/admins/add";
+    }
+
+    @PostMapping("/add")
+    public String add(@Valid User admin, BindingResult br, Model model) {
+        if (br.hasErrors()) {
+            return "admin/admins/add";
+        } else if (userService.existsByEmail(admin.getEmail())) {
+            model.addAttribute("emailExists", true);
+            return "admin/admins/add";
+        } else if (!admin.getPassword().equals(admin.getRepeatedPassword())) {
+            model.addAttribute("passwordsNotMatch", true);
+            return "admin/admins/add";
+        }
+        userService.save(admin);
+        model.addAttribute("isCreated", true);
+        model.addAttribute("admin", new User());
+        return "admin/admins/add";
+    }
+
 }
