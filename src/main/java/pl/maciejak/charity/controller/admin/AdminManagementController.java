@@ -59,6 +59,26 @@ public class AdminManagementController {
         return "admin/admins/edit";
     }
 
+    @PostMapping("/delete")
+    public String delete(@RequestParam Long id, Model model) {
+        this.admin = userService.findById(id);
+        model.addAttribute("admin", this.admin);
+        return "admin/admins/delete";
+    }
+
+    @PostMapping("/remove")
+    public String delete(User admin, Model model) {
+        userService.delete(admin);
+        model.addAttribute("isRemoved", true);
+        return "admin/admins/delete";
+    }
+
+    @GetMapping("/delete")
+    public String delete(Model model) {
+        model.addAttribute("admin", this.admin);
+        return "admin/admins/delete";
+    }
+
     @GetMapping("/add")
     public String add(Model model) {
         model.addAttribute("admin", new User());
