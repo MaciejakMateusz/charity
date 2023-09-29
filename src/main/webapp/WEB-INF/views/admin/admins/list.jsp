@@ -22,10 +22,10 @@
             <div class="container-fluid">
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <a href="${pageContext.request.contextPath}/admin/dashboard/add-user"
+                    <a href="${pageContext.request.contextPath}/admin/admins/add"
                        class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
                        style="font-size: 1.1rem;"><i
-                            class="fas fa-download fa-sm text-white-50"></i> Dodaj użytkownika
+                            class="fas fa-download fa-sm text-white-50"></i> Dodaj administratora
                     </a>
                 </div>
                 <!-- /.container-fluid -->

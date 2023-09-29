@@ -32,12 +32,12 @@
             <!-- /.container-fluid -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Edytuj użytkownika</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Edytuj dane administratora</h6>
                 </div>
                 <div class="card-body">
                     <form:form method="POST"
                                action="/admin/user/update"
-                               modelAttribute="user">
+                               modelAttribute="admin">
                         <form:hidden path="id"/>
                         <form:hidden path="created"/>
                         <form:hidden path="username"/>
@@ -92,7 +92,7 @@
                         <button type="submit" class="btn btn-primary">Edytuj</button>
                     </form:form>
                     <c:if test="${isUpdated==true}">
-                        <p class="confirmation">Dane zaktualizowane pomyślnie.</p>
+                        <p class="confirmation">Dane administratora zaktualizowane pomyślnie.</p>
                     </c:if>
                 </div>
             </div>
