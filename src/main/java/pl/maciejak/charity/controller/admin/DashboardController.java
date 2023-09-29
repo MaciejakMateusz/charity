@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import pl.maciejak.charity.service.InstitutionService;
 import pl.maciejak.charity.service.UserService;
 
 @Controller
@@ -11,9 +12,11 @@ import pl.maciejak.charity.service.UserService;
 public class DashboardController {
 
     private final UserService userService;
+    private final InstitutionService institutionService;
 
-    public DashboardController(UserService userService) {
+    public DashboardController(UserService userService, InstitutionService institutionService) {
         this.userService = userService;
+        this.institutionService = institutionService;
     }
 
     @GetMapping("/dashboard")
@@ -26,5 +29,11 @@ public class DashboardController {
     public String admins(Model model) {
         model.addAttribute("admins", userService.findByRoles("ROLE_ADMIN"));
         return "admin/admins/list";
+    }
+
+    @GetMapping("/institutions")
+    public String institutions(Model model) {
+        model.addAttribute("institutions", institutionService.findAll());
+        return "admin/institution/list";
     }
 }
