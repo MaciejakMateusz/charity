@@ -36,6 +36,29 @@ public class AdminManagementController {
         return "admin/admins/show";
     }
 
+    @PostMapping("/edit")
+    public String edit(@RequestParam Long id, Model model) {
+        this.admin = userService.findById(id);
+        model.addAttribute("admin", this.admin);
+        return "admin/admins/edit";
+    }
+
+    @PostMapping("/update")
+    public String edit(@Valid User admin, BindingResult br, Model model) {
+        if(br.hasErrors()) {
+            return "admin/admins/edit";
+        }
+        userService.save(admin);
+        model.addAttribute("isUpdated", true);
+        return "admin/admins/edit";
+    }
+
+    @GetMapping("/edit")
+    public String edit(Model model) {
+        model.addAttribute("admin", this.admin);
+        return "admin/admins/edit";
+    }
+
     @GetMapping("/add")
     public String add(Model model) {
         model.addAttribute("admin", new User());
