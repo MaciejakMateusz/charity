@@ -1,5 +1,6 @@
 package pl.maciejak.charity.service;
 
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import pl.maciejak.charity.entity.User;
@@ -23,8 +24,8 @@ public class UserService implements UserServiceInterface {
     }
 
     @Override
-    public List<User> findByRoles(String roleName) {
-        return userRepository.findByRoleName(roleName);
+    public List<User> findByRoles(String roleName, int pageNumber) {
+        return userRepository.findByRoleName(roleName, PageRequest.of(pageNumber, 10));
     }
 
     @Override
@@ -41,7 +42,7 @@ public class UserService implements UserServiceInterface {
     public void save(User user) {
         user.setEnabled(1);
         user.setRoles(new HashSet<>(Collections.singletonList(roleRepository.findByName("ROLE_USER"))));
-        userRepository.save(user);
+        userRepository.saveAndFlush(user);
     }
 
     @Override
