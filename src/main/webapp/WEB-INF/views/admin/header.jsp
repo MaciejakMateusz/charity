@@ -41,6 +41,10 @@
                 <p style="font-size: 1.2rem">Lista adminów</p>
             </a>
             <hr class="sidebar-divider">
+            <a type="s" class="nav-link" href="${pageContext.request.contextPath}/admin/institutions">
+                <p style="font-size: 1.2rem">Lista fundacji</p>
+            </a>
+            <hr class="sidebar-divider">
             <a type="s" class="nav-link" href="${pageContext.request.contextPath}/">
                 <p style="font-size: 1.2rem">Wyjdź z panelu</p>
             </a>

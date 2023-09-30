@@ -43,14 +43,14 @@
                                 <form:input path="name"
                                             class="form-control"/>
                             </label>
-                            <fom:errors path="name" cssClass="validation"/>
+                            <form:errors path="name" cssClass="validation"/>
                         </div>
                         <div class="form-group">
                             <label for="name">Nazwisko <br>
                                 <form:input path="surname"
                                             class="form-control"/>
                             </label>
-                            <fom:errors path="surname" cssClass="validation"/>
+                            <form:errors path="surname" cssClass="validation"/>
                         </div>
                         <div class="form-group">
                             <label for="email">Email <br>

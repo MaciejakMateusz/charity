@@ -96,7 +96,6 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-
                                             <c:forEach items="${users}" var="user">
                                                 <tr role="row">
                                                     <td style="text-align: center"><c:out
