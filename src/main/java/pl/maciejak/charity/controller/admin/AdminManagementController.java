@@ -1,6 +1,9 @@
 package pl.maciejak.charity.controller.admin;
 
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,13 +18,25 @@ import pl.maciejak.charity.service.UserService;
 @RequestMapping("/admin/admins")
 public class AdminManagementController {
 
+    private User admin;
     private final UserService userService;
+    private static final int PAGE_SIZE = 10;
+    private Pageable pageable = PageRequest.of(0, PAGE_SIZE);
+    private Page<User> allAdmins;
 
     public AdminManagementController(UserService userService) {
         this.userService = userService;
     }
 
-    private User admin;
+    @GetMapping
+    public String admins(Model model) {
+        this.allAdmins = getAllAdmins();
+        int totalPages = allAdmins.getTotalPages();
+        model.addAttribute("pageable", this.pageable);
+        model.addAttribute("totalPages", totalPages);
+        model.addAttribute("admins", allAdmins.stream().toList());
+        return "admin/admins/list";
+    }
 
     @PostMapping("/show")
     public String show(@RequestParam Long id, Model model) {
@@ -102,4 +117,31 @@ public class AdminManagementController {
         return "admin/admins/add";
     }
 
+    @PostMapping("/page")
+    private String setPageNumber(@RequestParam int pageNumber) {
+        if (pageNumber >= 0) {
+            this.pageable = PageRequest.of(pageNumber, PAGE_SIZE);
+        }
+        return "redirect:/admin/admins";
+    }
+
+    @PostMapping("/incrementPage")
+    private String incrementPageNumber() {
+        if(allAdmins.hasNext()) {
+            this.pageable = PageRequest.of(this.pageable.getPageNumber() + 1, PAGE_SIZE);
+        }
+        return "redirect:/admin/admins";
+    }
+
+    @PostMapping("/decrementPage")
+    private String decrementPage() {
+        if (this.pageable.hasPrevious()) {
+            this.pageable = PageRequest.of(this.pageable.getPageNumber() - 1, PAGE_SIZE);
+        }
+        return "redirect:/admin/admins";
+    }
+
+    private Page<User> getAllAdmins() {
+        return userService.findByRoles("ROLE_ADMIN", pageable);
+    }
 }

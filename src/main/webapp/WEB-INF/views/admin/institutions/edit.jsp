@@ -36,7 +36,7 @@
                 </div>
                 <div class="card-body">
                     <form:form method="POST"
-                               action="/admin/institution/update"
+                               action="/admin/institutions/update"
                                modelAttribute="institution">
                         <form:hidden path="id"/>
                         <form:hidden path="created"/>

@@ -36,7 +36,7 @@
                 </div>
                 <div class="card-body">
                     <form:form method="POST"
-                               action="/admin/institution/add"
+                               action="/admin/institutions/add"
                                modelAttribute="institution">
                         <div class="form-group">
                             <label for="name">Nazwa <br>

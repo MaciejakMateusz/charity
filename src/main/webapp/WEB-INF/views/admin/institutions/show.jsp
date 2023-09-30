@@ -23,7 +23,7 @@
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
                 <form style="all: unset;"
                       method="POST"
-                      action="${pageContext.request.contextPath}/admin/institution/edit">
+                      action="${pageContext.request.contextPath}/admin/institutions/edit">
                     <button
                             type="submit"
                             style="outline: none; font-size: 1.1rem;"

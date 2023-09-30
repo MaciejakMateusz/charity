@@ -104,7 +104,7 @@
                                         </button>
                                     </a>
                                     <form:form method="POST"
-                                               action="/admin/institution/remove"
+                                               action="/admin/institutions/remove"
                                                modelAttribute="institution"
                                                cssStyle="display: inline-block">
                                         <form:hidden path="id"/>
