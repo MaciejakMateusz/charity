@@ -102,4 +102,11 @@ public class UserManagementController {
         return "admin/user/add";
     }
 
+    @PostMapping("/block")
+    public String block(@RequestParam Long id, Model model) {
+        User user = userService.findById(id);
+        userService.block(user);
+        model.addAttribute("user", user);
+        return "admin/user/show";
+    }
 }

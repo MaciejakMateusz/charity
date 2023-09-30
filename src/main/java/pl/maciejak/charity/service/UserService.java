@@ -42,7 +42,17 @@ public class UserService implements UserServiceInterface {
     public void save(User user) {
         user.setEnabled(1);
         user.setRoles(new HashSet<>(Collections.singletonList(roleRepository.findByName("ROLE_USER"))));
-        userRepository.saveAndFlush(user);
+        userRepository.save(user);
+    }
+
+    @Override
+    public void block(User user) {
+        if (user.getEnabled() == 0) {
+            user.setEnabled(1);
+        } else {
+            user.setEnabled(0);
+        }
+        userRepository.save(user);
     }
 
     @Override

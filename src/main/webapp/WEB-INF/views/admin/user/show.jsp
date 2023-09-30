@@ -34,6 +34,37 @@
                         Edytuj użytkownika
                     </button>
                 </form>
+                <c:choose>
+                    <c:when test="${user.enabled==0}">
+                        <span class="validation">Użytkownik jest zablokowany</span>
+                        <form style="all: unset;"
+                              method="POST"
+                              action="${pageContext.request.contextPath}/admin/user/block">
+                            <button
+                                    type="submit"
+                                    style="outline: none; font-size: 1.1rem;"
+                                    class="button-list"
+                                    name="id"
+                                    value="${user.id}">
+                                Odblokuj użytkownika
+                            </button>
+                        </form>
+                    </c:when>
+                    <c:when test="${user.enabled==1}">
+                        <form style="all: unset;"
+                              method="POST"
+                              action="${pageContext.request.contextPath}/admin/user/block">
+                            <button
+                                    type="submit"
+                                    style="outline: none; font-size: 1.1rem; background: red; border-color: red;"
+                                    class="button-list"
+                                    name="id"
+                                    value="${user.id}">
+                                Zablokuj użytkownika
+                            </button>
+                        </form>
+                    </c:when>
+                </c:choose>
             </div>
             <!-- /.container-fluid -->
             <div class="card shadow mb-4">

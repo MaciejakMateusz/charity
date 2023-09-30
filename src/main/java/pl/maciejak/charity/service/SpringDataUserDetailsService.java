@@ -1,5 +1,6 @@
 package pl.maciejak.charity.service;
 
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -25,6 +26,8 @@ public class SpringDataUserDetailsService implements UserDetailsService {
         User user = userService.findByUsername(username); //optional
         if (user == null) {
             throw new UsernameNotFoundException(username);
+        } else if(user.getEnabled() == 0) {
+            throw new BadCredentialsException("Użytkownik zablokowany");
         }
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
         user.getRoles().forEach(r ->
