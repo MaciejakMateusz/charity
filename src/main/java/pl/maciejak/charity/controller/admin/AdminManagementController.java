@@ -86,7 +86,7 @@ public class AdminManagementController {
     @PostMapping("/remove")
     public String delete(User admin, Model model, Principal principal) {
         User currentAdmin = userService.findByUsername(principal.getName());
-        if(currentAdmin.getId() == admin.getId()) {
+        if (currentAdmin.getId() == admin.getId()) {
             return "admin/admins/delete";
         }
         userService.delete(admin);

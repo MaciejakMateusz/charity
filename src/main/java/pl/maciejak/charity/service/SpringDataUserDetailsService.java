@@ -26,7 +26,7 @@ public class SpringDataUserDetailsService implements UserDetailsService {
         User user = userService.findByUsername(username); //optional
         if (user == null) {
             throw new UsernameNotFoundException(username);
-        } else if(user.getEnabled() == 0) {
+        } else if (user.getEnabled() == 0) {
             throw new BadCredentialsException("Użytkownik zablokowany");
         }
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
