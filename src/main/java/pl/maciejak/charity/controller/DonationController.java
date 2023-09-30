@@ -37,7 +37,7 @@ public class DonationController {
     }
 
     @GetMapping
-    public String form(Model model, Principal principal) {
+    public String form(Model model, Principal principal) { //do poprawy
         User user = userService.findByUsername(principal.getName());
         model.addAttribute("user", user);
         model.addAttribute("donation", new Donation());

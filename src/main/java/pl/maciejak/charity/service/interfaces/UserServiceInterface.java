@@ -4,8 +4,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import pl.maciejak.charity.entity.User;
 
-import java.util.List;
-
 public interface UserServiceInterface {
     Page<User> findByRoles(String roleName, Pageable pageable);
 

@@ -122,7 +122,7 @@ public class InstitutionManagementController {
 
     @PostMapping("/incrementPage")
     private String incrementPageNumber() {
-        if(allInstitutions.hasNext()) {
+        if (allInstitutions.hasNext()) {
             this.pageable = PageRequest.of(this.pageable.getPageNumber() + 1, PAGE_SIZE);
         }
         return "redirect:/admin/institutions";

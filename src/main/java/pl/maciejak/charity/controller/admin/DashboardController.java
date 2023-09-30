@@ -47,7 +47,7 @@ public class DashboardController {
 
     @PostMapping("/dashboard/incrementPage")
     private String incrementPageNumber() {
-        if(allUsers.hasNext()) {
+        if (allUsers.hasNext()) {
             this.pageable = PageRequest.of(this.pageable.getPageNumber() + 1, PAGE_SIZE);
         }
         return "redirect:/admin/dashboard";

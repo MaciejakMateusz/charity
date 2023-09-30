@@ -45,7 +45,7 @@ public class UserManagementController {
 
     @PostMapping("/update")
     public String edit(@Valid User user, BindingResult br, Model model) {
-        if(br.hasErrors()) {
+        if (br.hasErrors()) {
             return "admin/user/edit";
         }
         userService.save(user);

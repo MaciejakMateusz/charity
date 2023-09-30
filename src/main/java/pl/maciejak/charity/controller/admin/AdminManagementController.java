@@ -60,7 +60,7 @@ public class AdminManagementController {
 
     @PostMapping("/update")
     public String edit(@Valid User admin, BindingResult br, Model model) {
-        if(br.hasErrors()) {
+        if (br.hasErrors()) {
             return "admin/admins/edit";
         }
         userService.save(admin);
@@ -127,7 +127,7 @@ public class AdminManagementController {
 
     @PostMapping("/incrementPage")
     private String incrementPageNumber() {
-        if(allAdmins.hasNext()) {
+        if (allAdmins.hasNext()) {
             this.pageable = PageRequest.of(this.pageable.getPageNumber() + 1, PAGE_SIZE);
         }
         return "redirect:/admin/admins";
