@@ -3,6 +3,10 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
+<sec:authentication var="authUser" property="principal"/>
+<c:set var="currentAdminUsername" value="${authUser.username}"/>
+
+
 <!-- Header -->
 <%@ include file="../header.jsp" %>
 <!-- End of Header -->
@@ -126,18 +130,20 @@
                                                             Edytuj
                                                         </button>
                                                     </form>
-                                                    <form style="all: unset;"
-                                                          method="POST"
-                                                          action="${pageContext.request.contextPath}/admin/admins/delete">
-                                                        <button
-                                                                type="submit"
-                                                                style="outline: none; background: tomato;"
-                                                                class="button-list"
-                                                                name="id"
-                                                                value="<c:out value='${admin.id}'/>">
-                                                            Usuń
-                                                        </button>
-                                                    </form>
+                                                    <c:if test="${admin.username != currentAdminUsername}">
+                                                        <form style="all: unset;"
+                                                              method="POST"
+                                                              action="${pageContext.request.contextPath}/admin/admins/delete">
+                                                            <button
+                                                                    type="submit"
+                                                                    style="outline: none; background: tomato;"
+                                                                    class="button-list"
+                                                                    name="id"
+                                                                    value="<c:out value='${admin.id}'/>">
+                                                                Usuń
+                                                            </button>
+                                                        </form>
+                                                    </c:if>
                                                 </td>
                                             </tr>
                                         </c:forEach>
