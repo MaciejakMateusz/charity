@@ -5,7 +5,7 @@ import pl.maciejak.charity.entity.User;
 import java.util.List;
 
 public interface UserServiceInterface {
-    List<User> findByRoles(String roleName);
+    List<User> findByRoles(String roleName, int pageNumber);
 
     User findByUsername(String email);
 
