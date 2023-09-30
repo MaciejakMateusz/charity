@@ -1,5 +1,6 @@
 package pl.maciejak.charity.repository;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -17,5 +18,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
     boolean existsByUsername(String username);
 
     @Query("SELECT u FROM User u JOIN u.roles r WHERE r.name = :roleName")
-    List<User> findByRoleName(@Param("roleName") String roleName, Pageable pageable);
+    Page<User> findByRoleName(@Param("roleName") String roleName, Pageable pageable);
 }

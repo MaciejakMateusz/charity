@@ -1,11 +1,13 @@
 package pl.maciejak.charity.service.interfaces;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import pl.maciejak.charity.entity.User;
 
 import java.util.List;
 
 public interface UserServiceInterface {
-    List<User> findByRoles(String roleName, int pageNumber);
+    Page<User> findByRoles(String roleName, Pageable pageable);
 
     User findByUsername(String email);
 

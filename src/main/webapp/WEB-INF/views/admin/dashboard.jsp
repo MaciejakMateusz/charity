@@ -142,6 +142,63 @@
                                             </c:forEach>
                                             </tbody>
                                         </table>
+                                        <c:if test="${pageable.hasPrevious()}">
+                                            <form action="${pageContext.request.contextPath}/admin/dashboard/decrementPage"
+                                                  method="POST" style="display: inline-block;">
+                                                <button type="submit"
+                                                        class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                                    <
+                                                </button>
+                                            </form>
+                                        </c:if>
+                                        <c:forEach var="iteration" begin="0" end="7">
+                                            <form action="${pageContext.request.contextPath}/admin/dashboard/page"
+                                                  method="POST"
+                                                  style="display: inline-block;">
+                                                <input type="hidden" name="pageNumber" value="${iteration}">
+                                                <button type="submit"
+                                                        class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                                        ${iteration}
+                                                </button>
+                                            </form>
+                                        </c:forEach>
+                                        <button
+                                                class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                            ...
+                                        </button>
+                                        <c:forEach var="iteration" begin="${totalPages - 8}" end="${totalPages - 1}">
+                                            <form action="${pageContext.request.contextPath}/admin/dashboard/page"
+                                                  method="POST"
+                                                  style="display: inline-block;">
+                                                <input type="hidden" name="pageNumber" value="${iteration}">
+                                                <button type="submit"
+                                                        class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                                    ${iteration}
+                                                </button>
+                                            </form>
+                                        </c:forEach>
+                                        <form action="${pageContext.request.contextPath}/admin/dashboard/incrementPage"
+                                              method="POST"
+                                              style="display: inline-block;">
+                                            <button type="submit"
+                                                    class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                                >
+                                            </button>
+                                        </form>
+                                        <p style="display:inline-block; white-space: pre;">  Strona  </p>
+                                        <form action="${pageContext.request.contextPath}/admin/dashboard/page"
+                                              method="POST"
+                                              style="display: inline-block;">
+                                            <label>
+                                                <input
+                                                        type="number"
+                                                        style="width: 4rem;"
+                                                        name="pageNumber"
+                                                        min="1"
+                                                        max="${totalPages - 1}"
+                                                        value="${pageable.pageNumber}">
+                                            </label>
+                                        </form>
                                     </div>
                                 </div>
                             </div>

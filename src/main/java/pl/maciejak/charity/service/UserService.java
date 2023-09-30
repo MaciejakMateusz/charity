@@ -1,6 +1,8 @@
 package pl.maciejak.charity.service;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import pl.maciejak.charity.entity.User;
@@ -24,8 +26,8 @@ public class UserService implements UserServiceInterface {
     }
 
     @Override
-    public List<User> findByRoles(String roleName, int pageNumber) {
-        return userRepository.findByRoleName(roleName, PageRequest.of(pageNumber, 10));
+    public Page<User> findByRoles(String roleName, Pageable pageable) {
+        return userRepository.findByRoleName(roleName, pageable);
     }
 
     @Override
