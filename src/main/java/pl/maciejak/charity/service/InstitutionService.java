@@ -1,6 +1,8 @@
 package pl.maciejak.charity.service;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import pl.maciejak.charity.entity.Institution;
 import pl.maciejak.charity.repository.InstitutionRepository;
@@ -23,8 +25,13 @@ public class InstitutionService implements InstitutionServiceInterface {
     }
 
     @Override
+    public Page<Institution> findAll(Pageable pageable) {
+        return institutionRepository.findAll(pageable);
+    }
+
+    @Override
     public List<Institution> findAll() {
-        return institutionRepository.findAll(PageRequest.of(0, 10)).getContent();
+        return institutionRepository.findAll();
     }
 
     @Override

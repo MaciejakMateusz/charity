@@ -20,8 +20,8 @@ public class DashboardController {
 
     private static final int PAGE_SIZE = 10;
     private Pageable pageable = PageRequest.of(0, PAGE_SIZE);
-    private final UserService userService;
     private Page<User> allUsers;
+    private final UserService userService;
 
     public DashboardController(UserService userService) {
         this.userService = userService;

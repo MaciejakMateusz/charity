@@ -22,7 +22,7 @@
             <div class="container-fluid">
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <a href="${pageContext.request.contextPath}/admin/institution/add"
+                    <a href="${pageContext.request.contextPath}/admin/institutions/add"
                        class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
                        style="font-size: 1.1rem;"><i
                             class="fas fa-download fa-sm text-white-50"></i> Dodaj fundację
@@ -96,7 +96,6 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-
                                             <c:forEach items="${institutions}" var="institution">
                                                 <tr role="row">
                                                     <td style="text-align: center"><c:out
@@ -106,7 +105,7 @@
                                                     <td>
                                                         <form style="all: unset;"
                                                                    method="POST"
-                                                                   action="${pageContext.request.contextPath}/admin/institution/show">
+                                                                   action="${pageContext.request.contextPath}/admin/institutions/show">
                                                             <input type="hidden" value="${institution.id}" name="id">
                                                             <button type="submit"
                                                                     style="outline: none;"
@@ -116,7 +115,7 @@
                                                         </form>
                                                         <form style="all: unset;"
                                                               method="POST"
-                                                              action="${pageContext.request.contextPath}/admin/institution/edit">
+                                                              action="${pageContext.request.contextPath}/admin/institutions/edit">
                                                             <button
                                                                     type="submit"
                                                                     style="outline: none;"
@@ -128,7 +127,7 @@
                                                         </form>
                                                         <form style="all: unset;"
                                                               method="POST"
-                                                              action="${pageContext.request.contextPath}/admin/institution/delete">
+                                                              action="${pageContext.request.contextPath}/admin/institutions/delete">
                                                             <button
                                                                     type="submit"
                                                                     style="outline: none; background: tomato;"
@@ -143,6 +142,80 @@
                                             </c:forEach>
                                             </tbody>
                                         </table>
+                                        <c:if test="${pageable.hasPrevious()}">
+                                            <form action="${pageContext.request.contextPath}/admin/institutions/decrementPage"
+                                                  method="POST" style="display: inline-block;">
+                                                <button type="submit"
+                                                        class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                                    <
+                                                </button>
+                                            </form>
+                                        </c:if>
+                                        <%-- SMALL RECORDS AMOUNT SCENARIO --%>
+                                        <c:if test="${totalPages != 1 && totalPages < 20}">
+                                            <c:forEach var="iteration" begin="0" end="${totalPages - 1}">
+                                                <form action="${pageContext.request.contextPath}/admin/institutions/page"
+                                                      method="POST"
+                                                      style="display: inline-block;">
+                                                    <input type="hidden" name="pageNumber" value="${iteration}">
+                                                    <button type="submit"
+                                                            class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                                            ${iteration}
+                                                    </button>
+                                                </form>
+                                            </c:forEach>
+                                        </c:if>
+                                        <%-- LARGE RECORDS AMOUNT SCENARIO --%>
+                                        <c:if test="${totalPages != 0 && totalPages > 20}">
+                                            <c:forEach var="iteration" begin="0" end="10">
+                                                <form action="${pageContext.request.contextPath}/admin/institutions/page"
+                                                      method="POST"
+                                                      style="display: inline-block;">
+                                                    <input type="hidden" name="pageNumber" value="${iteration}">
+                                                    <button type="submit"
+                                                            class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                                            ${iteration}
+                                                    </button>
+                                                </form>
+                                            </c:forEach>
+                                            <button
+                                                    class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                                ...
+                                            </button>
+                                            <c:forEach var="iteration" begin="${totalPages - 8}" end="${totalPages - 1}">
+                                                <form action="${pageContext.request.contextPath}/admin/institutions/page"
+                                                      method="POST"
+                                                      style="display: inline-block;">
+                                                    <input type="hidden" name="pageNumber" value="${iteration}">
+                                                    <button type="submit"
+                                                            class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                                            ${iteration}
+                                                    </button>
+                                                </form>
+                                            </c:forEach>
+                                            <form action="${pageContext.request.contextPath}/admin/institutions/incrementPage"
+                                                  method="POST"
+                                                  style="display: inline-block;">
+                                                <button type="submit"
+                                                        class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                                    >
+                                                </button>
+                                            </form>
+                                            <p style="display:inline-block; white-space: pre;"> Strona </p>
+                                            <form action="${pageContext.request.contextPath}/admin/institutions/page"
+                                                  method="POST"
+                                                  style="display: inline-block;">
+                                                <label>
+                                                    <input
+                                                            type="number"
+                                                            style="width: 4rem;"
+                                                            name="pageNumber"
+                                                            min="1"
+                                                            max="${totalPages - 1}"
+                                                            value="${pageable.pageNumber}">
+                                                </label>
+                                            </form>
+                                        </c:if>
                                     </div>
                                 </div>
                             </div>

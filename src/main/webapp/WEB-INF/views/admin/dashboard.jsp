@@ -152,7 +152,7 @@
                                         </form>
                                     </c:if>
                                     <%-- SMALL RECORDS AMOUNT SCENARIO --%>
-                                    <c:if test="${totalPages != 0 && totalPages < 20}">
+                                    <c:if test="${totalPages != 1 && totalPages < 20}">
                                         <c:forEach var="iteration" begin="0" end="${totalPages - 1}">
                                             <form action="${pageContext.request.contextPath}/admin/dashboard/page"
                                                   method="POST"
