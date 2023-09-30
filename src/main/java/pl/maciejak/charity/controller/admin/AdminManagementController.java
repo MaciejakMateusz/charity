@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import pl.maciejak.charity.entity.User;
 import pl.maciejak.charity.service.UserService;
 
+import java.security.Principal;
+
 @Controller
 @RequestMapping("/admin/admins")
 public class AdminManagementController {
@@ -82,7 +84,11 @@ public class AdminManagementController {
     }
 
     @PostMapping("/remove")
-    public String delete(User admin, Model model) {
+    public String delete(User admin, Model model, Principal principal) {
+        User currentAdmin = userService.findByUsername(principal.getName());
+        if(currentAdmin.getId() == admin.getId()) {
+            return "admin/admins/delete";
+        }
         userService.delete(admin);
         model.addAttribute("isRemoved", true);
         return "admin/admins/delete";
