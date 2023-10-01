@@ -19,7 +19,7 @@ public class EmailService implements EmailServiceInterface {
 
     private final JavaMailSender emailSender;
     private final UserService userService;
-    private static final String LOCAL_HOST = "http://localhost:8080/login/";
+    private static final String LOCAL_HOST = "http://localhost:8080/";
     private Map<User, String> usersRecoveryTokens = new HashMap<>();
 
     public EmailService(JavaMailSender emailSender,
@@ -51,8 +51,27 @@ public class EmailService implements EmailServiceInterface {
         String recoveryToken = token.toString();
         this.usersRecoveryTokens.put(user, recoveryToken);
 
-        String link = LOCAL_HOST + recoveryToken;
+        String link = LOCAL_HOST + "login/" + recoveryToken;
         message.setText("Twój link do zmiany hasła: " + link);
+
+        emailSender.send(message);
+    }
+
+    @Override
+    public void activateAccount(String to) {
+
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom("noreply@charityapp.pl");
+        message.setTo(to);
+        message.setSubject("Charity - link aktywacyjny do konta");
+
+        User user = userService.findByUsername(to);
+        UUID token = UUID.randomUUID();
+        String recoveryToken = token.toString();
+        this.usersRecoveryTokens.put(user, recoveryToken);
+
+        String link = LOCAL_HOST + "register/" + recoveryToken;
+        message.setText("Kliknij w ten link, aby aktywować swoje konto: " + link);
 
         emailSender.send(message);
     }
