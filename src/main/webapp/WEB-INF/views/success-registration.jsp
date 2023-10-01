@@ -17,7 +17,7 @@
 
 <section class="login-page">
     <h2>Załóż konto</h2>
-    <p class="success-message">Rejestracja przebiegła pomyślnie.</p>
+    <p class="success-message">Konto zostało aktywowane</p>
     <a href="${pageContext.request.contextPath}/login" class="btn btn--without-border">Zaloguj się</a>
 </section>
 

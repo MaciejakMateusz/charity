@@ -50,11 +50,20 @@
                 </c:if>
             </label>
         </div>
-
-        <div class="form-group form-group--buttons">
-            <a href="${pageContext.request.contextPath}/login" class="btn btn--without-border">Zaloguj się</a>
-            <button class="btn" type="submit">Załóż konto</button>
-        </div>
+        <c:if test="${error==true}">
+            <p class="validation">Coś poszło nie tak, spróbuj ponownie</p>
+        </c:if>
+        <c:choose>
+            <c:when test="${activationSent!=true}">
+                <div class="form-group form-group--buttons">
+                    <a href="${pageContext.request.contextPath}/login" class="btn btn--without-border">Zaloguj się</a>
+                    <button class="btn" type="submit">Załóż konto</button>
+                </div>
+            </c:when>
+            <c:when test="${activationSent==true}">
+                <p class="success-message">Link aktywacyjny został wysłany na adres ${email}</p>
+            </c:when>
+        </c:choose>
     </form:form>
 </section>
 
