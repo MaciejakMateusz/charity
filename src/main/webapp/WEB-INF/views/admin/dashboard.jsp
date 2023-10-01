@@ -66,7 +66,16 @@
                         <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
                             <div class="row">
                                 <div class="col-sm-12">
-
+                                    <c:if test="${foundByEmail==true}">
+                                        <a href="${pageContext.request.contextPath}/admin/dashboard">
+                                            <button type="submit"
+                                                    style="outline: none; font-size: 1.1rem;"
+                                                    class="button-list">
+                                                Powrót
+                                            </button>
+                                        </a>
+                                        <p style="font-weight: bold; display: inline-block; margin-left: 2rem;">Wyniki dla wyszukiwania "${partialEmail}":</p>
+                                    </c:if>
                                     <table class="table table-bordered dataTable" id="dataTable" width="100%"
                                            cellspacing="0" role="grid" aria-describedby="dataTable_info"
                                            style="width: 100%; border-collapse: collapse; border-left: none;">
@@ -191,7 +200,7 @@
                                     <c:if test="${userNotFound==true}">
                                         <p class="validation">Nie znaleziono wyników</p>
                                     </c:if>
-                                    <c:if test="${filterEngaged==true}">
+                                    <c:if test="${filterEngaged==true || userNotFound==true}">
                                         <a href="${pageContext.request.contextPath}/admin/dashboard">
                                             <button type="submit"
                                                     style="outline: none; font-size: 1.1rem;"
