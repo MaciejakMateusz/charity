@@ -15,11 +15,20 @@ public class EmailService implements EmailServiceInterface {
     }
 
     @Override
-    public void sendSimpleMessage(
-            String to, String subject, String text) {
+    public void sendMessage(String to, String subject, String text) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("noreply@charityapp.pl");
         message.setTo(to);
+        message.setSubject(subject);
+        message.setText(text);
+        emailSender.send(message);
+    }
+
+    @Override
+    public void contactForm(String from, String subject, String text) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom(from);
+        message.setTo("applicationcharity@gmail.com");
         message.setSubject(subject);
         message.setText(text);
         emailSender.send(message);
