@@ -69,7 +69,7 @@ public class UserService implements UserServiceInterface {
     @Override
     public void updatePassword(User user) {
         user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
-        save(user);
+        userRepository.saveAndFlush(user);
     }
 
     @Override

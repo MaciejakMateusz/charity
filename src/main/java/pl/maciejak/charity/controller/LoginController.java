@@ -56,7 +56,7 @@ public class LoginController {
             if (entry.getValue().equals(recoveryToken)) {
                 foundUser = entry.getKey();
                 isFound = true;
-                usersRecoveryTokens.remove(foundUser);
+                usersRecoveryTokens.remove(foundUser, recoveryToken);
                 emailService.setUsersRecoveryTokens(usersRecoveryTokens);
                 break;
             }

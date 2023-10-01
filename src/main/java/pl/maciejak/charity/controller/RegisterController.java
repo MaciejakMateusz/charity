@@ -59,7 +59,7 @@ public class RegisterController {
             if (entry.getValue().equals(token)) {
                 isFound = true;
                 foundUser = entry.getKey();
-                usersTokens.remove(entry.getKey());
+                usersTokens.remove(entry.getKey(), token);
                 emailService.setUsersRecoveryTokens(usersTokens);
                 break;
             }
