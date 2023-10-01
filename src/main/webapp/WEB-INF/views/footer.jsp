@@ -6,15 +6,25 @@
     <div class="contact">
         <h2>Skontaktuj się z nami</h2>
         <h3>Formularz kontaktowy</h3>
-        <form class="form--contact">
+        <form class="form--contact"
+              action="${pageContext.request.contextPath}/contact-form"
+              method="POST">
+
             <div class="form-group form-group--50">
                 <label>
                     <input type="text" name="name" placeholder="Imię"/>
                 </label>
             </div>
+
             <div class="form-group form-group--50">
                 <label>
                     <input type="text" name="surname" placeholder="Nazwisko"/>
+                </label>
+            </div>
+
+            <div class="form-group">
+                <label>
+                    <input type="email" name="email" placeholder="Email"/>
                 </label>
             </div>
 
