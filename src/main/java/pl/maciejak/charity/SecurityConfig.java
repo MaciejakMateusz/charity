@@ -47,7 +47,7 @@ public class SecurityConfig {
                         .requestMatchers(mvcMatcherBuilder.pattern("/WEB-INF/**")).permitAll()
                         .requestMatchers(mvcMatcherBuilder.pattern("/")).permitAll()
                         .requestMatchers(mvcMatcherBuilder.pattern("/contact-form")).permitAll()
-                        .requestMatchers(mvcMatcherBuilder.pattern("/register")).permitAll()
+                        .requestMatchers(mvcMatcherBuilder.pattern("/register/**")).permitAll()
                         .requestMatchers(mvcMatcherBuilder.pattern("/login/**")).permitAll()
                         .requestMatchers(mvcMatcherBuilder.pattern("/form")).hasAnyRole("USER", "ADMIN")
                         .requestMatchers(mvcMatcherBuilder.pattern("/profile/**")).hasAnyRole("USER", "ADMIN")
