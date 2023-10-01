@@ -7,10 +7,10 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
 import pl.maciejak.charity.entity.User;
 import pl.maciejak.charity.service.interfaces.EmailServiceInterface;
-import pl.maciejak.charity.utils.RandomStringGenerator;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 @Component
 @Getter
@@ -18,16 +18,13 @@ import java.util.Map;
 public class EmailService implements EmailServiceInterface {
 
     private final JavaMailSender emailSender;
-    private final RandomStringGenerator randomStringGenerator;
     private final UserService userService;
     private static final String LOCAL_HOST = "http://localhost:8080/login/";
     private Map<User, String> usersRecoveryTokens = new HashMap<>();
 
     public EmailService(JavaMailSender emailSender,
-                        RandomStringGenerator randomStringGenerator,
                         UserService userService) {
         this.emailSender = emailSender;
-        this.randomStringGenerator = randomStringGenerator;
         this.userService = userService;
     }
 
@@ -50,7 +47,8 @@ public class EmailService implements EmailServiceInterface {
         message.setSubject("Charity - jednorazowy link do zmiany hasła");
 
         User user = userService.findByUsername(to);
-        String recoveryToken = randomStringGenerator.generateRandomString();
+        UUID token = UUID.randomUUID();
+        String recoveryToken = token.toString();
         this.usersRecoveryTokens.put(user, recoveryToken);
 
         String link = LOCAL_HOST + recoveryToken;
