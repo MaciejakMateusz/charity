@@ -14,20 +14,21 @@ import pl.maciejak.charity.entity.User;
 import pl.maciejak.charity.service.UserService;
 
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/admin/dashboard")
 @Slf4j
 public class DashboardController {
 
     private static final int PAGE_SIZE = 10;
     private Pageable pageable = PageRequest.of(0, PAGE_SIZE);
     private Page<User> allUsers;
+    private User foundUser;
     private final UserService userService;
 
     public DashboardController(UserService userService) {
         this.userService = userService;
     }
 
-    @GetMapping("/dashboard")
+    @GetMapping()
     public String users(Model model) {
         this.allUsers = getAllUsers();
         int totalPages = allUsers.getTotalPages();
@@ -37,7 +38,7 @@ public class DashboardController {
         return "admin/dashboard";
     }
 
-    @PostMapping("/dashboard/page")
+    @PostMapping("/page")
     private String setPageNumber(@RequestParam int pageNumber) {
         if (pageNumber >= 0) {
             this.pageable = PageRequest.of(pageNumber, PAGE_SIZE);
@@ -45,7 +46,7 @@ public class DashboardController {
         return "redirect:/admin/dashboard";
     }
 
-    @PostMapping("/dashboard/incrementPage")
+    @PostMapping("/incrementPage")
     private String incrementPageNumber() {
         if (allUsers.hasNext()) {
             this.pageable = PageRequest.of(this.pageable.getPageNumber() + 1, PAGE_SIZE);
@@ -53,12 +54,36 @@ public class DashboardController {
         return "redirect:/admin/dashboard";
     }
 
-    @PostMapping("/dashboard/decrementPage")
+    @PostMapping("/decrementPage")
     private String decrementPage() {
         if (this.pageable.hasPrevious()) {
             this.pageable = PageRequest.of(this.pageable.getPageNumber() - 1, PAGE_SIZE);
         }
         return "redirect:/admin/dashboard";
+    }
+
+    @PostMapping("/findById")
+    private String findById(@RequestParam Long id, Model model) {
+        model.addAttribute("filterEngaged", true);
+        if (!userService.existsById(id)) {
+            this.foundUser = null;
+            model.addAttribute("userNotFound", true);
+        } else {
+            this.foundUser = userService.findById(id);
+            model.addAttribute("foundUser", foundUser);
+        }
+        return "admin/dashboard";
+    }
+
+    @GetMapping("/findById")
+    private String findById(Model model) {
+        model.addAttribute("filterEngaged", true);
+        if (this.foundUser == null) {
+            model.addAttribute("userNotFound", true);
+        } else {
+            model.addAttribute("foundUser", this.foundUser);
+        }
+        return "admin/dashboard";
     }
 
     private Page<User> getAllUsers() {
