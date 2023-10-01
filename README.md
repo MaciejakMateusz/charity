@@ -24,7 +24,8 @@ guarantee that donated items will reach those in need.
 - Login
 - Management (CRUD) of administrators
 - Management (CRUD) of trusted institutions
-- Viewing, editing, and deleting registered users
+- Management (CRUD) of registered users
+- Ability to block registered user
 - Viewing donated items
 - Ability to set item status (submitted/received/distributed)
 (additional entity and relationship for statuses will be added)
@@ -32,18 +33,12 @@ guarantee that donated items will reach those in need.
 - Registration
 - Login (using the same form as administrators)
 - Editing own profile (basic information)
-- Adding items for donation (only accessible when logged in)
+- Adding items for donation
 - Viewing, editing, and deleting donated items
 - Marking an item as donated (archiving)
-
-In the extended version, the following features will be implemented:
-
-- User roles (ROLE_USER, ROLE_ADMIN)
-- Administrative panel based on the Sb Admin 2 template: Sb Admin 2
-- Additional Functionality
+- ### Additional
 - Account activation confirmation via email sent to the provided email during registration
-- Handling forgotten passwords
-- Validation for correct entry of two identical passwords
+- Handling passwords recovery
 - Administrative user validation (e.g., preventing the deletion of the last existing administrator)
 
 ## About CRUD
