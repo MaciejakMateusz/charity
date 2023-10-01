@@ -29,6 +29,11 @@ public class UserService implements UserServiceInterface {
     }
 
     @Override
+    public Page<User> findByPartialEmail(String email) {
+        return userRepository.findUserByEmailContains(email);
+    }
+
+    @Override
     public User findByUsername(String username) {
         return userRepository.findUserByUsername(username);
     }
