@@ -7,7 +7,7 @@ import pl.maciejak.charity.entity.User;
 public interface UserServiceInterface {
     Page<User> findByRoles(String roleName, Pageable pageable);
 
-    Page<User> findByPartialEmail(String email);
+    Page<User> findByPartialEmail(String email, Pageable pageable);
 
     User findByUsername(String email);
 
