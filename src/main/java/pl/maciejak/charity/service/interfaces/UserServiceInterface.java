@@ -24,4 +24,6 @@ public interface UserServiceInterface {
     boolean existsByUsername(String username);
 
     boolean existsByEmail(String email);
+
+    boolean existsById(Long id);
 }
