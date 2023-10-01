@@ -7,8 +7,7 @@
         <h2>Skontaktuj się z nami</h2>
         <h3>Formularz kontaktowy</h3>
         <form class="form--contact"
-              action="${pageContext.request.contextPath}/contact-form"
-              method="POST">
+              id="contact-form">
 
             <div class="form-group form-group--50">
                 <label>
@@ -36,6 +35,9 @@
 
             <button class="btn" type="submit">Wyślij</button>
         </form>
+        <div id="success-message" class="success-message" style="display: none;">
+            Wiadomość została wysłana pomyślnie.
+        </div>
     </div>
     <div class="bottom-line">
         <span class="bottom-line--copy">Copyright &copy; 2018</span>
@@ -51,6 +53,8 @@
     </div>
 </footer>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="<c:url value="/resources/js/app.js"/>"></script>
+<script src="<c:url value="/resources/js/contact-form.js"/>"></script>
 </body>
 </html>
