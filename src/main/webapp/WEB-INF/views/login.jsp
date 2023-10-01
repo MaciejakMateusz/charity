@@ -25,7 +25,10 @@
         </div>
         <div class="form-group">
             <form:password path="password" placeholder="Hasło" cssClass="custom-form-input"/>
-            <a href="#" class="btn btn--small btn--without-border reset-password">Przypomnij hasło</a>
+            <a href="${pageContext.request.contextPath}/login/password-recovery"
+               class="btn btn--small btn--without-border reset-password">
+                Przypomnij hasło
+            </a>
         </div>
         <c:if test="${param.error != null}">
             <p class="validation">
