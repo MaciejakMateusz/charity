@@ -21,8 +21,14 @@
                method="POST"
                modelAttribute="user">
         <form:hidden path="id"/>
+        <form:hidden path="name"/>
+        <form:hidden path="surname"/>
+        <form:hidden path="street"/>
+        <form:hidden path="city"/>
+        <form:hidden path="zipCode"/>
         <form:hidden path="username"/>
         <form:hidden path="email"/>
+        <form:hidden path="phoneNumber"/>
         <form:hidden path="created"/>
         <div class="form-section form-section--columns">
 
