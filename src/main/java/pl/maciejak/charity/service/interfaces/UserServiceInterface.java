@@ -13,6 +13,8 @@ public interface UserServiceInterface {
 
     void save(User user);
 
+    void saveTemporary(User user);
+
     void block(User user);
 
     void delete(User user);
