@@ -27,8 +27,7 @@ guarantee that donated items will reach those in need.
 - Management (CRUD) of registered users
 - Ability to block registered user
 - Viewing donated items
-- Ability to set item status (submitted/received/distributed)
-(additional entity and relationship for statuses will be added)
+- Ability to set item status (not received/received)
 ### User Profile:
 - Registration
 - Login (using the same form as administrators)
