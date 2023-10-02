@@ -76,6 +76,12 @@ public class Donation {
     @DateTimeFormat(pattern = "HH:mm")
     private LocalTime pickedUpTime;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate archivedDate;
+
+    @DateTimeFormat(pattern = "HH:mm")
+    private LocalTime archivedTime;
+
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime created;
 
