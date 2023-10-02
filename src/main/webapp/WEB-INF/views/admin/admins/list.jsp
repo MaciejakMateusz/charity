@@ -182,18 +182,20 @@
                                                                     Edytuj
                                                                 </button>
                                                             </form>
-                                                            <form style="all: unset;"
-                                                                  method="POST"
-                                                                  action="${pageContext.request.contextPath}/admin/admins/delete">
-                                                                <button
-                                                                        type="submit"
-                                                                        style="outline: none; background: tomato;"
-                                                                        class="button-list"
-                                                                        name="id"
-                                                                        value="${admin.id}">
-                                                                    Usuń
-                                                                </button>
-                                                            </form>
+                                                            <c:if test="${currentAdminUsername!=admin.username}">
+                                                                <form style="all: unset;"
+                                                                      method="POST"
+                                                                      action="${pageContext.request.contextPath}/admin/admins/delete">
+                                                                    <button
+                                                                            type="submit"
+                                                                            style="outline: none; background: tomato;"
+                                                                            class="button-list"
+                                                                            name="id"
+                                                                            value="${admin.id}">
+                                                                        Usuń
+                                                                    </button>
+                                                                </form>
+                                                            </c:if>
                                                         </td>
                                                     </tr>
                                                 </c:forEach>
