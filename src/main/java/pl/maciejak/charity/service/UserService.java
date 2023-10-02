@@ -29,8 +29,8 @@ public class UserService implements UserServiceInterface {
     }
 
     @Override
-    public Page<User> findByPartialEmail(String email, Pageable pageable) {
-        return userRepository.findUserByEmailContains(email, pageable);
+    public Page<User> findByPartialEmail(String email, String roleName, Pageable pageable) {
+        return userRepository.findUserByEmailContainsAndRoleName(email, roleName, pageable);
     }
 
     @Override
@@ -41,6 +41,11 @@ public class UserService implements UserServiceInterface {
     @Override
     public User findById(Long id) {
         return userRepository.findById(id).orElse(new User());
+    }
+
+    @Override
+    public User findByIdAndRoleName(Long id, String roleName) {
+        return userRepository.findUserByIdAndRoleName(id, roleName).orElse(null);
     }
 
     @Override

@@ -26,6 +26,7 @@ public class DashboardController {
     private String emailFilter;
 
     private final UserService userService;
+
     public DashboardController(UserService userService) {
         this.userService = userService;
     }
@@ -46,7 +47,7 @@ public class DashboardController {
         if (pageNumber >= 0) {
             this.pageable = PageRequest.of(pageNumber, PAGE_SIZE);
         }
-        if(filterEngaged) {
+        if (filterEngaged) {
             return "redirect:/admin/dashboard/findByEmail";
         }
         return "redirect:/admin/dashboard";
@@ -57,7 +58,7 @@ public class DashboardController {
         if (allUsers.hasNext()) {
             this.pageable = PageRequest.of(this.pageable.getPageNumber() + 1, PAGE_SIZE);
         }
-        if(filterEngaged) {
+        if (filterEngaged) {
             return "redirect:/admin/dashboard/findByEmail";
         }
         return "redirect:/admin/dashboard";
@@ -68,7 +69,7 @@ public class DashboardController {
         if (this.pageable.hasPrevious()) {
             this.pageable = PageRequest.of(this.pageable.getPageNumber() - 1, PAGE_SIZE);
         }
-        if(filterEngaged) {
+        if (filterEngaged) {
             return "redirect:/admin/dashboard/findByEmail";
         }
         return "redirect:/admin/dashboard";
@@ -81,8 +82,12 @@ public class DashboardController {
             this.foundUser = null;
             model.addAttribute("userNotFound", true);
         } else {
-            this.foundUser = userService.findById(id);
-            model.addAttribute("foundUser", foundUser);
+            this.foundUser = userService.findByIdAndRoleName(id, "ROLE_USER");
+            if(this.foundUser == null) {
+                model.addAttribute("userNotFound", true);
+            } else {
+                model.addAttribute("foundUser", foundUser);
+            }
         }
         return "admin/dashboard";
     }
@@ -102,7 +107,7 @@ public class DashboardController {
     private String findByEmail(@RequestParam String email, Model model) {
         this.filterEngaged = true;
         this.emailFilter = email;
-        this.allUsers = userService.findByPartialEmail(email, this.pageable);
+        this.allUsers = userService.findByPartialEmail(email, "ROLE_USER", this.pageable);
         if (this.allUsers == null || this.allUsers.isEmpty()) {
             model.addAttribute("userNotFound", true);
         } else {
@@ -114,7 +119,7 @@ public class DashboardController {
     @GetMapping("/findByEmail")
     private String findByEmail(Model model) {
         this.filterEngaged = true;
-        this.allUsers = userService.findByPartialEmail(this.emailFilter, this.pageable);
+        this.allUsers = userService.findByPartialEmail(this.emailFilter, "ROLE_USER", this.pageable);
         if (this.allUsers.isEmpty()) {
             model.addAttribute("userNotFound", true);
         } else {

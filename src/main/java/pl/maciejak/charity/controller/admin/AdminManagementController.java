@@ -29,6 +29,7 @@ public class AdminManagementController {
     private String emailFilter;
 
     private final UserService userService;
+
     public AdminManagementController(UserService userService) {
         this.userService = userService;
     }
@@ -132,7 +133,7 @@ public class AdminManagementController {
         if (pageNumber >= 0) {
             this.pageable = PageRequest.of(pageNumber, PAGE_SIZE);
         }
-        if(filterEngaged) {
+        if (filterEngaged) {
             return "redirect:/admin/admins/findByEmail";
         }
         return "redirect:/admin/admins";
@@ -143,7 +144,7 @@ public class AdminManagementController {
         if (allAdmins.hasNext()) {
             this.pageable = PageRequest.of(this.pageable.getPageNumber() + 1, PAGE_SIZE);
         }
-        if(filterEngaged) {
+        if (filterEngaged) {
             return "redirect:/admin/admins/findByEmail";
         }
         return "redirect:/admin/admins";
@@ -154,7 +155,7 @@ public class AdminManagementController {
         if (this.pageable.hasPrevious()) {
             this.pageable = PageRequest.of(this.pageable.getPageNumber() - 1, PAGE_SIZE);
         }
-        if(filterEngaged) {
+        if (filterEngaged) {
             return "redirect:/admin/admins/findByEmail";
         }
         return "redirect:/admin/admins";
@@ -167,8 +168,12 @@ public class AdminManagementController {
             this.foundAdmin = null;
             model.addAttribute("adminNotFound", true);
         } else {
-            this.foundAdmin = userService.findById(id);
-            model.addAttribute("foundAdmin", foundAdmin);
+            this.foundAdmin = userService.findByIdAndRoleName(id, "ROLE_ADMIN");
+            if (this.foundAdmin == null) {
+                model.addAttribute("adminNotFound", true);
+            } else {
+                model.addAttribute("foundAdmin", foundAdmin);
+            }
         }
         return "admin/admins/list";
     }
@@ -188,7 +193,7 @@ public class AdminManagementController {
     private String findByEmail(@RequestParam String email, Model model) {
         this.filterEngaged = true;
         this.emailFilter = email;
-        this.allAdmins = userService.findByPartialEmail(email, this.pageable);
+        this.allAdmins = userService.findByPartialEmail(email, "ROLE_ADMIN", this.pageable);
         if (this.allAdmins == null || this.allAdmins.isEmpty()) {
             model.addAttribute("adminNotFound", true);
         } else {
@@ -200,7 +205,7 @@ public class AdminManagementController {
     @GetMapping("/findByEmail")
     private String findByEmail(Model model) {
         filterEngaged = true;
-        this.allAdmins = userService.findByPartialEmail(this.emailFilter, this.pageable);
+        this.allAdmins = userService.findByPartialEmail(this.emailFilter, "ROLE_ADMIN", this.pageable);
         if (this.allAdmins.isEmpty()) {
             model.addAttribute("adminNotFound", true);
         } else {
