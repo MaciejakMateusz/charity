@@ -158,7 +158,7 @@
                                                             <td>
                                                                 <form style="all: unset;"
                                                                       method="POST"
-                                                                      action="${pageContext.request.contextPath}/admin/user">
+                                                                      action="${pageContext.request.contextPath}/admin/institutions/show">
                                                                     <input type="hidden" value="${institution.id}" name="id">
                                                                     <button type="submit"
                                                                             style="outline: none;"
@@ -168,7 +168,7 @@
                                                                 </form>
                                                                 <form style="all: unset;"
                                                                       method="POST"
-                                                                      action="${pageContext.request.contextPath}/admin/user/edit">
+                                                                      action="${pageContext.request.contextPath}/admin/institutions/edit">
                                                                     <button
                                                                             type="submit"
                                                                             style="outline: none;"
@@ -180,7 +180,7 @@
                                                                 </form>
                                                                 <form style="all: unset;"
                                                                       method="POST"
-                                                                      action="${pageContext.request.contextPath}/admin/user/delete">
+                                                                      action="${pageContext.request.contextPath}/admin/institutions/delete">
                                                                     <button
                                                                             type="submit"
                                                                             style="outline: none; background: tomato;"
