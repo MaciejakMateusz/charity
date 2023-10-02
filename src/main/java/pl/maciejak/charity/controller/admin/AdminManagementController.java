@@ -132,6 +132,9 @@ public class AdminManagementController {
         if (pageNumber >= 0) {
             this.pageable = PageRequest.of(pageNumber, PAGE_SIZE);
         }
+        if(filterEngaged) {
+            return "redirect:/admin/admins/list/findByEmail";
+        }
         return "redirect:/admin/admins";
     }
 
@@ -140,6 +143,9 @@ public class AdminManagementController {
         if (allAdmins.hasNext()) {
             this.pageable = PageRequest.of(this.pageable.getPageNumber() + 1, PAGE_SIZE);
         }
+        if(filterEngaged) {
+            return "redirect:/admin/admins/list/findByEmail";
+        }
         return "redirect:/admin/admins";
     }
 
@@ -147,6 +153,9 @@ public class AdminManagementController {
     private String decrementPage() {
         if (this.pageable.hasPrevious()) {
             this.pageable = PageRequest.of(this.pageable.getPageNumber() - 1, PAGE_SIZE);
+        }
+        if(filterEngaged) {
+            return "redirect:/admin/admins/list/findByEmail";
         }
         return "redirect:/admin/admins";
     }
