@@ -50,6 +50,9 @@ public class User {
             zipCode,
             phoneNumber;
 
+    @OneToOne
+    private Token token;
+
     @Transient
     private String repeatedPassword;
 
