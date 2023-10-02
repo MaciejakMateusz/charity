@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import pl.maciejak.charity.entity.User;
 import pl.maciejak.charity.service.UserService;
 
+import java.security.Principal;
+
 @Controller
 @RequestMapping("/profile")
 @Slf4j
@@ -25,17 +27,15 @@ public class UserProfileController {
     }
 
     @GetMapping
-    public String profile(Model model) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String username = authentication.getName();
-        User user = userService.findByUsername(username);
+    public String profile(Model model, Principal principal) {
+        User user = userService.findByUsername(principal.getName());
         model.addAttribute("user", user);
         return "profile/profile";
     }
 
     @PostMapping
     public String profile(User user, Model model) {
-        userService.save(user);
+        userService.update(user);
         model.addAttribute("formSubmitted", true);
         return "profile/profile";
     }

@@ -56,6 +56,11 @@ public class UserService implements UserServiceInterface {
     }
 
     @Override
+    public void update(User user) {
+        userRepository.save(user);
+    }
+
+    @Override
     public void saveTemporary(User user) {
         user.setEnabled(0);
         userRepository.save(user);
