@@ -21,6 +21,10 @@ public class InstitutionManagementController {
     private static final int PAGE_SIZE = 10;
     private Pageable pageable = PageRequest.of(0, PAGE_SIZE);
     private Page<Institution> allInstitutions;
+    private Institution foundInstitution;
+    private boolean filterEngaged;
+    private String emailFilter;
+
     private final InstitutionService institutionService;
 
     public InstitutionManagementController(InstitutionService institutionService) {
@@ -117,6 +121,9 @@ public class InstitutionManagementController {
         if (pageNumber >= 0) {
             this.pageable = PageRequest.of(pageNumber, PAGE_SIZE);
         }
+        if (filterEngaged) {
+            return "redirect:/admin/institutions/findByEmail";
+        }
         return "redirect:/admin/institutions";
     }
 
@@ -124,6 +131,9 @@ public class InstitutionManagementController {
     private String incrementPageNumber() {
         if (allInstitutions.hasNext()) {
             this.pageable = PageRequest.of(this.pageable.getPageNumber() + 1, PAGE_SIZE);
+        }
+        if (filterEngaged) {
+            return "redirect:/admin/institutions/findByEmail";
         }
         return "redirect:/admin/institutions";
     }
@@ -133,7 +143,68 @@ public class InstitutionManagementController {
         if (this.pageable.hasPrevious()) {
             this.pageable = PageRequest.of(this.pageable.getPageNumber() - 1, PAGE_SIZE);
         }
+        if (filterEngaged) {
+            return "redirect:/admin/institutions/findByEmail";
+        }
         return "redirect:/admin/institutions";
+    }
+
+    @PostMapping("/findById")
+    private String findById(@RequestParam Long id, Model model) {
+        model.addAttribute("filterEngaged", true);
+        if (!institutionService.existsById(id)) {
+            this.foundInstitution = null;
+            model.addAttribute("institutionNotFound", true);
+        } else {
+            this.foundInstitution = institutionService.findById(id);
+            model.addAttribute("foundInstitution", foundInstitution);
+        }
+        return "admin/institutions/list";
+    }
+
+    @GetMapping("/findById")
+    private String findById(Model model) {
+        model.addAttribute("filterEngaged", true);
+        if (this.foundInstitution == null) {
+            model.addAttribute("institutionNotFound", true);
+        } else {
+            model.addAttribute("foundInstitution", this.foundInstitution);
+        }
+        return "admin/institutions/list";
+    }
+
+    @PostMapping("/findByEmail")
+    private String findByEmail(@RequestParam String email, Model model) {
+        this.filterEngaged = true;
+        this.emailFilter = email;
+        this.allInstitutions = institutionService.findByPartialEmail(email, this.pageable);
+        if (this.allInstitutions == null || this.allInstitutions.isEmpty()) {
+            model.addAttribute("institutionNotFound", true);
+        } else {
+            emailFilterModelAttributes(model);
+        }
+        return "admin/institutions/list";
+    }
+
+    @GetMapping("/findByEmail")
+    private String findByEmail(Model model) {
+        this.filterEngaged = true;
+        this.allInstitutions = institutionService.findByPartialEmail(this.emailFilter, this.pageable);
+        if (this.allInstitutions.isEmpty()) {
+            model.addAttribute("institutionsNotFound", true);
+        } else {
+            emailFilterModelAttributes(model);
+        }
+        return "admin/institutions/list";
+    }
+
+    private void emailFilterModelAttributes(Model model) {
+        int totalPages = this.allInstitutions.getTotalPages();
+        model.addAttribute("pageable", this.pageable);
+        model.addAttribute("totalPages", totalPages);
+        model.addAttribute("foundByEmail", true);
+        model.addAttribute("partialEmail", this.emailFilter);
+        model.addAttribute("institutions", this.allInstitutions.stream().toList());
     }
 
     private Page<Institution> getAllInstitutions() {

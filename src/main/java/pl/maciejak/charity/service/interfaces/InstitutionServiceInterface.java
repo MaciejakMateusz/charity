@@ -11,7 +11,11 @@ public interface InstitutionServiceInterface {
 
     Page<Institution> findAll(Pageable pageable);
 
+    Page<Institution> findByPartialEmail(String email, Pageable pageable);
+
     List<Institution> findAll();
+
+    boolean existsById(Long id);
 
     void save(Institution institution);
 

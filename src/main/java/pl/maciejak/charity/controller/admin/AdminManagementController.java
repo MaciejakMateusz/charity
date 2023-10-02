@@ -133,7 +133,7 @@ public class AdminManagementController {
             this.pageable = PageRequest.of(pageNumber, PAGE_SIZE);
         }
         if(filterEngaged) {
-            return "redirect:/admin/admins/list/findByEmail";
+            return "redirect:/admin/admins/findByEmail";
         }
         return "redirect:/admin/admins";
     }
@@ -144,7 +144,7 @@ public class AdminManagementController {
             this.pageable = PageRequest.of(this.pageable.getPageNumber() + 1, PAGE_SIZE);
         }
         if(filterEngaged) {
-            return "redirect:/admin/admins/list/findByEmail";
+            return "redirect:/admin/admins/findByEmail";
         }
         return "redirect:/admin/admins";
     }
@@ -155,7 +155,7 @@ public class AdminManagementController {
             this.pageable = PageRequest.of(this.pageable.getPageNumber() - 1, PAGE_SIZE);
         }
         if(filterEngaged) {
-            return "redirect:/admin/admins/list/findByEmail";
+            return "redirect:/admin/admins/findByEmail";
         }
         return "redirect:/admin/admins";
     }

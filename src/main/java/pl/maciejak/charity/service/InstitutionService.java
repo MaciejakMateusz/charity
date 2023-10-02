@@ -29,9 +29,20 @@ public class InstitutionService implements InstitutionServiceInterface {
     }
 
     @Override
+    public Page<Institution> findByPartialEmail(String email, Pageable pageable) {
+        return institutionRepository.findInstitutionByEmailContains(email, pageable);
+    }
+
+    @Override
     public List<Institution> findAll() {
         return institutionRepository.findAll();
     }
+
+    @Override
+    public boolean existsById(Long id) {
+        return institutionRepository.existsById(id);
+    }
+
 
     @Override
     public void save(Institution institution) {
