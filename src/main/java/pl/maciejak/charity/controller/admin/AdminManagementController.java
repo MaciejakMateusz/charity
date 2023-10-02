@@ -165,10 +165,10 @@ public class AdminManagementController {
         model.addAttribute("filterEngaged", true);
         if (!userService.existsById(id)) {
             this.foundAdmin = null;
-            model.addAttribute("userNotFound", true);
+            model.addAttribute("adminNotFound", true);
         } else {
             this.foundAdmin = userService.findById(id);
-            model.addAttribute("foundUser", foundAdmin);
+            model.addAttribute("foundAdmin", foundAdmin);
         }
         return "admin/admins/list";
     }
@@ -177,9 +177,9 @@ public class AdminManagementController {
     private String findById(Model model) {
         model.addAttribute("filterEngaged", true);
         if (this.foundAdmin == null) {
-            model.addAttribute("userNotFound", true);
+            model.addAttribute("adminNotFound", true);
         } else {
-            model.addAttribute("foundUser", this.foundAdmin);
+            model.addAttribute("foundAdmin", this.foundAdmin);
         }
         return "admin/admins/list";
     }
@@ -190,7 +190,7 @@ public class AdminManagementController {
         this.emailFilter = email;
         this.allAdmins = userService.findByPartialEmail(email, this.pageable);
         if (this.allAdmins == null || this.allAdmins.isEmpty()) {
-            model.addAttribute("userNotFound", true);
+            model.addAttribute("adminNotFound", true);
         } else {
             emailFilterModelAttributes(model);
         }
@@ -202,7 +202,7 @@ public class AdminManagementController {
         filterEngaged = true;
         this.allAdmins = userService.findByPartialEmail(this.emailFilter, this.pageable);
         if (this.allAdmins.isEmpty()) {
-            model.addAttribute("userNotFound", true);
+            model.addAttribute("adminNotFound", true);
         } else {
             emailFilterModelAttributes(model);
         }

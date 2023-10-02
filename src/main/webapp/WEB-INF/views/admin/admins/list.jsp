@@ -40,39 +40,46 @@
                 <div class="card-body">
                     <div>
                         <p>Wyszukaj administratora po:</p>
-                        <form style="display: inline-block;" method="post" id="findId"
-                              action="${pageContext.request.contextPath}/app/list">
+                        <form style="display: inline-block;"
+                              method="POST"
+                              action="${pageContext.request.contextPath}/admin/admins/findById"
+                              id="findById">
                             <label>
                                 <input type="number"
                                        style="width: 80px;"
                                        min="1"
-                                       name="findId"
-                                       value="${findId}" ;
-                                       placeholder="Id"
-                                       form="findId">
+                                       name="id"
+                                       placeholder="ID"
+                                       form="findById">
                             </label>
                         </form>
                         <p style="display: inline-block; white-space: pre;"> lub </p>
-                        <form style="display: inline-block;" method="post" id="findEmail"
-                              action="${pageContext.request.contextPath}/app/list">
+                        <form action="${pageContext.request.contextPath}/admin/admins/findByEmail"
+                              method="POST"
+                              id="findByEmail"
+                              style="display: inline-block;">
                             <label>
                                 <input type="text"
-                                       name="findEmail"
-                                       value="${findEmail}"
+                                       name="email"
                                        placeholder="Email"
-                                       form="findEmail">
+                                       form="findByEmail">
                             </label>
-                            <c:if test="${wideResult==true}">
-                                <p style="color: red; display: inline-block;">Znaleziono więcej niż 50 wyników,
-                                    spróbuj zawęzić wyszukiwanie.</p>
-                            </c:if>
                         </form>
                     </div>
                     <div class="table-responsive">
                         <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
                             <div class="row">
                                 <div class="col-sm-12">
-
+                                    <c:if test="${foundByEmail==true}">
+                                        <a href="${pageContext.request.contextPath}/admin/dashboard">
+                                            <button type="submit"
+                                                    style="outline: none; font-size: 1.1rem;"
+                                                    class="button-list">
+                                                Powrót
+                                            </button>
+                                        </a>
+                                        <p style="font-weight: bold; display: inline-block; margin-left: 2rem;">Wyniki dla wyszukiwania "${partialEmail}":</p>
+                                    </c:if>
                                     <table class="table table-bordered dataTable" id="dataTable" width="100%"
                                            cellspacing="0" role="grid" aria-describedby="dataTable_info"
                                            style="width: 100%; border-collapse: collapse; border-left: none;">
@@ -100,55 +107,112 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-
-                                        <c:forEach items="${admins}" var="admin">
-                                            <tr role="row">
-                                                <td style="text-align: center"><c:out
-                                                        value='${admin.id}'/></td>
-                                                <td><c:out value='${admin.username}'/></td>
-                                                <td><c:out value='${admin.email}'/></td>
-                                                <td>
-                                                    <form style="all: unset;"
-                                                          method="POST"
-                                                          action="${pageContext.request.contextPath}/admin/admins/show">
-                                                        <input type="hidden" value="${admin.id}" name="id">
-                                                        <button type="submit"
-                                                                style="outline: none;"
-                                                                class="button-list">
-                                                            Pokaż
-                                                        </button>
-                                                    </form>
-                                                    <form style="all: unset;"
-                                                          method="POST"
-                                                          action="${pageContext.request.contextPath}/admin/admins/edit">
-                                                        <button
-                                                                type="submit"
-                                                                style="outline: none;"
-                                                                class="button-list"
-                                                                name="id"
-                                                                value="<c:out value='${admin.id}'/>">
-                                                            Edytuj
-                                                        </button>
-                                                    </form>
-                                                    <c:if test="${admin.username != currentAdminUsername}">
+                                        <c:choose>
+                                            <c:when test="${filterEngaged==true && adminNotFound!=true}">
+                                                <tr role="row">
+                                                    <td style="text-align: center"><c:out
+                                                            value='${foundAdmin.id}'/></td>
+                                                    <td><c:out value='${foundAdmin.username}'/></td>
+                                                    <td><c:out value='${foundAdmin.email}'/></td>
+                                                    <td>
                                                         <form style="all: unset;"
                                                               method="POST"
-                                                              action="${pageContext.request.contextPath}/admin/admins/delete">
+                                                              action="${pageContext.request.contextPath}/admin/user">
+                                                            <input type="hidden" value="${foundAdmin.id}" name="id">
+                                                            <button type="submit"
+                                                                    style="outline: none;"
+                                                                    class="button-list">
+                                                                Pokaż
+                                                            </button>
+                                                        </form>
+                                                        <form style="all: unset;"
+                                                              method="POST"
+                                                              action="${pageContext.request.contextPath}/admin/user/edit">
+                                                            <button
+                                                                    type="submit"
+                                                                    style="outline: none;"
+                                                                    class="button-list"
+                                                                    name="id"
+                                                                    value="${foundAdmin.id}">
+                                                                Edytuj
+                                                            </button>
+                                                        </form>
+                                                        <form style="all: unset;"
+                                                              method="POST"
+                                                              action="${pageContext.request.contextPath}/admin/user/delete">
                                                             <button
                                                                     type="submit"
                                                                     style="outline: none; background: tomato;"
                                                                     class="button-list"
                                                                     name="id"
-                                                                    value="<c:out value='${admin.id}'/>">
+                                                                    value="${foundAdmin.id}">
                                                                 Usuń
                                                             </button>
                                                         </form>
-                                                    </c:if>
-                                                </td>
-                                            </tr>
-                                        </c:forEach>
+                                                    </td>
+                                                </tr>
+                                            </c:when>
+                                            <c:when test="${filterEngaged!=true}">
+                                                <c:forEach items="${admins}" var="admin">
+                                                    <tr role="row">
+                                                        <td style="text-align: center"><c:out
+                                                                value='${admin.id}'/></td>
+                                                        <td><c:out value='${admin.username}'/></td>
+                                                        <td><c:out value='${admin.email}'/></td>
+                                                        <td>
+                                                            <form style="all: unset;"
+                                                                  method="POST"
+                                                                  action="${pageContext.request.contextPath}/admin/user">
+                                                                <input type="hidden" value="${admin.id}" name="id">
+                                                                <button type="submit"
+                                                                        style="outline: none;"
+                                                                        class="button-list">
+                                                                    Pokaż
+                                                                </button>
+                                                            </form>
+                                                            <form style="all: unset;"
+                                                                  method="POST"
+                                                                  action="${pageContext.request.contextPath}/admin/user/edit">
+                                                                <button
+                                                                        type="submit"
+                                                                        style="outline: none;"
+                                                                        class="button-list"
+                                                                        name="id"
+                                                                        value="${admin.id}">
+                                                                    Edytuj
+                                                                </button>
+                                                            </form>
+                                                            <form style="all: unset;"
+                                                                  method="POST"
+                                                                  action="${pageContext.request.contextPath}/admin/user/delete">
+                                                                <button
+                                                                        type="submit"
+                                                                        style="outline: none; background: tomato;"
+                                                                        class="button-list"
+                                                                        name="id"
+                                                                        value="${admin.id}">
+                                                                    Usuń
+                                                                </button>
+                                                            </form>
+                                                        </td>
+                                                    </tr>
+                                                </c:forEach>
+                                            </c:when>
+                                        </c:choose>
                                         </tbody>
                                     </table>
+                                    <c:if test="${adminNotFound==true}">
+                                        <p class="validation">Nie znaleziono wyników</p>
+                                    </c:if>
+                                    <c:if test="${filterEngaged==true || adminNotFound==true}">
+                                        <a href="${pageContext.request.contextPath}/admin/dashboard">
+                                            <button type="submit"
+                                                    style="outline: none; font-size: 1.1rem;"
+                                                    class="button-list">
+                                                Powrót
+                                            </button>
+                                        </a>
+                                    </c:if>
                                     <c:if test="${pageable.hasPrevious()}">
                                         <form action="${pageContext.request.contextPath}/admin/admins/decrementPage"
                                               method="POST" style="display: inline-block;">
