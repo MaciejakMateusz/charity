@@ -42,6 +42,7 @@
                         <form:hidden path="created"/>
                         <form:hidden path="username"/>
                         <form:hidden path="password"/>
+                        <form:hidden path="enabled"/>
                         <div class="form-group">
                             <label for="name">Imię <br>
                                 <form:input path="name"

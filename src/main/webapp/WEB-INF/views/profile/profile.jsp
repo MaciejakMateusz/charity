@@ -30,6 +30,7 @@
                 <form:hidden path="password"/>
                 <form:hidden path="username"/>
                 <form:hidden path="created"/>
+                <form:hidden path="enabled"/>
                 <div class="form-section form-section--columns">
 
                     <div class="form-section--column">
