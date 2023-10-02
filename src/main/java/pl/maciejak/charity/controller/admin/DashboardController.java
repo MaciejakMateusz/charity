@@ -32,7 +32,7 @@ public class DashboardController {
 
     @GetMapping()
     public String users(Model model) {
-        filterEngaged = false;
+        this.filterEngaged = false;
         this.allUsers = getAllUsers();
         int totalPages = this.allUsers.getTotalPages();
         model.addAttribute("pageable", this.pageable);
@@ -100,7 +100,7 @@ public class DashboardController {
 
     @PostMapping("/findByEmail")
     private String findByEmail(@RequestParam String email, Model model) {
-        filterEngaged = true;
+        this.filterEngaged = true;
         this.emailFilter = email;
         this.allUsers = userService.findByPartialEmail(email, this.pageable);
         if (this.allUsers == null || this.allUsers.isEmpty()) {
@@ -113,7 +113,7 @@ public class DashboardController {
 
     @GetMapping("/findByEmail")
     private String findByEmail(Model model) {
-        filterEngaged = true;
+        this.filterEngaged = true;
         this.allUsers = userService.findByPartialEmail(this.emailFilter, this.pageable);
         if (this.allUsers.isEmpty()) {
             model.addAttribute("userNotFound", true);

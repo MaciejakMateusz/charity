@@ -21,17 +21,21 @@ import java.security.Principal;
 public class AdminManagementController {
 
     private User admin;
-    private final UserService userService;
     private static final int PAGE_SIZE = 10;
     private Pageable pageable = PageRequest.of(0, PAGE_SIZE);
     private Page<User> allAdmins;
+    private User foundAdmin;
+    private boolean filterEngaged;
+    private String emailFilter;
 
+    private final UserService userService;
     public AdminManagementController(UserService userService) {
         this.userService = userService;
     }
 
     @GetMapping
     public String admins(Model model) {
+        this.filterEngaged = false;
         this.allAdmins = getAllAdmins();
         int totalPages = allAdmins.getTotalPages();
         model.addAttribute("pageable", this.pageable);
@@ -145,6 +149,64 @@ public class AdminManagementController {
             this.pageable = PageRequest.of(this.pageable.getPageNumber() - 1, PAGE_SIZE);
         }
         return "redirect:/admin/admins";
+    }
+
+    @PostMapping("/findById")
+    private String findById(@RequestParam Long id, Model model) {
+        model.addAttribute("filterEngaged", true);
+        if (!userService.existsById(id)) {
+            this.foundAdmin = null;
+            model.addAttribute("userNotFound", true);
+        } else {
+            this.foundAdmin = userService.findById(id);
+            model.addAttribute("foundUser", foundAdmin);
+        }
+        return "admin/admins/list";
+    }
+
+    @GetMapping("/findById")
+    private String findById(Model model) {
+        model.addAttribute("filterEngaged", true);
+        if (this.foundAdmin == null) {
+            model.addAttribute("userNotFound", true);
+        } else {
+            model.addAttribute("foundUser", this.foundAdmin);
+        }
+        return "admin/admins/list";
+    }
+
+    @PostMapping("/findByEmail")
+    private String findByEmail(@RequestParam String email, Model model) {
+        this.filterEngaged = true;
+        this.emailFilter = email;
+        this.allAdmins = userService.findByPartialEmail(email, this.pageable);
+        if (this.allAdmins == null || this.allAdmins.isEmpty()) {
+            model.addAttribute("userNotFound", true);
+        } else {
+            emailFilterModelAttributes(model);
+        }
+        return "admin/admins/list";
+    }
+
+    @GetMapping("/findByEmail")
+    private String findByEmail(Model model) {
+        filterEngaged = true;
+        this.allAdmins = userService.findByPartialEmail(this.emailFilter, this.pageable);
+        if (this.allAdmins.isEmpty()) {
+            model.addAttribute("userNotFound", true);
+        } else {
+            emailFilterModelAttributes(model);
+        }
+        return "admin/admins/list";
+    }
+
+    private void emailFilterModelAttributes(Model model) {
+        int totalPages = this.allAdmins.getTotalPages();
+        model.addAttribute("pageable", this.pageable);
+        model.addAttribute("totalPages", totalPages);
+        model.addAttribute("foundByEmail", true);
+        model.addAttribute("partialEmail", this.emailFilter);
+        model.addAttribute("admins", this.allAdmins.stream().toList());
     }
 
     private Page<User> getAllAdmins() {
