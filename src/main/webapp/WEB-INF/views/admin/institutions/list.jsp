@@ -67,7 +67,7 @@
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <c:if test="${foundByEmail==true}">
-                                            <a href="${pageContext.request.contextPath}/admin/dashboard">
+                                            <a href="${pageContext.request.contextPath}/admin/institutions">
                                                 <button type="submit"
                                                         style="outline: none; font-size: 1.1rem;"
                                                         class="button-list">
@@ -201,7 +201,7 @@
                                             <p class="validation">Nie znaleziono wyników</p>
                                         </c:if>
                                         <c:if test="${filterEngaged==true || institutionNotFound==true}">
-                                            <a href="${pageContext.request.contextPath}/admin/dashboard">
+                                            <a href="${pageContext.request.contextPath}/admin/institutions">
                                                 <button type="submit"
                                                         style="outline: none; font-size: 1.1rem;"
                                                         class="button-list">
