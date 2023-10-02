@@ -36,39 +36,46 @@
                     <div class="card-body">
                         <div>
                             <p>Wyszukaj fundację po:</p>
-                            <form style="display: inline-block;" method="post" id="findId"
-                                  action="${pageContext.request.contextPath}/app/list">
+                            <form style="display: inline-block;"
+                                  method="POST"
+                                  action="${pageContext.request.contextPath}/admin/institutions/findById"
+                                  id="findById">
                                 <label>
                                     <input type="number"
                                            style="width: 80px;"
                                            min="1"
-                                           name="findId"
-                                           value="${findId}" ;
-                                           placeholder="Id"
-                                           form="findId">
+                                           name="id"
+                                           placeholder="ID"
+                                           form="findById">
                                 </label>
                             </form>
                             <p style="display: inline-block; white-space: pre;"> lub </p>
-                            <form style="display: inline-block;" method="post" id="findEmail"
-                                  action="${pageContext.request.contextPath}/app/list">
+                            <form action="${pageContext.request.contextPath}/admin/institutions/findByEmail"
+                                  method="POST"
+                                  id="findByEmail"
+                                  style="display: inline-block;">
                                 <label>
                                     <input type="text"
-                                           name="findEmail"
-                                           value="${findEmail}"
+                                           name="email"
                                            placeholder="Email"
-                                           form="findEmail">
+                                           form="findByEmail">
                                 </label>
-                                <c:if test="${wideResult==true}">
-                                    <p style="color: red; display: inline-block;">Znaleziono więcej niż 50 wyników,
-                                        spróbuj zawęzić wyszukiwanie.</p>
-                                </c:if>
                             </form>
                         </div>
                         <div class="table-responsive">
                             <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
                                 <div class="row">
                                     <div class="col-sm-12">
-
+                                        <c:if test="${foundByEmail==true}">
+                                            <a href="${pageContext.request.contextPath}/admin/dashboard">
+                                                <button type="submit"
+                                                        style="outline: none; font-size: 1.1rem;"
+                                                        class="button-list">
+                                                    Powrót
+                                                </button>
+                                            </a>
+                                            <p style="font-weight: bold; display: inline-block; margin-left: 2rem;">Wyniki dla wyszukiwania "${partialEmail}":</p>
+                                        </c:if>
                                         <table class="table table-bordered dataTable" id="dataTable" width="100%"
                                                cellspacing="0" role="grid" aria-describedby="dataTable_info"
                                                style="width: 100%; border-collapse: collapse; border-left: none;">
@@ -96,52 +103,112 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <c:forEach items="${institutions}" var="institution">
-                                                <tr role="row">
-                                                    <td style="text-align: center"><c:out
-                                                            value='${institution.id}'/></td>
-                                                    <td><c:out value='${institution.name}'/></td>
-                                                    <td><c:out value='${institution.description}'/></td>
-                                                    <td>
-                                                        <form style="all: unset;"
-                                                                   method="POST"
-                                                                   action="${pageContext.request.contextPath}/admin/institutions/show">
-                                                            <input type="hidden" value="${institution.id}" name="id">
-                                                            <button type="submit"
-                                                                    style="outline: none;"
-                                                                    class="button-list">
-                                                                Pokaż
-                                                            </button>
-                                                        </form>
-                                                        <form style="all: unset;"
-                                                              method="POST"
-                                                              action="${pageContext.request.contextPath}/admin/institutions/edit">
-                                                            <button
-                                                                    type="submit"
-                                                                    style="outline: none;"
-                                                                    class="button-list"
-                                                                    name="id"
-                                                                    value="<c:out value='${institution.id}'/>">
-                                                                Edytuj
-                                                            </button>
-                                                        </form>
-                                                        <form style="all: unset;"
-                                                              method="POST"
-                                                              action="${pageContext.request.contextPath}/admin/institutions/delete">
-                                                            <button
-                                                                    type="submit"
-                                                                    style="outline: none; background: tomato;"
-                                                                    class="button-list"
-                                                                    name="id"
-                                                                    value="<c:out value='${institution.id}'/>">
-                                                                Usuń
-                                                            </button>
-                                                        </form>
-                                                    </td>
-                                                </tr>
-                                            </c:forEach>
+                                            <c:choose>
+                                                <c:when test="${filterEngaged==true && institutionNotFound!=true}">
+                                                    <tr role="row">
+                                                        <td style="text-align: center"><c:out
+                                                                value='${foundInstitution.id}'/></td>
+                                                        <td><c:out value='${foundInstitution.name}'/></td>
+                                                        <td><c:out value='${foundInstitution.email}'/></td>
+                                                        <td>
+                                                            <form style="all: unset;"
+                                                                  method="POST"
+                                                                  action="${pageContext.request.contextPath}/admin/user">
+                                                                <input type="hidden" value="${foundInstitution.id}" name="id">
+                                                                <button type="submit"
+                                                                        style="outline: none;"
+                                                                        class="button-list">
+                                                                    Pokaż
+                                                                </button>
+                                                            </form>
+                                                            <form style="all: unset;"
+                                                                  method="POST"
+                                                                  action="${pageContext.request.contextPath}/admin/user/edit">
+                                                                <button
+                                                                        type="submit"
+                                                                        style="outline: none;"
+                                                                        class="button-list"
+                                                                        name="id"
+                                                                        value="${foundInstitution.id}">
+                                                                    Edytuj
+                                                                </button>
+                                                            </form>
+                                                            <form style="all: unset;"
+                                                                  method="POST"
+                                                                  action="${pageContext.request.contextPath}/admin/user/delete">
+                                                                <button
+                                                                        type="submit"
+                                                                        style="outline: none; background: tomato;"
+                                                                        class="button-list"
+                                                                        name="id"
+                                                                        value="${foundInstitution.id}">
+                                                                    Usuń
+                                                                </button>
+                                                            </form>
+                                                        </td>
+                                                    </tr>
+                                                </c:when>
+                                                <c:when test="${filterEngaged!=true}">
+                                                    <c:forEach items="${institutions}" var="institution">
+                                                        <tr role="row">
+                                                            <td style="text-align: center"><c:out
+                                                                    value='${institution.id}'/></td>
+                                                            <td><c:out value='${institution.name}'/></td>
+                                                            <td><c:out value='${institution.email}'/></td>
+                                                            <td>
+                                                                <form style="all: unset;"
+                                                                      method="POST"
+                                                                      action="${pageContext.request.contextPath}/admin/user">
+                                                                    <input type="hidden" value="${institution.id}" name="id">
+                                                                    <button type="submit"
+                                                                            style="outline: none;"
+                                                                            class="button-list">
+                                                                        Pokaż
+                                                                    </button>
+                                                                </form>
+                                                                <form style="all: unset;"
+                                                                      method="POST"
+                                                                      action="${pageContext.request.contextPath}/admin/user/edit">
+                                                                    <button
+                                                                            type="submit"
+                                                                            style="outline: none;"
+                                                                            class="button-list"
+                                                                            name="id"
+                                                                            value="${institution.id}">
+                                                                        Edytuj
+                                                                    </button>
+                                                                </form>
+                                                                <form style="all: unset;"
+                                                                      method="POST"
+                                                                      action="${pageContext.request.contextPath}/admin/user/delete">
+                                                                    <button
+                                                                            type="submit"
+                                                                            style="outline: none; background: tomato;"
+                                                                            class="button-list"
+                                                                            name="id"
+                                                                            value="${institution.id}">
+                                                                        Usuń
+                                                                    </button>
+                                                                </form>
+                                                            </td>
+                                                        </tr>
+                                                    </c:forEach>
+                                                </c:when>
+                                            </c:choose>
                                             </tbody>
                                         </table>
+                                        <c:if test="${institutionNotFound==true}">
+                                            <p class="validation">Nie znaleziono wyników</p>
+                                        </c:if>
+                                        <c:if test="${filterEngaged==true || institutionNotFound==true}">
+                                            <a href="${pageContext.request.contextPath}/admin/dashboard">
+                                                <button type="submit"
+                                                        style="outline: none; font-size: 1.1rem;"
+                                                        class="button-list">
+                                                    Powrót
+                                                </button>
+                                            </a>
+                                        </c:if>
                                         <c:if test="${pageable.hasPrevious()}">
                                             <form action="${pageContext.request.contextPath}/admin/institutions/decrementPage"
                                                   method="POST" style="display: inline-block;">
