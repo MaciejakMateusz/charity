@@ -50,6 +50,7 @@ public class User {
             zipCode,
             phoneNumber;
 
+    @Column(length = 36)
     private String token;
 
     @Transient

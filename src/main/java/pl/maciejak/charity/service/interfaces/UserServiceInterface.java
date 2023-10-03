@@ -4,6 +4,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import pl.maciejak.charity.entity.User;
 
+import java.util.Optional;
+
 public interface UserServiceInterface {
     Page<User> findByRoles(String roleName, Pageable pageable);
 
@@ -14,6 +16,8 @@ public interface UserServiceInterface {
     User findById(Long id);
 
     User findByIdAndRoleName(Long id, String roleName);
+
+    Optional<User> findUserByToken(String token);
 
     void save(User user);
 

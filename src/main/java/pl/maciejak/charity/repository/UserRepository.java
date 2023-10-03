@@ -31,4 +31,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
             "WHERE u.id = :id " +
             "AND r.name = :roleName")
     Optional<User> findUserByIdAndRoleName(Long id, String roleName);
+
+    Optional<User> findUserByToken(String token);
 }
