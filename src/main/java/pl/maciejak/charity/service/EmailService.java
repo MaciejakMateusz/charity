@@ -8,8 +8,6 @@ import org.springframework.stereotype.Component;
 import pl.maciejak.charity.entity.User;
 import pl.maciejak.charity.service.interfaces.EmailServiceInterface;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 
 @Component
@@ -20,7 +18,6 @@ public class EmailService implements EmailServiceInterface {
     private final JavaMailSender emailSender;
     private final UserService userService;
     private static final String LOCAL_HOST = "http://localhost:8080/";
-    private Map<User, String> usersRecoveryTokens = new HashMap<>();
 
     public EmailService(JavaMailSender emailSender,
                         UserService userService) {
@@ -65,11 +62,10 @@ public class EmailService implements EmailServiceInterface {
         message.setSubject("Charity - link aktywacyjny do konta");
 
         User user = userService.findByUsername(to);
-        UUID token = UUID.randomUUID();
-        String recoveryToken = token.toString();
-        this.usersRecoveryTokens.put(user, recoveryToken);
+        user.setToken(UUID.randomUUID().toString());
+        userService.update(user);
 
-        String link = LOCAL_HOST + "register/" + recoveryToken;
+        String link = LOCAL_HOST + "register/" + user.getToken();
         message.setText("Kliknij w ten link, aby aktywować swoje konto: " + link);
 
         emailSender.send(message);

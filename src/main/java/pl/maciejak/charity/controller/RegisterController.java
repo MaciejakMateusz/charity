@@ -12,7 +12,7 @@ import pl.maciejak.charity.entity.User;
 import pl.maciejak.charity.service.EmailService;
 import pl.maciejak.charity.service.UserService;
 
-import java.util.Map;
+import java.util.Objects;
 
 @Controller
 @RequestMapping("/register")
@@ -52,26 +52,14 @@ public class RegisterController {
 
     @GetMapping("/{token}")
     public String activate(@PathVariable String token, Model model) {
-        Map<User, String> usersTokens = emailService.getUsersRecoveryTokens();
-        User foundUser = new User();
-        boolean isFound = false;
-        for (Map.Entry<User, String> entry : usersTokens.entrySet()) {
-            if (entry.getValue().equals(token)) {
-                isFound = true;
-                foundUser = entry.getKey();
-                usersTokens.remove(entry.getKey(), token);
-                emailService.setUsersRecoveryTokens(usersTokens);
-                break;
-            }
-        }
-        if(isFound) {
-            userService.save(foundUser);
-            return "success-registration";
-        } else {
+        User foundUser = userService.findUserByToken(token).orElse(null);
+        if (Objects.isNull(foundUser)) {
             model.addAttribute("error", true);
             return "register";
         }
-
+        foundUser.setToken(null);
+        userService.save(foundUser);
+        return "success-registration";
     }
 
 }
