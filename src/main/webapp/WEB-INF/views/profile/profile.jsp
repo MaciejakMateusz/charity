@@ -31,6 +31,7 @@
                 <form:hidden path="username"/>
                 <form:hidden path="created"/>
                 <form:hidden path="enabled"/>
+                <form:hidden path="roles"/>
                 <div class="form-section form-section--columns">
 
                     <div class="form-section--column">
