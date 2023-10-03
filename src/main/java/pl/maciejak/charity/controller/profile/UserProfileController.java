@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -50,11 +51,18 @@ public class UserProfileController {
     }
 
     @PostMapping("/password")
-    public String password(@Valid User user, BindingResult br, Model model) {
-        if (br.hasErrors()) {
+    public String password(@Valid User user,
+                           BindingResult br,
+                           Model model) {
+
+        String currentPassword = userService.findById(user.getId()).getPassword();
+
+        if (!BCrypt.checkpw(user.getOldPassword(), currentPassword)) {
+            model.addAttribute("invalidPassword", true);
             return "profile/password/password";
-        }
-        if (!user.getPassword().equals(user.getRepeatedPassword())) {
+        } else if (br.hasErrors()) {
+            return "profile/password/password";
+        } else if (!user.getPassword().equals(user.getRepeatedPassword())) {
             model.addAttribute("passwordsNotMatch", true);
             return "profile/password/password";
         }

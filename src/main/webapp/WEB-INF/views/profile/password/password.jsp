@@ -43,6 +43,14 @@
                     <div class="form-section--column">
                         <h4>Zmień hasło</h4>
                         <div class="form-group form-group--inline">
+                            <label>Stare hasło
+                                <form:password path="oldPassword"/>
+                            </label>
+                            <c:if test="${invalidPassword==true}">
+                                <p class="profile-validation">Niepoprawne hasło, spróbuj ponownie</p>
+                            </c:if>
+                        </div>
+                        <div class="form-group form-group--inline">
                             <label>Nowe hasło
                                 <form:password path="password"/>
                             </label>

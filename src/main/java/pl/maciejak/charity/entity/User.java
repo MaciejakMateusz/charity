@@ -42,6 +42,12 @@ public class User {
     @Password
     private String password;
 
+    @Transient
+    private String repeatedPassword;
+
+    @Transient
+    private String oldPassword;
+
     private String
             name,
             surname,
@@ -52,9 +58,6 @@ public class User {
 
     @Column(length = 36)
     private String token;
-
-    @Transient
-    private String repeatedPassword;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime created;
@@ -83,5 +86,10 @@ public class User {
     private void preUpdate() {
         this.updated = LocalDateTime.now();
         log.info("Date of edition has been set to : " + this.updated);
+    }
+
+    @PostLoad
+    private void postLoad() {
+        this.oldPassword = this.password;
     }
 }
