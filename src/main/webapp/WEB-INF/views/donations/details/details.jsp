@@ -52,6 +52,10 @@
             <div class="date-time-area">
                 <p>Czasu odbioru:</p>
                 <p>${donation.pickUpDate} o godzinie ${donation.pickUpTime}</p>
+                <c:if test="${donation.archived==true}">
+                    <p>Czasu archiwizacji:</p>
+                    <p>${donation.archivedDate} o godzinie ${donation.archivedTime}</p>
+                </c:if>
             </div>
 
             <div class="status-area">

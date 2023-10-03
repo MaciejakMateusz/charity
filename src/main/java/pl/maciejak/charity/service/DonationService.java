@@ -53,6 +53,8 @@ public class DonationService implements DonationServiceInterface {
     public void archive(Donation donation) {
         Donation existingDonation = findById(donation.getId());
         existingDonation.setArchived(true);
+        existingDonation.setArchivedDate(LocalDate.now());
+        existingDonation.setPickUpTime(LocalTime.now());
         donationRepository.save(existingDonation);
     }
 
