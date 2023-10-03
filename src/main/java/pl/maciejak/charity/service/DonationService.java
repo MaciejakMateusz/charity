@@ -3,6 +3,7 @@ package pl.maciejak.charity.service;
 import org.springframework.stereotype.Service;
 import pl.maciejak.charity.entity.Donation;
 import pl.maciejak.charity.entity.User;
+import pl.maciejak.charity.exception.GeneralException;
 import pl.maciejak.charity.repository.DonationRepository;
 import pl.maciejak.charity.service.interfaces.DonationServiceInterface;
 
@@ -23,8 +24,9 @@ public class DonationService implements DonationServiceInterface {
     }
 
     @Override
-    public Donation findById(Long id) {
-        return donationRepository.findById(id).orElseThrow();
+    public Donation findById(Long id) throws GeneralException {
+        return donationRepository.findById(id)
+                .orElseThrow(() -> new GeneralException("Nie znaleziono takiej donacji"));
     }
 
     @Override
