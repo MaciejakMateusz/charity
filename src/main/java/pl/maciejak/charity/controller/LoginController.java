@@ -9,7 +9,7 @@ import pl.maciejak.charity.entity.User;
 import pl.maciejak.charity.service.EmailService;
 import pl.maciejak.charity.service.UserService;
 
-import java.util.Map;
+import java.util.Objects;
 
 @Controller
 @RequestMapping("/login")
@@ -48,27 +48,13 @@ public class LoginController {
 
     @GetMapping("/{recoveryToken}")
     public String resetPassword(@PathVariable String recoveryToken, Model model) {
-
-        Map<User, String> usersRecoveryTokens = emailService.getUsersRecoveryTokens();
-        User foundUser = new User();
-        boolean isFound = false;
-        for (Map.Entry<User, String> entry : usersRecoveryTokens.entrySet()) {
-            if (entry.getValue().equals(recoveryToken)) {
-                foundUser = entry.getKey();
-                isFound = true;
-                usersRecoveryTokens.remove(foundUser, recoveryToken);
-                emailService.setUsersRecoveryTokens(usersRecoveryTokens);
-                break;
-            }
-        }
-
-        if (isFound) {
-            model.addAttribute("user", foundUser);
-            return "reset-password";
-        } else {
+        User foundUser = userService.findUserByToken(recoveryToken).orElse(null);
+        if (Objects.isNull(foundUser)) {
             model.addAttribute("error", true);
             return "password-recovery";
         }
+        model.addAttribute("user", foundUser);
+        return "reset-password";
     }
 
     @PostMapping("/reset-password")
