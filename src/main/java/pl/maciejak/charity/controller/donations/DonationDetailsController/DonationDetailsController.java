@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import pl.maciejak.charity.entity.Donation;
+import pl.maciejak.charity.exception.GeneralException;
 import pl.maciejak.charity.service.DonationService;
 
 @Controller
@@ -25,7 +26,13 @@ public class DonationDetailsController {
 
     @PostMapping
     public String donationDetails(@RequestParam long id, Model model) {
-        this.currentDonation = donationService.findById(id);
+        try {
+            this.currentDonation = donationService.findById(id);
+        } catch (GeneralException e) {
+            model.addAttribute("donationNotFound", true);
+            model.addAttribute("error", e.getMessage());
+            return "donations/donations";
+        }
         model.addAttribute("donation", currentDonation);
         return "donations/details/details";
     }

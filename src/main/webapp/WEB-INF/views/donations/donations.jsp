@@ -44,30 +44,46 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${donations}" var="donation">
-            <tr>
-                <td>${donation.institution.name}</td>
-                <td>${donation.pickUpDate}</td>
-                <td>${donation.pickUpTime}</td>
-                <c:choose>
-                    <c:when test="${donation.pickedUp==true}">
-                        <td>Odebrano</td>
-                    </c:when>
-                    <c:when test="${donation.pickedUp==false}">
-                        <td>Nie odebrano</td>
-                    </c:when>
-                </c:choose>
-                <td>
-                    <form action="${pageContext.request.contextPath}/donations/details"
-                          method="POST">
-                        <input type="hidden" name="id" value="${donation.id}">
-                        <button type="submit">Szczegóły</button>
-                    </form>
-                </td>
-            </tr>
-        </c:forEach>
+        <c:choose>
+            <c:when test="${donationNotFound!=true}">
+                <c:forEach items="${donations}" var="donation">
+                    <tr>
+                        <td>${donation.institution.name}</td>
+                        <td>${donation.pickUpDate}</td>
+                        <td>${donation.pickUpTime}</td>
+                        <c:choose>
+                            <c:when test="${donation.pickedUp==true}">
+                                <td>Odebrano</td>
+                            </c:when>
+                            <c:when test="${donation.pickedUp==false}">
+                                <td>Nie odebrano</td>
+                            </c:when>
+                        </c:choose>
+                        <td>
+                            <form action="${pageContext.request.contextPath}/donations/details"
+                                  method="POST">
+                                <input type="hidden" name="id" value="7">
+                                <button type="submit">Szczegóły</button>
+                            </form>
+                        </td>
+                    </tr>
+                </c:forEach>
+            </c:when>
+            <c:when test="${donationNotFound==true}">
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td style="text-align: center">
+                        <span class="validation" style="font-size: 1.5rem">${error}</span>
+                    </td>
+                </tr>
+            </c:when>
+        </c:choose>
         </tbody>
     </table>
+
 </div>
 
 <%-- HEADER --%>

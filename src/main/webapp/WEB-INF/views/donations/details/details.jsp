@@ -103,7 +103,6 @@
                     </a>
                 </c:when>
             </c:choose>
-
         </div>
     </div>
 </header>
