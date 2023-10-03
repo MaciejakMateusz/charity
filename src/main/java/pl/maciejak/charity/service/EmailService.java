@@ -47,11 +47,10 @@ public class EmailService implements EmailServiceInterface {
         message.setSubject("Charity - jednorazowy link do zmiany hasła");
 
         User user = userService.findByUsername(to);
-        UUID token = UUID.randomUUID();
-        String recoveryToken = token.toString();
-        this.usersRecoveryTokens.put(user, recoveryToken);
+        user.setToken(UUID.randomUUID().toString());
+        userService.update(user);
 
-        String link = LOCAL_HOST + "login/" + recoveryToken;
+        String link = LOCAL_HOST + "login/" + user.getToken();
         message.setText("Twój link do zmiany hasła: " + link);
 
         emailSender.send(message);
