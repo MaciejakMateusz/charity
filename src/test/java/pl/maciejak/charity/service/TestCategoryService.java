@@ -13,6 +13,8 @@ import org.springframework.test.context.TestPropertySource;
 import pl.maciejak.charity.entity.Category;
 import pl.maciejak.charity.service.interfaces.CategoryServiceInterface;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
@@ -30,5 +32,11 @@ public class TestCategoryService {
     public void shouldFindById() {
         Category category = categoryService.findById(3L);
         assertEquals("zabawki", category.getName());
+    }
+
+    @Test
+    public void shouldFindAll() {
+        List<Category> categories = categoryService.findAll();
+        assertEquals(5, categories.size());
     }
 }
