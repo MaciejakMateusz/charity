@@ -13,6 +13,7 @@ import pl.maciejak.charity.service.interfaces.CategoryServiceInterface;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -47,5 +48,15 @@ public class TestCategoryService {
         categoryService.save(category);
         Category savedCategory = categoryService.findById(6L).orElse(new Category());
         assertEquals("Test category", savedCategory.getName());
+    }
+
+    @Test
+    @Order(4)
+    public void shouldDeleteCategory() {
+        Category savedCategory = categoryService.findById(6L).orElse(new Category());
+        assertEquals("Test category", savedCategory.getName());
+        categoryService.delete(savedCategory);
+        Category category = categoryService.findById(6L).orElse(null);
+        assertNull(category);
     }
 }
