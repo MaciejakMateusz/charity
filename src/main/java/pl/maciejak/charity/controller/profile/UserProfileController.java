@@ -54,7 +54,6 @@ public class UserProfileController {
     public String password(@Valid User user,
                            BindingResult br,
                            Model model) {
-
         String currentPassword = userService.findById(user.getId()).getPassword();
 
         if (!BCrypt.checkpw(user.getOldPassword(), currentPassword)) {

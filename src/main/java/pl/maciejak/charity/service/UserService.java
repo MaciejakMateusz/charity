@@ -5,6 +5,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import pl.maciejak.charity.entity.User;
+import pl.maciejak.charity.exception.GeneralException;
 import pl.maciejak.charity.repository.RoleRepository;
 import pl.maciejak.charity.repository.UserRepository;
 import pl.maciejak.charity.service.interfaces.UserServiceInterface;
@@ -41,7 +42,8 @@ public class UserService implements UserServiceInterface {
 
     @Override
     public User findById(Long id) {
-        return userRepository.findById(id).orElse(new User());
+        return userRepository.findById(id)
+                .orElseThrow(() -> new GeneralException("Nie znaleziono użytkownika o podanym identyfikatorze"));
     }
 
     @Override
