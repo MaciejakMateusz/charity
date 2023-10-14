@@ -1,9 +1,6 @@
 package pl.maciejak.charity.service;
 
-import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
-import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -29,14 +26,26 @@ public class TestCategoryService {
     private CategoryServiceInterface categoryService;
 
     @Test
+    @Order(1)
     public void shouldFindById() {
-        Category category = categoryService.findById(3L);
+        Category category = categoryService.findById(3L).orElse(new Category());
         assertEquals("zabawki", category.getName());
     }
 
     @Test
+    @Order(2)
     public void shouldFindAll() {
         List<Category> categories = categoryService.findAll();
         assertEquals(5, categories.size());
+    }
+
+    @Test
+    @Order(3)
+    public void shouldSaveCategory() {
+        Category category = new Category();
+        category.setName("Test category");
+        categoryService.save(category);
+        Category savedCategory = categoryService.findById(6L).orElse(new Category());
+        assertEquals("Test category", savedCategory.getName());
     }
 }
