@@ -6,6 +6,7 @@ import pl.maciejak.charity.repository.CategoryRepository;
 import pl.maciejak.charity.service.interfaces.CategoryServiceInterface;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CategoryService implements CategoryServiceInterface {
@@ -17,8 +18,8 @@ public class CategoryService implements CategoryServiceInterface {
     }
 
     @Override
-    public Category findById(Long id) {
-        return categoryRepository.findById(id).orElseThrow();
+    public Optional<Category> findById(Long id) {
+        return categoryRepository.findById(id);
     }
 
     @Override
