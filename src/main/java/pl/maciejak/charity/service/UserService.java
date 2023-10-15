@@ -1,5 +1,6 @@
 package pl.maciejak.charity.service;
 
+import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCrypt;
@@ -64,10 +65,14 @@ public class UserService implements UserServiceInterface {
     }
 
     @Override
-    public void saveAdmin(User user) {
-        user.setEnabled(1);
-        user.setRoles(new HashSet<>(Collections.singletonList(roleRepository.findByName("ROLE_ADMIN"))));
-        userRepository.save(user);
+    @Transactional
+    public void saveAdmin(String email, String password) {
+        User admin = new User();
+        admin.setEmail(email);
+        admin.setPassword(password);
+        admin.setEnabled(1);
+        admin.setRoles(new HashSet<>(Collections.singletonList(roleRepository.findByName("ROLE_ADMIN"))));
+        userRepository.save(admin);
     }
 
     @Override
