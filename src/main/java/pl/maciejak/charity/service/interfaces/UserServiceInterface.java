@@ -21,6 +21,8 @@ public interface UserServiceInterface {
 
     void save(User user);
 
+    void saveAdmin(User user);
+
     void update(User user);
 
     void saveTemporary(User user);

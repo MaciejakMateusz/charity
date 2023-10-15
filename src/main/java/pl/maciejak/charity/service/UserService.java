@@ -64,6 +64,13 @@ public class UserService implements UserServiceInterface {
     }
 
     @Override
+    public void saveAdmin(User user) {
+        user.setEnabled(1);
+        user.setRoles(new HashSet<>(Collections.singletonList(roleRepository.findByName("ROLE_ADMIN"))));
+        userRepository.save(user);
+    }
+
+    @Override
     public void update(User user) {
         userRepository.save(user);
     }
