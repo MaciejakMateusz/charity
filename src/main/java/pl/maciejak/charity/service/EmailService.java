@@ -1,13 +1,17 @@
 package pl.maciejak.charity.service;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import pl.maciejak.charity.entity.User;
 import pl.maciejak.charity.service.interfaces.EmailServiceInterface;
 
+import java.util.Objects;
 import java.util.UUID;
 
 @Component
@@ -47,7 +51,7 @@ public class EmailService implements EmailServiceInterface {
         user.setToken(UUID.randomUUID().toString());
         userService.update(user);
 
-        String link = LOCAL_HOST + "login/" + user.getToken();
+        String link = determineBaseUrl() + "/login/" + user.getToken();
         message.setText("Twój link do zmiany hasła: " + link);
 
         emailSender.send(message);
@@ -65,9 +69,15 @@ public class EmailService implements EmailServiceInterface {
         user.setToken(UUID.randomUUID().toString());
         userService.update(user);
 
-        String link = LOCAL_HOST + "register/" + user.getToken();
+        String link = determineBaseUrl() + "/register/" + user.getToken();
         message.setText("Kliknij w ten link, aby aktywować swoje konto: " + link);
 
         emailSender.send(message);
+    }
+
+    private String determineBaseUrl() {
+        HttpServletRequest request = ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
+        String requestUrl = request.getRequestURL().toString();
+        return requestUrl.replace(request.getRequestURI(), request.getContextPath());
     }
 }
