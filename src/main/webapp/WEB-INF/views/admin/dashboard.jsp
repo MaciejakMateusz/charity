@@ -74,7 +74,8 @@
                                                 Powrót
                                             </button>
                                         </a>
-                                        <p style="font-weight: bold; display: inline-block; margin-left: 2rem;">Wyniki dla wyszukiwania "${partialEmail}":</p>
+                                        <p style="font-weight: bold; display: inline-block; margin-left: 2rem;">Wyniki
+                                            dla wyszukiwania "${partialEmail}":</p>
                                     </c:if>
                                     <table class="table table-bordered dataTable" id="dataTable" width="100%"
                                            cellspacing="0" role="grid" aria-describedby="dataTable_info"
@@ -218,72 +219,76 @@
                                             </button>
                                         </form>
                                     </c:if>
-                                    <%-- SMALL RECORDS AMOUNT SCENARIO --%>
-                                    <c:if test="${totalPages != 1 && totalPages < 20}">
-                                        <c:forEach var="iteration" begin="0" end="${totalPages - 1}">
+                                    <c:if test="${totalPages!=0}">
+                                        <%-- SMALL RECORDS AMOUNT SCENARIO --%>
+                                        <c:if test="${totalPages != 1 && totalPages < 20}">
+                                            <c:forEach var="iteration" begin="0" end="${totalPages - 1}">
+                                                <form action="${pageContext.request.contextPath}/admin/dashboard/page"
+                                                      method="POST"
+                                                      style="display: inline-block;">
+                                                    <input type="hidden" name="pageNumber" value="${iteration}">
+                                                    <button type="submit"
+                                                            class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                                            ${iteration}
+                                                    </button>
+                                                </form>
+                                            </c:forEach>
+                                        </c:if>
+
+                                        <%-- LARGE RECORDS AMOUNT SCENARIO --%>
+                                        <c:if test="${totalPages != 0 && totalPages > 20}">
+                                            <c:forEach var="iteration" begin="0" end="10">
+                                                <form action="${pageContext.request.contextPath}/admin/dashboard/page"
+                                                      method="POST"
+                                                      style="display: inline-block;">
+                                                    <input type="hidden" name="pageNumber" value="${iteration}">
+                                                    <button type="submit"
+                                                            class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                                            ${iteration}
+                                                    </button>
+                                                </form>
+                                            </c:forEach>
+                                            <button
+                                                    class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                                ...
+                                            </button>
+                                            <c:forEach var="iteration" begin="${totalPages - 8}"
+                                                       end="${totalPages - 1}">
+                                                <form action="${pageContext.request.contextPath}/admin/dashboard/page"
+                                                      method="POST"
+                                                      style="display: inline-block;">
+                                                    <input type="hidden" name="pageNumber" value="${iteration}">
+                                                    <button type="submit"
+                                                            class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                                            ${iteration}
+                                                    </button>
+                                                </form>
+                                            </c:forEach>
+                                            <form action="${pageContext.request.contextPath}/admin/dashboard/incrementPage"
+                                                  method="POST"
+                                                  style="display: inline-block;">
+                                                <button type="submit"
+                                                        class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                                    >
+                                                </button>
+                                            </form>
+                                            <p style="display:inline-block; white-space: pre;"> Strona </p>
                                             <form action="${pageContext.request.contextPath}/admin/dashboard/page"
                                                   method="POST"
                                                   style="display: inline-block;">
-                                                <input type="hidden" name="pageNumber" value="${iteration}">
-                                                <button type="submit"
-                                                        class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                                                        ${iteration}
-                                                </button>
+                                                <label>
+                                                    <input
+                                                            type="number"
+                                                            style="width: 4rem;"
+                                                            name="pageNumber"
+                                                            min="1"
+                                                            max="${totalPages - 1}"
+                                                            value="${pageable.pageNumber}">
+                                                </label>
                                             </form>
-                                        </c:forEach>
+                                        </c:if>
                                     </c:if>
 
-                                    <%-- LARGE RECORDS AMOUNT SCENARIO --%>
-                                    <c:if test="${totalPages != 0 && totalPages > 20}">
-                                        <c:forEach var="iteration" begin="0" end="10">
-                                            <form action="${pageContext.request.contextPath}/admin/dashboard/page"
-                                                  method="POST"
-                                                  style="display: inline-block;">
-                                                <input type="hidden" name="pageNumber" value="${iteration}">
-                                                <button type="submit"
-                                                        class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                                                        ${iteration}
-                                                </button>
-                                            </form>
-                                        </c:forEach>
-                                        <button
-                                                class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                                            ...
-                                        </button>
-                                        <c:forEach var="iteration" begin="${totalPages - 8}" end="${totalPages - 1}">
-                                            <form action="${pageContext.request.contextPath}/admin/dashboard/page"
-                                                  method="POST"
-                                                  style="display: inline-block;">
-                                                <input type="hidden" name="pageNumber" value="${iteration}">
-                                                <button type="submit"
-                                                        class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                                                        ${iteration}
-                                                </button>
-                                            </form>
-                                        </c:forEach>
-                                        <form action="${pageContext.request.contextPath}/admin/dashboard/incrementPage"
-                                              method="POST"
-                                              style="display: inline-block;">
-                                            <button type="submit"
-                                                    class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                                                >
-                                            </button>
-                                        </form>
-                                        <p style="display:inline-block; white-space: pre;"> Strona </p>
-                                        <form action="${pageContext.request.contextPath}/admin/dashboard/page"
-                                              method="POST"
-                                              style="display: inline-block;">
-                                            <label>
-                                                <input
-                                                        type="number"
-                                                        style="width: 4rem;"
-                                                        name="pageNumber"
-                                                        min="1"
-                                                        max="${totalPages - 1}"
-                                                        value="${pageable.pageNumber}">
-                                            </label>
-                                        </form>
-                                    </c:if>
                                 </div>
                             </div>
                         </div>
