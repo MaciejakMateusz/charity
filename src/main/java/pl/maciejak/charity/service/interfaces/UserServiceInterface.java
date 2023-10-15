@@ -21,7 +21,7 @@ public interface UserServiceInterface {
 
     void save(User user);
 
-    void saveAdmin(User user);
+    void saveAdmin(String email, String password);
 
     void update(User user);
 

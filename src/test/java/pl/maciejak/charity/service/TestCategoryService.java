@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 @SpringBootTest
 @AutoConfigureMockMvc
 @AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
-@TestPropertySource(locations = "classpath:test.properties")
+@TestPropertySource(locations = "classpath:application-test.properties")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class TestCategoryService {
