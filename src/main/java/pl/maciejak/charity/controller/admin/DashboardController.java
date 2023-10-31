@@ -59,7 +59,7 @@ public class DashboardController {
         return "redirect:/admin/dashboard";
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     private String findById(Model model, @PathVariable Long id) {
         User user = userService.findById(id);
         model.addAttribute("filterEngaged", true);
