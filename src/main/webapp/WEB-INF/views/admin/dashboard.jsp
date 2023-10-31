@@ -37,8 +37,7 @@
                     <div>
                         <p>Wyszukaj użytkownika po:</p>
                         <form style="display: inline-block;"
-                              method="POST"
-                              action="${pageContext.request.contextPath}/admin/dashboard/findById"
+                              action="${pageContext.request.contextPath}/admin/dashboard/id/id"
                               id="findById">
                             <label>
                                 <input type="number"
