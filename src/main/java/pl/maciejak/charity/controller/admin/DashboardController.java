@@ -19,7 +19,6 @@ import pl.maciejak.charity.service.UserService;
 public class DashboardController {
 
     private static final int PAGE_SIZE = 10;
-    private Pageable pageable = PageRequest.of(0, PAGE_SIZE);
 
     private final UserService userService;
 

@@ -221,29 +221,61 @@
                                         <%-- SMALL RECORDS AMOUNT SCENARIO --%>
                                         <c:if test="${totalPages != 1 && totalPages < 20}">
                                             <c:forEach var="iteration" begin="0" end="${totalPages - 1}">
-                                                <form action="${pageContext.request.contextPath}/admin/dashboard/page"
-                                                      method="POST"
-                                                      style="display: inline-block;">
-                                                    <input type="hidden" name="pageNumber" value="${iteration}">
-                                                    <button type="submit"
-                                                            class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                                                            ${iteration}
-                                                    </button>
-                                                </form>
+                                                <c:choose>
+                                                    <c:when test="${foundByEmail!=true}">
+                                                        <form action="${pageContext.request.contextPath}/admin/dashboard"
+                                                              method="POST"
+                                                              style="display: inline-block;">
+                                                            <input type="hidden" name="pageNumber" value="${iteration}">
+                                                            <button type="submit"
+                                                                    class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                                                    ${iteration}
+                                                            </button>
+                                                        </form>
+                                                    </c:when>
+                                                    <c:when test="${foundByEmail==true}">
+                                                        <form action="${pageContext.request.contextPath}/admin/dashboard/emailFilter"
+                                                              method="POST"
+                                                              style="display: inline-block;">
+                                                            <input type="hidden" name="email" value="${partialEmail}">
+                                                            <input type="hidden" name="pageNumber" value="${iteration}">
+                                                            <button type="submit"
+                                                                    class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                                                    ${iteration}
+                                                            </button>
+                                                        </form>
+                                                    </c:when>
+                                                </c:choose>
+
                                             </c:forEach>
                                         </c:if>
 
                                         <%-- LARGE RECORDS AMOUNT SCENARIO --%>
                                         <c:if test="${totalPages != 0 && totalPages > 20}">
                                             <c:forEach var="iteration" begin="0" end="10">
-                                                <form action="${pageContext.request.contextPath}/admin/dashboard"
-                                                      style="display: inline-block;">
-                                                    <input type="hidden" name="page" value="${iteration}">
-                                                    <button type="submit"
-                                                            class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                                                            ${iteration}
-                                                    </button>
-                                                </form>
+                                                <c:choose>
+                                                    <c:when test="${foundByEmail!=true}">
+                                                        <form action="${pageContext.request.contextPath}/admin/dashboard"
+                                                              style="display: inline-block;">
+                                                            <input type="hidden" name="page" value="${iteration}">
+                                                            <button type="submit"
+                                                                    class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                                                    ${iteration}
+                                                            </button>
+                                                        </form>
+                                                    </c:when>
+                                                    <c:when test="${foundByEmail==true}">
+                                                        <form action="${pageContext.request.contextPath}/admin/dashboard/emailFilter"
+                                                              style="display: inline-block;">
+                                                            <input type="hidden" name="email" value="${partialEmail}">
+                                                            <input type="hidden" name="page" value="${iteration}">
+                                                            <button type="submit"
+                                                                    class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                                                    ${iteration}
+                                                            </button>
+                                                        </form>
+                                                    </c:when>
+                                                </c:choose>
                                             </c:forEach>
                                             <button
                                                     class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
@@ -251,14 +283,30 @@
                                             </button>
                                             <c:forEach var="iteration" begin="${totalPages - 8}"
                                                        end="${totalPages - 1}">
-                                                <form action="${pageContext.request.contextPath}/admin/dashboard"
-                                                      style="display: inline-block;">
-                                                    <input type="hidden" name="page" value="${iteration}">
-                                                    <button type="submit"
-                                                            class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                                                            ${iteration}
-                                                    </button>
-                                                </form>
+                                                <c:choose>
+                                                    <c:when test="${foundByEmail!=true}">
+                                                        <form action="${pageContext.request.contextPath}/admin/dashboard"
+                                                              style="display: inline-block;">
+                                                            <input type="hidden" name="page" value="${iteration}">
+                                                            <button type="submit"
+                                                                    class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                                                    ${iteration}
+                                                            </button>
+                                                        </form>
+                                                    </c:when>
+                                                    <c:when test="${foundByEmail==true}">
+                                                        <form action="${pageContext.request.contextPath}/admin/dashboard/emailFilter"
+                                                              style="display: inline-block;">
+                                                            <input type="hidden" name="email" value="${partialEmail}">
+                                                            <input type="hidden" name="page" value="${iteration}">
+                                                            <button type="submit"
+                                                                    class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                                                    ${iteration}
+                                                            </button>
+                                                        </form>
+                                                    </c:when>
+                                                </c:choose>
+
                                             </c:forEach>
                                             <form action="${pageContext.request.contextPath}/admin/dashboard/incrementPage"
                                                   method="POST"
@@ -269,18 +317,37 @@
                                                 </button>
                                             </form>
                                             <p style="display:inline-block; white-space: pre;"> Strona </p>
-                                            <form action="${pageContext.request.contextPath}/admin/dashboard"
-                                                  style="display: inline-block;">
-                                                <label>
-                                                    <input
-                                                            type="number"
-                                                            style="width: 4rem;"
-                                                            name="page"
-                                                            min="1"
-                                                            max="${totalPages - 1}"
-                                                            value="${pageable.pageNumber}">
-                                                </label>
-                                            </form>
+                                            <c:choose>
+                                                <c:when test="${foundByEmail!=true}">
+                                                    <form action="${pageContext.request.contextPath}/admin/dashboard"
+                                                          style="display: inline-block;">
+                                                        <label>
+                                                            <input
+                                                                    type="number"
+                                                                    style="width: 4rem;"
+                                                                    name="page"
+                                                                    min="1"
+                                                                    max="${totalPages - 1}"
+                                                                    value="${pageable.pageNumber}">
+                                                        </label>
+                                                    </form>
+                                                </c:when>
+                                                <c:when test="${foundByEmail==true}">
+                                                    <form action="${pageContext.request.contextPath}/admin/dashboard/emailFilter"
+                                                          style="display: inline-block;">
+                                                        <label>
+                                                            <input type="hidden" name="email" value="${partialEmail}">
+                                                            <input
+                                                                    type="number"
+                                                                    style="width: 4rem;"
+                                                                    name="page"
+                                                                    min="1"
+                                                                    max="${totalPages - 1}"
+                                                                    value="${pageable.pageNumber}">
+                                                        </label>
+                                                    </form>
+                                                </c:when>
+                                            </c:choose>
                                         </c:if>
                                     </c:if>
                                 </div>
