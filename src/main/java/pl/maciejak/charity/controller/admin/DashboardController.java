@@ -6,7 +6,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import pl.maciejak.charity.entity.User;
 import pl.maciejak.charity.service.UserService;
 
@@ -17,7 +20,6 @@ public class DashboardController {
 
     private static final int PAGE_SIZE = 10;
     private Pageable pageable = PageRequest.of(0, PAGE_SIZE);
-    private Page<User> allUsers;
 
     private final UserService userService;
 
@@ -25,11 +27,12 @@ public class DashboardController {
         this.userService = userService;
     }
 
-    @GetMapping()
-    public String users(Model model) {
-        this.allUsers = getAllUsers();
-        int totalPages = this.allUsers.getTotalPages();
-        model.addAttribute("pageable", this.pageable);
+    @GetMapping
+    public String users(Model model, @RequestParam int page) {
+        Page<User> allUsers = getAllUsers();
+        int totalPages = allUsers.getTotalPages();
+        Pageable pageable = PageRequest.of(page, PAGE_SIZE);
+        model.addAttribute("pageable", pageable);
         model.addAttribute("totalPages", totalPages);
         model.addAttribute("users", allUsers.stream().toList());
         return "admin/dashboard";
@@ -45,6 +48,7 @@ public class DashboardController {
 
     @PostMapping("/incrementPage")
     private String incrementPageNumber() {
+        Page<User> allUsers = getAllUsers();
         if (allUsers.hasNext()) {
             this.pageable = PageRequest.of(this.pageable.getPageNumber() + 1, PAGE_SIZE);
         }
@@ -59,8 +63,8 @@ public class DashboardController {
         return "redirect:/admin/dashboard";
     }
 
-    @GetMapping("/id/{id}")
-    private String findById(Model model, @PathVariable Long id) {
+    @GetMapping("/idFilter")
+    private String findById(Model model, @RequestParam Long id) {
         User user = userService.findById(id);
         model.addAttribute("filterEngaged", true);
         if (user == null) {
@@ -71,18 +75,18 @@ public class DashboardController {
         return "admin/dashboard";
     }
 
-    @GetMapping("/{emailFilter}")
-    private String findByEmail(Model model, @PathVariable String emailFilter) {
-        this.allUsers = userService.findByPartialEmail(emailFilter, "ROLE_USER", this.pageable);
-        if (this.allUsers.isEmpty()) {
+    @GetMapping("/emailFilter")
+    private String findByEmail(Model model, @RequestParam String email) {
+        Page<User> allUsers = userService.findByPartialEmail(email, "ROLE_USER", this.pageable);
+        if (allUsers.isEmpty()) {
             model.addAttribute("userNotFound", true);
         } else {
-            int totalPages = this.allUsers.getTotalPages();
+            int totalPages = allUsers.getTotalPages();
             model.addAttribute("pageable", this.pageable);
             model.addAttribute("totalPages", totalPages);
             model.addAttribute("foundByEmail", true);
-            model.addAttribute("partialEmail", emailFilter);
-            model.addAttribute("users", this.allUsers.stream().toList());
+            model.addAttribute("partialEmail", email);
+            model.addAttribute("users", allUsers.stream().toList());
         }
         return "admin/dashboard";
     }
